@@ -1,0 +1,33 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: grid;
+    gap: 20px; /* margin between pictures */
+    justify-content: center;
+}
+
+img {
+    width: 100%; /* adjusts image width within the container */
+    max-width: 300px; /* maximum image width */
+    display: block;
+}
+
+.center {
+    justify-self: center;
+}
+
+.left {
+    justify-self: start;
+}
+
+.right {
+    justify-self: end;
+}
