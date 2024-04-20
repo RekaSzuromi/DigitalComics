@@ -25,22 +25,19 @@ document.addEventListener('DOMContentLoaded', function() {
         // Draw the image
         ctx.drawImage(image, 0, 0);
 
-        // Clip to the polygon
+        // Create clipping path from the polygon
         ctx.beginPath();
+        ctx.moveTo(polygon[0].x, polygon[0].y);
         polygon.forEach((point, index) => {
-            if (index === 0) {
-                ctx.moveTo(point.x, point.y);
-            } else {
-                ctx.lineTo(point.x, point.y);
-            }
+            ctx.lineTo(point.x, point.y);
         });
         ctx.closePath();
+
+        // Clip the region
         ctx.clip();
 
-        // Clear outside the polygon
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Draw the image again within the clipped region
-        ctx.drawImage(image, 0, 0);
+        // Clear the canvas outside the clipped region by drawing only the clipped image
+        ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clears the whole canvas
+        ctx.drawImage(image, 0, 0);  // Redraws the image within the clipping mask
     };
 });
