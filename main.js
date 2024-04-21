@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
         canvas.width = image.width;
         canvas.height = image.height;
 
+        // First draw the image
+        ctx.drawImage(image, 0, 0);
+
         // Define the polygon coordinates
         const polygon = [
             {x: 182, y: 679}, {x: 160, y: 690}, {x: 134, y: 725}, {x: 140, y: 767},
@@ -22,22 +25,19 @@ document.addEventListener('DOMContentLoaded', function() {
             {x: 227, y: 681}, {x: 211, y: 687}
         ];
 
-        // Draw the image
-        ctx.drawImage(image, 0, 0);
+        // Set composite mode to 'destination-in' to keep only the pixels that overlap both the existing canvas and the new path
+        ctx.globalCompositeOperation = 'destination-in';
 
-        // Create clipping path from the polygon
+        // Draw the polygon path
         ctx.beginPath();
         ctx.moveTo(polygon[0].x, polygon[0].y);
         polygon.forEach((point, index) => {
             ctx.lineTo(point.x, point.y);
         });
         ctx.closePath();
+        ctx.fill();
 
-        // Clip the region
-        ctx.clip();
-
-        // Clear the canvas outside the clipped region by drawing only the clipped image
-        ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clears the whole canvas
-        ctx.drawImage(image, 0, 0);  // Redraws the image within the clipping mask
+        // Reset composite mode to default
+        ctx.globalCompositeOperation = 'source-over';
     };
 });
