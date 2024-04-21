@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Define the polygon coordinates
         const polygon = [
-            {x: 182, y: 679}, {x: 160, y: 690}
+            {x: 182, y: 679}, {x: 160, y: 690}, {x: 134, y: 725}, {x: 140, y: 767},
+            {x: 149, y: 738}, {x: 148, y: 773}, {x: 148, y: 781}, {x: 118, y: 797}
         ];
 
         // Set composite mode to 'destination-in' to keep only the pixels that overlap both the existing canvas and the new path
