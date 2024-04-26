@@ -37,7 +37,7 @@ function processPanelData(panelData) {
             canvas.height = image.height;
 
             // Extract the vertices for the polygon from the panel data
-            let vertices = panel['Region Vertices']
+            let vertices = panel['Panel Region Vertices']
                 .split('),')
                 .map(s => s.replace('(', '').replace(')', '').split(',').map(Number))
                 .map(([x, y]) => ({x, y}));
