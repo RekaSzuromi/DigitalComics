@@ -42,7 +42,6 @@ function processPanelData(panelData) {
     panelData.forEach((panel, index) => {
         let canvas = document.createElement('canvas');
         canvas.id = `panelCanvas-${index}`;
-        canvas.style.border = "1px solid black"; // Optional, for better visibility of the panels
         canvas.style.marginBottom = "10px"; // Adds space between each canvas
         document.body.appendChild(canvas);
         
