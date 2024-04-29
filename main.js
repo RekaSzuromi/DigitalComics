@@ -1,18 +1,17 @@
-
+// Function to determine if a point is inside a polygon (using the Ray-casting algorithm)
 function pointInPolygon(point, polygon) {
     var x = point.x, y = point.y;
     var inside = false;
     for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
         var xi = polygon[i].x, yi = polygon[i].y;
         var xj = polygon[j].x, yj = polygon[j].y;
-        var intersect = ((yi > y) != (yj > y))
-            && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+        var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
         if (intersect) inside = !inside;
     }
     return inside;
 }
 
-// Function to draw the panel on the canvas, adjusted to set canvas size dynamically and without outline
+// Function to draw the panel on the canvas
 function drawPanel(ctx, image, vertices, isRectangle) {
     let minX, maxX, minY, maxY;
 
@@ -44,29 +43,30 @@ function drawPanel(ctx, image, vertices, isRectangle) {
     ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, maxX - minX, maxY - minY);
 }
 
+// Process the panel data and create canvases, and log emotion associations
 function processPanelData(panelData, emotionData) {
-    let emotionAssociations = [];
-
     panelData.forEach((panel, index) => {
         let canvas = document.createElement('canvas');
         canvas.id = `panelCanvas-${index}`;
-        canvas.style.border = "1px solid black";
-        canvas.style.marginBottom = "10px";
+        canvas.style.marginBottom = "40px"; // Adds space between each canvas
         document.body.appendChild(canvas);
-
+        
         let ctx = canvas.getContext('2d');
         let image = new Image();
         image.src = `pages/page-${panel['Page Number']}.jpg`;
 
         image.onload = function() {
-            let panelVertices = panel['Panel Region Vertices']
+            let vertices = panel['Panel Region Vertices']
                 .match(/\((\d+,\d+)\)/g)
                 .map(s => s.replace(/[()]/g, '').split(',').map(Number))
                 .map(([x, y]) => ({x, y}));
 
-            drawPanel(ctx, image, panelVertices, panelVertices.length > 2);
+            let isRectangle = vertices.length === 2;
 
-            let associatedTaxonomyPaths = [];
+            drawPanel(ctx, image, vertices, isRectangle);
+
+            // Process emotions for this panel
+            let emotionAssociations = [];
             emotionData.forEach(emotion => {
                 if (emotion['Page Number'] === panel['Page Number']) {
                     let emotionVertices = emotion['Emotion Region Vertices']
@@ -74,26 +74,19 @@ function processPanelData(panelData, emotionData) {
                         .map(s => s.replace(/[()]/g, '').split(',').map(Number))
                         .map(([x, y]) => ({x, y}));
 
-                    let countInside = emotionVertices.reduce((count, vertex) => count + pointInPolygon(vertex, panelVertices), 0);
+                    let countInside = emotionVertices.reduce((count, vertex) => count + pointInPolygon(vertex, vertices), 0);
 
                     if (countInside > emotionVertices.length / 2) {
-                        associatedTaxonomyPaths.push(emotion['Taxonomy Path']);
+                        emotionAssociations.push(emotion['Taxonomy Path']);
                     }
                 }
             });
 
-            if (associatedTaxonomyPaths.length) {
-                emotionAssociations.push({
-                    panelId: `panelCanvas-${index}`,
-                    taxonomyPaths: associatedTaxonomyPaths
-                });
+            if (emotionAssociations.length) {
+                console.log(`Panel ${index} associations:`, emotionAssociations);
             }
         };
     });
-
-    // Optionally: output to console or send to server
-    console.log(emotionAssociations);
-    // Here you can also send this data to a server or save it as a file depending on your environment
 }
 
 document.addEventListener('DOMContentLoaded', function() {
