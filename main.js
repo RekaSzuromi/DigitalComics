@@ -45,6 +45,8 @@ function drawPanel(ctx, image, vertices, isRectangle) {
 
 // Process the panel data and create canvases, and log emotion associations
 function processPanelData(panelData, emotionData) {
+    let allEmotionAssociations = [];
+
     panelData.forEach((panel, index) => {
         let canvas = document.createElement('canvas');
         canvas.id = `panelCanvas-${index}`;
@@ -83,10 +85,33 @@ function processPanelData(panelData, emotionData) {
             });
 
             if (emotionAssociations.length) {
-                console.log(`Panel ${index} associations:`, emotionAssociations);
+                allEmotionAssociations.push({
+                    panelId: `panelCanvas-${index}`,
+                    taxonomyPaths: emotionAssociations
+                });
             }
         };
     });
+
+    // Once all panels have been processed, create and download the JSON file
+    image.onloadend = function() {
+        downloadJSON(allEmotionAssociations, 'emotion_associations.json');
+    };
+}
+
+function downloadJSON(data, filename) {
+    if (!data) {
+        console.error('No data to save');
+        return;
+    }
+
+    let blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+    let url = URL.createObjectURL(blob);
+    let a = document.createElement('a');
+    a.download = filename;
+    a.href = url;
+    a.textContent = 'Download ' + filename;
+    a.click();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
