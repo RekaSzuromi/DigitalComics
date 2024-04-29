@@ -1,3 +1,17 @@
+
+function pointInPolygon(point, polygon) {
+    var x = point.x, y = point.y;
+    var inside = false;
+    for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+        var xi = polygon[i].x, yi = polygon[i].y;
+        var xj = polygon[j].x, yj = polygon[j].y;
+        var intersect = ((yi > y) != (yj > y))
+            && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+        if (intersect) inside = !inside;
+    }
+    return inside;
+}
+
 // Function to draw the panel on the canvas, adjusted to set canvas size dynamically and without outline
 function drawPanel(ctx, image, vertices, isRectangle) {
     let minX, maxX, minY, maxY;
