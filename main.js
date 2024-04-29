@@ -14,9 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function loadPanels(panelData) {
+    // Sort panelData by ID before creating and displaying panels
+    panelData.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+
     panelData.forEach(panel => {
         let canvas = document.createElement('canvas');
-        canvas.id = `panelCanvas-${panel.id}`;  // Assume 'id' is part of the panel data
+        canvas.id = `panelCanvas-${panel.id}`;  // Use panel id for identification
         canvas.style.marginBottom = "20px";  // Adds space between each canvas
         document.body.appendChild(canvas);
 
@@ -29,6 +32,7 @@ function loadPanels(panelData) {
         };
     });
 }
+
 
 function createAssociations(panelData, emotionData) {
     let allEmotionAssociations = [];
