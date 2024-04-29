@@ -1,4 +1,3 @@
-
 // Function to draw the panel on the canvas, adjusted to set canvas size dynamically and without outline
 function drawPanel(ctx, image, vertices, isRectangle) {
     let minX, maxX, minY, maxY;
@@ -31,17 +30,15 @@ function drawPanel(ctx, image, vertices, isRectangle) {
     ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, maxX - minX, maxY - minY);
 }
 
-// Function to process panel and emotion data
 function processPanelData(panelData, emotionData) {
-    panelData.forEach((panel, index) => {
-        let container = document.createElement('div');
-        container.className = 'panel-container';
-        document.body.appendChild(container);
+    let emotionAssociations = [];
 
+    panelData.forEach((panel, index) => {
         let canvas = document.createElement('canvas');
         canvas.id = `panelCanvas-${index}`;
         canvas.style.border = "1px solid black";
-        container.appendChild(canvas);
+        canvas.style.marginBottom = "10px";
+        document.body.appendChild(canvas);
 
         let ctx = canvas.getContext('2d');
         let image = new Image();
@@ -55,32 +52,34 @@ function processPanelData(panelData, emotionData) {
 
             drawPanel(ctx, image, panelVertices, panelVertices.length > 2);
 
-            // Process emotions for this panel
-            let panelEmotions = emotionData.filter(emotion => emotion['Page Number'] === panel['Page Number']);
-            let taxonomyTexts = [];
+            let associatedTaxonomyPaths = [];
+            emotionData.forEach(emotion => {
+                if (emotion['Page Number'] === panel['Page Number']) {
+                    let emotionVertices = emotion['Emotion Region Vertices']
+                        .match(/\((\d+,\d+)\)/g)
+                        .map(s => s.replace(/[()]/g, '').split(',').map(Number))
+                        .map(([x, y]) => ({x, y}));
 
-            panelEmotions.forEach(emotion => {
-                let emotionVertices = emotion['Emotion Region Vertices']
-                    .match(/\((\d+,\d+)\)/g)
-                    .map(s => s.replace(/[()]/g, '').split(',').map(Number))
-                    .map(([x, y]) => ({x, y}));
+                    let countInside = emotionVertices.reduce((count, vertex) => count + pointInPolygon(vertex, panelVertices), 0);
 
-                let countInside = emotionVertices.reduce((count, vertex) => count + pointInPolygon(vertex, panelVertices), 0);
-
-                if (countInside > emotionVertices.length / 2) {
-                    taxonomyTexts.push(emotion['Taxonomy Path']);
+                    if (countInside > emotionVertices.length / 2) {
+                        associatedTaxonomyPaths.push(emotion['Taxonomy Path']);
+                    }
                 }
             });
 
-            if (taxonomyTexts.length) {
-                let taxonomyDiv = document.createElement('div');
-                taxonomyDiv.innerText = taxonomyTexts.join('\n');
-                taxonomyDiv.style.whiteSpace = 'pre';
-                taxonomyDiv.style.marginLeft = '10px';
-                container.appendChild(taxonomyDiv);
+            if (associatedTaxonomyPaths.length) {
+                emotionAssociations.push({
+                    panelId: `panelCanvas-${index}`,
+                    taxonomyPaths: associatedTaxonomyPaths
+                });
             }
         };
     });
+
+    // Optionally: output to console or send to server
+    console.log(emotionAssociations);
+    // Here you can also send this data to a server or save it as a file depending on your environment
 }
 
 document.addEventListener('DOMContentLoaded', function() {
