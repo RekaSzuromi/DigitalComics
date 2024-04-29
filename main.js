@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
 function loadPanels(panelData) {
     panelData.forEach(panel => {
         let canvas = document.createElement('canvas');
-        canvas.id = `panelCanvas-${panel.id}`; // Assume 'id' is part of the panel data
-        canvas.style.marginBottom = "20px"; // Adds space between each canvas
+        canvas.id = `panelCanvas-${panel.id}`;  // Assume 'id' is part of the panel data
+        canvas.style.marginBottom = "20px";  // Adds space between each canvas
         document.body.appendChild(canvas);
 
         let ctx = canvas.getContext('2d');
@@ -35,17 +35,20 @@ function createAssociations(panelData, emotionData) {
 
     panelData.forEach(panel => {
         let panelVertices = formatVertices(panel['Panel Region Vertices']);
+        let isPanelRectangle = panelVertices.length === 2; // Check if panel is a rectangle
 
         emotionData.forEach(emotion => {
             if (emotion['Page Number'] === panel['Page Number']) {
                 let emotionVertices = formatVertices(emotion['Emotion Region Vertices']);
 
-                let countInside = emotionVertices.reduce((count, vertex) => count + pointInPolygon(vertex, panelVertices), 0);
+                let isOverlap = isPanelRectangle ? 
+                    rectangleContainsPolygon(panelVertices, emotionVertices) :
+                    polygonContainsPolygon(panelVertices, emotionVertices);
 
-                if (countInside > emotionVertices.length / 2) {
+                if (isOverlap) {
                     allEmotionAssociations.push({
-                        panelId: panel['ID'],
-                        emotionId: emotion['ID'],
+                        panelId: panel['ID'],  // Using 'ID' field
+                        emotionId: emotion['ID'],  // Using 'ID' field
                         taxonomyPath: emotion['Taxonomy Path']
                     });
                 }
@@ -54,6 +57,28 @@ function createAssociations(panelData, emotionData) {
     });
 
     return allEmotionAssociations;
+}
+
+function rectangleContainsPolygon(rectangleVertices, polygonVertices) {
+    let [minRect, maxRect] = rectangleVertices;
+    let rectangle = {
+        minX: Math.min(minRect.x, maxRect.x),
+        maxX: Math.max(minRect.x, maxRect.x),
+        minY: Math.min(minRect.y, maxRect.y),
+        maxY: Math.max(minRect.y, maxRect.y)
+    };
+
+    let countInside = polygonVertices.reduce((count, vertex) => {
+        return count + (vertex.x >= rectangle.minX && vertex.x <= rectangle.maxX &&
+                        vertex.y >= rectangle.minY && vertex.y <= rectangle.maxY);
+    }, 0);
+
+    return countInside > polygonVertices.length / 2;
+}
+
+function polygonContainsPolygon(panelVertices, emotionVertices) {
+    let countInside = emotionVertices.reduce((count, vertex) => count + pointInPolygon(vertex, panelVertices), 0);
+    return countInside > emotionVertices.length / 2;
 }
 
 function formatVertices(vertexString) {
@@ -101,7 +126,8 @@ function pointInPolygon(point, polygon) {
     for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
         var xi = polygon[i].x, yi = polygon[i].y;
         var xj = polygon[j].x, yj = polygon[j].y;
-        var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+        var intersect = ((yi > y) != (yj > y))
+            && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
         if (intersect) inside = !inside;
     }
     return inside;
