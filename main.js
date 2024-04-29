@@ -1,12 +1,25 @@
 // Function to draw the panel on the canvas
 function drawPanel(ctx, image, vertices) {
     ctx.beginPath();
-    ctx.moveTo(vertices[0].x, vertices[0].y);
-    vertices.forEach(vertex => ctx.lineTo(vertex.x, vertex.y));
-    ctx.closePath();
+    
+    // Check if the vertices define a rectangle (exactly 2 points)
+    if (vertices.length === 2) {
+        // Rectangle: use the 'rect' method
+        const x = Math.min(vertices[0].x, vertices[1].x);
+        const y = Math.min(vertices[0].y, vertices[1].y);
+        const width = Math.abs(vertices[1].x - vertices[0].x);
+        const height = Math.abs(vertices[1].y - vertices[0].y);
+        ctx.rect(x, y, width, height);
+    } else {
+        // Polygon: use the 'moveTo' and 'lineTo' methods
+        ctx.moveTo(vertices[0].x, vertices[0].y);
+        vertices.slice(1).forEach(vertex => ctx.lineTo(vertex.x, vertex.y));
+        ctx.closePath();
+    }
+
     ctx.clip();
 
-    // Clear the area outside the polygon and draw the image
+    // Clear the area outside the shape and draw the image
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.drawImage(image, 0, 0);
 
@@ -16,7 +29,7 @@ function drawPanel(ctx, image, vertices) {
     ctx.stroke();
 }
 
-// Function to process panel data and create canvases
+// Process the panel data and create canvases
 function processPanelData(panelData) {
     panelData.forEach((panel, index) => {
         // Create a new canvas element for each panel
@@ -36,10 +49,10 @@ function processPanelData(panelData) {
             canvas.width = image.width;
             canvas.height = image.height;
 
-            // Extract the vertices for the polygon from the panel data
+            // Extract the vertices for the shape from the panel data
             let vertices = panel['Panel Region Vertices']
-                .split('),')
-                .map(s => s.replace('(', '').replace(')', '').split(',').map(Number))
+                .match(/\((\d+,\d+)\)/g)
+                .map(s => s.replace(/[()]/g, '').split(',').map(Number))
                 .map(([x, y]) => ({x, y}));
 
             // Draw the panel on the canvas
