@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('./panel_data.json').then(response => response.json()),
         fetch('./emotion_data.json').then(response => response.json())
     ]).then(([panelData, emotionData]) => {
-        loadPanels(panelData);
+        loadPanels(panelData);  // Load and display panels immediately.
         document.getElementById('downloadButton').addEventListener('click', () => {
             const associations = createAssociations(panelData, emotionData);
             downloadJSON(associations, 'emotion_associations.json');
@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
 function loadPanels(panelData) {
     panelData.forEach(panel => {
         let canvas = document.createElement('canvas');
-        canvas.id = `panelCanvas-${panel.id}`; // Assuming each panel has a unique 'id'
-        canvas.style.marginBottom = "20px";
+        canvas.id = `panelCanvas-${panel.id}`;  // Use panel id for identification
+        canvas.style.marginBottom = "20px";  // Space between canvases
         document.body.appendChild(canvas);
 
         let ctx = canvas.getContext('2d');
@@ -28,7 +28,6 @@ function loadPanels(panelData) {
                 .match(/\((\d+,\d+)\)/g)
                 .map(s => s.replace(/[()]/g, '').split(',').map(Number))
                 .map(([x, y]) => ({x, y}));
-
             drawPanel(ctx, image, vertices, vertices.length === 2);
         };
     });
@@ -54,9 +53,9 @@ function createAssociations(panelData, emotionData) {
 
                 if (countInside > emotionVertices.length / 2) {
                     allEmotionAssociations.push({
-                        panelId: panel.id,
-                        emotionId: emotion.id,
-                        taxonomyPath: emotion['Taxonomy Path']
+                        panelId: panel.id,  // Ensure panel id is included
+                        emotionId: emotion.id,  // Include emotion id
+                        taxonomyPath: emotion['Taxonomy Path']  // Include taxonomy path
                     });
                 }
             }
@@ -72,7 +71,6 @@ function downloadJSON(data, filename) {
     let a = document.createElement('a');
     a.href = url;
     a.download = filename;
-    a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -106,8 +104,7 @@ function pointInPolygon(point, polygon) {
     for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
         var xi = polygon[i].x, yi = polygon[i].y;
         var xj = polygon[j].x, yj = polygon[j].y;
-        var intersect = ((yi > y) != (yj > y))
-            && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+        var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
         if (intersect) inside = !inside;
     }
     return inside;
