@@ -45,9 +45,7 @@ function createAssociations(panelData, emotionData) {
                 if (countInside > emotionVertices.length / 2) {
                     allEmotionAssociations.push({
                         panelId: panel['ID'],
-                        panelVertices: panelVertices,
                         emotionId: emotion['ID'],
-                        emotionVertices: emotionVertices,
                         taxonomyPath: emotion['Taxonomy Path']
                     });
                 }
@@ -56,12 +54,6 @@ function createAssociations(panelData, emotionData) {
     });
 
     return allEmotionAssociations;
-}
-
-function formatVertices(vertexString) {
-    return vertexString.match(/\((\d+,\d+)\)/g)
-                        .map(s => s.replace(/[()]/g, '').split(',').map(Number))
-                        .map(([x, y]) => ({x, y}));
 }
 
 function downloadJSON(data, filename) {
