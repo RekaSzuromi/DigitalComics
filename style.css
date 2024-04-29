@@ -52,3 +52,9 @@ img {
     margin: 20px auto;
     border: 1px solid #ccc; /* Optional: adds a border around the canvas */
 }
+
+.panel-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
