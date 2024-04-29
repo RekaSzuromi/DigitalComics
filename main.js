@@ -50,9 +50,9 @@ function processPanelData(panelData, emotionData) {
     panelData.forEach((panel, index) => {
         let canvas = document.createElement('canvas');
         canvas.id = `panelCanvas-${index}`;
-        canvas.style.marginBottom = "40px"; // Adds space between each canvas
+        canvas.style.marginBottom = "40px";
         document.body.appendChild(canvas);
-        
+
         let ctx = canvas.getContext('2d');
         let image = new Image();
         image.src = `pages/page-${panel['Page Number']}.jpg`;
@@ -63,11 +63,8 @@ function processPanelData(panelData, emotionData) {
                 .map(s => s.replace(/[()]/g, '').split(',').map(Number))
                 .map(([x, y]) => ({x, y}));
 
-            let isRectangle = vertices.length === 2;
+            drawPanel(ctx, image, vertices, vertices.length > 2);
 
-            drawPanel(ctx, image, vertices, isRectangle);
-
-            // Process emotions for this panel
             let emotionAssociations = [];
             emotionData.forEach(emotion => {
                 if (emotion['Page Number'] === panel['Page Number']) {
@@ -90,28 +87,25 @@ function processPanelData(panelData, emotionData) {
                     taxonomyPaths: emotionAssociations
                 });
             }
+
+            if (index === panelData.length - 1) { // Check if this is the last panel processed
+                downloadJSON(allEmotionAssociations, 'emotion_associations.json');
+            }
         };
     });
-
-    // Once all panels have been processed, create and download the JSON file
-    image.onloadend = function() {
-        downloadJSON(allEmotionAssociations, 'emotion_associations.json');
-    };
 }
 
 function downloadJSON(data, filename) {
-    if (!data) {
-        console.error('No data to save');
-        return;
-    }
-
     let blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
     let url = URL.createObjectURL(blob);
     let a = document.createElement('a');
-    a.download = filename;
+    a.style.display = 'none';
     a.href = url;
-    a.textContent = 'Download ' + filename;
+    a.download = filename;
+    document.body.appendChild(a);
     a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -124,3 +118,4 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error fetching data:', error);
     });
 });
+
