@@ -53,7 +53,8 @@ function createAssociations(panelData, emotionData) {
 
                 if (countInside > emotionVertices.length / 2) {
                     allEmotionAssociations.push({
-                        panelId: panel.id,  // Ensure panel id is included
+                        panelId: panel.ID,  // Ensure panel id is included
+                        canvasId: canvas.id,
                         emotionId: emotion.id,  // Include emotion id
                         taxonomyPath: emotion['Taxonomy Path']  // Include taxonomy path
                     });
