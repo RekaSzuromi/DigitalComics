@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('./panel_data.json').then(response => response.json()),
         fetch('./emotion_data.json').then(response => response.json())
     ]).then(([panelData, emotionData]) => {
-        loadPanels(panelData);  // Load and display panels immediately.
+        loadPanels(panelData);
         document.getElementById('downloadButton').addEventListener('click', () => {
             const associations = createAssociations(panelData, emotionData);
             downloadJSON(associations, 'emotion_associations.json');
@@ -16,18 +16,15 @@ document.addEventListener('DOMContentLoaded', function() {
 function loadPanels(panelData) {
     panelData.forEach(panel => {
         let canvas = document.createElement('canvas');
-        canvas.id = `panelCanvas-${panel.id}`;  // Use panel id for identification
-        canvas.style.marginBottom = "20px";  // Space between canvases
+        canvas.id = `panelCanvas-${panel.id}`; // Assume 'id' is part of the panel data
+        canvas.style.marginBottom = "20px"; // Adds space between each canvas
         document.body.appendChild(canvas);
 
         let ctx = canvas.getContext('2d');
         let image = new Image();
         image.src = `pages/page-${panel['Page Number']}.jpg`;
         image.onload = () => {
-            let vertices = panel['Panel Region Vertices']
-                .match(/\((\d+,\d+)\)/g)
-                .map(s => s.replace(/[()]/g, '').split(',').map(Number))
-                .map(([x, y]) => ({x, y}));
+            let vertices = formatVertices(panel['Panel Region Vertices']);
             drawPanel(ctx, image, vertices, vertices.length === 2);
         };
     });
@@ -37,26 +34,21 @@ function createAssociations(panelData, emotionData) {
     let allEmotionAssociations = [];
 
     panelData.forEach(panel => {
-        let panelVertices = panel['Panel Region Vertices']
-            .match(/\((\d+,\d+)\)/g)
-            .map(s => s.replace(/[()]/g, '').split(',').map(Number))
-            .map(([x, y]) => ({x, y}));
+        let panelVertices = formatVertices(panel['Panel Region Vertices']);
 
         emotionData.forEach(emotion => {
             if (emotion['Page Number'] === panel['Page Number']) {
-                let emotionVertices = emotion['Emotion Region Vertices']
-                    .match(/\((\d+,\d+)\)/g)
-                    .map(s => s.replace(/[()]/g, '').split(',').map(Number))
-                    .map(([x, y]) => ({x, y}));
+                let emotionVertices = formatVertices(emotion['Emotion Region Vertices']);
 
                 let countInside = emotionVertices.reduce((count, vertex) => count + pointInPolygon(vertex, panelVertices), 0);
 
                 if (countInside > emotionVertices.length / 2) {
                     allEmotionAssociations.push({
-                        panelId: panel.ID,  // Ensure panel id is included
-                        canvasId: canvas.id,
-                        emotionId: emotion.id,  // Include emotion id
-                        taxonomyPath: emotion['Taxonomy Path']  // Include taxonomy path
+                        panelId: panel.id,
+                        panelVertices: panelVertices,
+                        emotionId: emotion.id,
+                        emotionVertices: emotionVertices,
+                        taxonomyPath: emotion['Taxonomy Path']
                     });
                 }
             }
@@ -64,6 +56,12 @@ function createAssociations(panelData, emotionData) {
     });
 
     return allEmotionAssociations;
+}
+
+function formatVertices(vertexString) {
+    return vertexString.match(/\((\d+,\d+)\)/g)
+                        .map(s => s.replace(/[()]/g, '').split(',').map(Number))
+                        .map(([x, y]) => ({x, y}));
 }
 
 function downloadJSON(data, filename) {
