@@ -1,1 +1,437 @@
-[{"ID":1,"Page Number":1,"Panel Region Vertices":"(40,59), (1003,441)"},{"ID":2,"Page Number":1,"Panel Region Vertices":"(285,443), (980,869)"},{"ID":3,"Page Number":1,"Panel Region Vertices":"(36,869), (1001,1422)"},{"ID":4,"Page Number":1,"Panel Region Vertices":"(59,447), (260,871)"},{"ID":5,"Page Number":2,"Panel Region Vertices":"(984,781), (390,781), (386,902), (426,904), (438,917), (472,843), (462,831), (466,822), (455,808), (472,810), (489,780), (554,780), (554,827), (508,852), (474,953), (518,1020), (566,1108), (564,1135), (560,1154), (522,1202), (501,1209), (543,1401), (980,1402)"},{"ID":6,"Page Number":2,"Panel Region Vertices":"(38,52), (1001,407)"},{"ID":7,"Page Number":2,"Panel Region Vertices":"(61,747), (65,403), (631,407), (634,753), (583,753), (585,713), (567,705), (535,718), (525,713), (512,732), (522,739), (516,749), (331,749), (332,741), (298,749), (290,717), (273,697), (283,730), (269,715), (231,713), (245,720), (199,715), (143,736), (128,753)"},{"ID":8,"Page Number":2,"Panel Region Vertices":"(524,1423), (545,1402), (497,1208), (522,1204), (571,1135), (535,1049), (474,952), (510,850), (552,831), (558,762), (577,757), (585,730), (579,709), (560,703), (535,722), (524,715), (516,732), (518,738), (516,753), (499,747), (489,766), (478,768), (460,776), (489,791), (476,812), (455,804), (470,822), (460,833), (472,846), (439,917), (428,904), (384,904), (392,751), (321,749), (332,747), (296,753), (287,711), (277,701), (281,726), (266,715), (239,711), (246,722), (216,713), (170,728), (128,755), (36,753), (38,1427)"},{"ID":9,"Page Number":2,"Panel Region Vertices":"(653,407), (980,749)"},{"ID":10,"Page Number":3,"Panel Region Vertices":"(61,460), (386,906)"},{"ID":11,"Page Number":3,"Panel Region Vertices":"(348,929), (741,1416)"},{"ID":12,"Page Number":3,"Panel Region Vertices":"(407,457), (757,904)"},{"ID":13,"Page Number":3,"Panel Region Vertices":"(741,929), (990,1399)"},{"ID":14,"Page Number":3,"Panel Region Vertices":"(63,929), (348,1402)"},{"ID":15,"Page Number":3,"Panel Region Vertices":"(780,453), (990,906)"},{"ID":16,"Page Number":3,"Panel Region Vertices":"(65,73), (986,435)"},{"ID":17,"Page Number":4,"Panel Region Vertices":"(1001,1408), (1004,935), (597,938), (519,903), (475,922), (430,910), (416,902), (440,925), (419,933), (401,944), (43,936), (38,1410)"},{"ID":18,"Page Number":4,"Panel Region Vertices":"(63,73), (353,524)"},{"ID":19,"Page Number":4,"Panel Region Vertices":"(428,921), (434,537), (65,550), (67,938), (241,938), (237,931), (262,940), (411,938)"},{"ID":20,"Page Number":4,"Panel Region Vertices":"(764,541), (980,934)"},{"ID":21,"Page Number":4,"Panel Region Vertices":"(457,546), (739,542), (739,853), (737,937), (590,935), (560,922), (516,903), (472,920), (453,916)"},{"ID":22,"Page Number":4,"Panel Region Vertices":"(353,63), (1005,541)"},{"ID":23,"Page Number":5,"Panel Region Vertices":"(342,1418), (353,971), (263,967), (296,965), (269,958), (238,970), (219,973), (200,956), (171,951), (147,965), (67,973), (65,1011), (53,1043), (66,1021), (64,1061), (47,1089), (49,1154), (64,1110), (62,1128), (51,1167), (51,1211), (67,1246), (62,1418)"},{"ID":24,"Page Number":5,"Panel Region Vertices":"(70,618), (986,940)"},{"ID":25,"Page Number":5,"Panel Region Vertices":"(66,48), (774,620)"},{"ID":26,"Page Number":5,"Panel Region Vertices":"(772,76), (988,594)"},{"ID":27,"Page Number":5,"Panel Region Vertices":"(345,948), (1004,1426)"},{"ID":28,"Page Number":6,"Panel Region Vertices":"(692,504), (620,912), (982,912), (982,498)"},{"ID":29,"Page Number":6,"Panel Region Vertices":"(67,496), (60,912), (604,914), (670,500)"},{"ID":30,"Page Number":6,"Panel Region Vertices":"(360,920), (1002,1424)"},{"ID":31,"Page Number":6,"Panel Region Vertices":"(64,938), (356,1414)"},{"ID":32,"Page Number":6,"Panel Region Vertices":"(36,58), (1003,496)"},{"ID":33,"Page Number":6,"Panel Region Vertices":"(704,58), (986,472)"},{"ID":34,"Page Number":7,"Panel Region Vertices":"(662,936), (988,1406)"},{"ID":35,"Page Number":7,"Panel Region Vertices":"(68,436), (340,896)"},{"ID":36,"Page Number":7,"Panel Region Vertices":"(322,922), (662,1426)"},{"ID":37,"Page Number":7,"Panel Region Vertices":"(620,434), (990,900)"},{"ID":38,"Page Number":7,"Panel Region Vertices":"(70,924), (318,1408)"},{"ID":39,"Page Number":7,"Panel Region Vertices":"(36,50), (1000,436)"},{"ID":40,"Page Number":7,"Panel Region Vertices":"(370,436), (592,896)"},{"ID":41,"Page Number":8,"Panel Region Vertices":"(80,94), (80,512), (304,510), (258,94)"},{"ID":42,"Page Number":8,"Panel Region Vertices":"(262,65), (40,68), (40,530), (270,536), (1001,530), (1001,63)"},{"ID":43,"Page Number":8,"Panel Region Vertices":"(42,534), (1004,920)"},{"ID":44,"Page Number":8,"Panel Region Vertices":"(567,920), (476,1415), (1004,1412), (1002,920)"},{"ID":45,"Page Number":8,"Panel Region Vertices":"(42,920), (566,922), (476,1414), (40,1412)"},{"ID":46,"Page Number":9,"Panel Region Vertices":"(38,52), (1004,420)"},{"ID":47,"Page Number":9,"Panel Region Vertices":"(630,422), (982,836)"},{"ID":48,"Page Number":9,"Panel Region Vertices":"(64,866), (396,1404)"},{"ID":49,"Page Number":9,"Panel Region Vertices":"(70,424), (602,840)"},{"ID":50,"Page Number":9,"Panel Region Vertices":"(702,864), (1000,1424)"},{"ID":51,"Page Number":9,"Panel Region Vertices":"(428,864), (700,1406)"},{"ID":52,"Page Number":10,"Panel Region Vertices":"(72,408), (370,858)"},{"ID":53,"Page Number":10,"Panel Region Vertices":"(700,388), (706,802), (768,820), (798,860), (854,884), (916,902), (1004,930), (1000,384)"},{"ID":54,"Page Number":10,"Panel Region Vertices":"(132,896), (82,974), (96,1200), (164,1242), (398,1208), (590,1200), (626,1174), (716,932), (610,874)"},{"ID":55,"Page Number":10,"Panel Region Vertices":"(72,76), (520,378)"},{"ID":56,"Page Number":10,"Panel Region Vertices":"(398,406), (696,858)"},{"ID":57,"Page Number":10,"Panel Region Vertices":"(68,1286), (100,1426), (1000,1428), (1000,930), (794,864), (708,852), (724,932), (628,1176), (594,1204), (382,1214), (162,1250)"},{"ID":58,"Page Number":10,"Panel Region Vertices":"(546,74), (990,382)"},{"ID":59,"Page Number":11,"Panel Region Vertices":"(38,66), (1000,1410)"},{"ID":60,"Page Number":12,"Panel Region Vertices":"(626,369), (624,395), (636,405), (636,494), (625,518), (632,537), (634,606), (640,617), (631,637), (637,646), (625,670), (656,677), (694,669), (765,673), (777,667), (797,676), (920,667), (972,671), (975,653), (967,642), (983,568), (963,508), (981,363)"},{"ID":61,"Page Number":12,"Panel Region Vertices":"(72,374), (80,399), (69,426), (86,448), (87,492), (78,509), (84,584), (71,611), (78,628), (76,650), (76,676), (235,677), (304,664), (437,668), (609,665), (608,619), (613,607), (603,596), (607,498), (597,469), (608,439), (596,429), (599,395), (616,365), (577,362), (450,366)"},{"ID":62,"Page Number":12,"Panel Region Vertices":"(78,700), (972,1056)"},{"ID":63,"Page Number":12,"Panel Region Vertices":"(86,136), (76,157), (92,214), (72,270), (92,300), (86,311), (90,325), (67,351), (220,353), (433,338), (541,347), (668,342), (773,351), (788,336), (804,346), (887,336), (969,337), (955,282), (970,264), (972,207), (969,175), (951,159), (954,133), (952,108), (974,87), (907,88), (807,96), (784,86), (684,85), (663,87), (492,87), (424,85), (335,97), (210,92), (105,98), (70,95)"},{"ID":64,"Page Number":12,"Panel Region Vertices":"(38,1054), (1000,1414)"},{"ID":65,"Page Number":13,"Panel Region Vertices":"(430,473), (981,805)"},{"ID":66,"Page Number":13,"Panel Region Vertices":"(72,53), (442,471)"},{"ID":67,"Page Number":13,"Panel Region Vertices":"(74,474), (404,808)"},{"ID":68,"Page Number":13,"Panel Region Vertices":"(75,832), (393,1398)"},{"ID":69,"Page Number":13,"Panel Region Vertices":"(445,75), (982,444)"},{"ID":70,"Page Number":13,"Panel Region Vertices":"(36,810), (1001,1426)"},{"ID":71,"Page Number":14,"Panel Region Vertices":"(333,404), (603,812)"},{"ID":72,"Page Number":14,"Panel Region Vertices":"(68,79), (513,379)"},{"ID":73,"Page Number":14,"Panel Region Vertices":"(625,402), (973,813)"},{"ID":74,"Page Number":14,"Panel Region Vertices":"(539,78), (974,382)"},{"ID":75,"Page Number":14,"Panel Region Vertices":"(38,808), (1002,1426)"},{"ID":76,"Page Number":14,"Panel Region Vertices":"(68,404), (308,814)"},{"ID":77,"Page Number":15,"Panel Region Vertices":"(72,59), (325,498)"},{"ID":78,"Page Number":15,"Panel Region Vertices":"(323,57), (1002,525)"},{"ID":79,"Page Number":15,"Panel Region Vertices":"(72,922), (358,1408)"},{"ID":80,"Page Number":15,"Panel Region Vertices":"(364,901), (1002,1419)"},{"ID":81,"Page Number":15,"Panel Region Vertices":"(36,523), (1001,897)"},{"ID":82,"Page Number":16,"Panel Region Vertices":"(39,56), (1003,474)"},{"ID":83,"Page Number":16,"Panel Region Vertices":"(37,955), (1003,1419)"},{"ID":84,"Page Number":16,"Panel Region Vertices":"(69,469), (401,951)"},{"ID":85,"Page Number":16,"Panel Region Vertices":"(427,471), (969,952)"},{"ID":86,"Page Number":16,"Panel Region Vertices":"(786,988), (968,1399)"},{"ID":87,"Page Number":17,"Panel Region Vertices":"(40,52), (1004,1420)"}]
+[
+    {
+        "ID": 1,
+        "Page Number": 1,
+        "Panel Region Vertices": "(40,59), (1003,441)"
+    },
+    {
+        "ID": 2,
+        "Page Number": 1,
+        "Panel Region Vertices": "(285,443), (980,869)"
+    },
+    {
+        "ID": 3,
+        "Page Number": 1,
+        "Panel Region Vertices": "(36,869), (1001,1422)"
+    },
+    {
+        "ID": 4,
+        "Page Number": 1,
+        "Panel Region Vertices": "(59,447), (260,871)"
+    },
+    {
+        "ID": 5,
+        "Page Number": 2,
+        "Panel Region Vertices": "(984,781), (390,781), (386,902), (426,904), (438,917), (472,843), (462,831), (466,822), (455,808), (472,810), (489,780), (554,780), (554,827), (508,852), (474,953), (518,1020), (566,1108), (564,1135), (560,1154), (522,1202), (501,1209), (543,1401), (980,1402)"
+    },
+    {
+        "ID": 6,
+        "Page Number": 2,
+        "Panel Region Vertices": "(38,52), (1001,407)"
+    },
+    {
+        "ID": 7,
+        "Page Number": 2,
+        "Panel Region Vertices": "(61,747), (65,403), (631,407), (634,753), (583,753), (585,713), (567,705), (535,718), (525,713), (512,732), (522,739), (516,749), (331,749), (332,741), (298,749), (290,717), (273,697), (283,730), (269,715), (231,713), (245,720), (199,715), (143,736), (128,753)"
+    },
+    {
+        "ID": 8,
+        "Page Number": 2,
+        "Panel Region Vertices": "(524,1423), (545,1402), (497,1208), (522,1204), (571,1135), (535,1049), (474,952), (510,850), (552,831), (558,762), (577,757), (585,730), (579,709), (560,703), (535,722), (524,715), (516,732), (518,738), (516,753), (499,747), (489,766), (478,768), (460,776), (489,791), (476,812), (455,804), (470,822), (460,833), (472,846), (439,917), (428,904), (384,904), (392,751), (321,749), (332,747), (296,753), (287,711), (277,701), (281,726), (266,715), (239,711), (246,722), (216,713), (170,728), (128,755), (36,753), (38,1427)"
+    },
+    {
+        "ID": 9,
+        "Page Number": 2,
+        "Panel Region Vertices": "(653,407), (980,749)"
+    },
+    {
+        "ID": 10,
+        "Page Number": 3,
+        "Panel Region Vertices": "(61,460), (386,906)"
+    },
+    {
+        "ID": 11,
+        "Page Number": 3,
+        "Panel Region Vertices": "(348,929), (741,1416)"
+    },
+    {
+        "ID": 12,
+        "Page Number": 3,
+        "Panel Region Vertices": "(407,457), (757,904)"
+    },
+    {
+        "ID": 13,
+        "Page Number": 3,
+        "Panel Region Vertices": "(741,929), (990,1399)"
+    },
+    {
+        "ID": 14,
+        "Page Number": 3,
+        "Panel Region Vertices": "(63,929), (348,1402)"
+    },
+    {
+        "ID": 15,
+        "Page Number": 3,
+        "Panel Region Vertices": "(780,453), (990,906)"
+    },
+    {
+        "ID": 16,
+        "Page Number": 3,
+        "Panel Region Vertices": "(65,73), (986,435)"
+    },
+    {
+        "ID": 17,
+        "Page Number": 4,
+        "Panel Region Vertices": "(1001,1408), (1004,935), (597,938), (519,903), (475,922), (430,910), (416,902), (440,925), (419,933), (401,944), (43,936), (38,1410)"
+    },
+    {
+        "ID": 18,
+        "Page Number": 4,
+        "Panel Region Vertices": "(63,73), (353,524)"
+    },
+    {
+        "ID": 19,
+        "Page Number": 4,
+        "Panel Region Vertices": "(428,921), (434,537), (65,550), (67,938), (241,938), (237,931), (262,940), (411,938)"
+    },
+    {
+        "ID": 20,
+        "Page Number": 4,
+        "Panel Region Vertices": "(764,541), (980,934)"
+    },
+    {
+        "ID": 21,
+        "Page Number": 4,
+        "Panel Region Vertices": "(457,546), (739,542), (739,853), (737,937), (590,935), (560,922), (516,903), (472,920), (453,916)"
+    },
+    {
+        "ID": 22,
+        "Page Number": 4,
+        "Panel Region Vertices": "(353,63), (1005,541)"
+    },
+    {
+        "ID": 23,
+        "Page Number": 5,
+        "Panel Region Vertices": "(342,1418), (353,971), (263,967), (296,965), (269,958), (238,970), (219,973), (200,956), (171,951), (147,965), (67,973), (65,1011), (53,1043), (66,1021), (64,1061), (47,1089), (49,1154), (64,1110), (62,1128), (51,1167), (51,1211), (67,1246), (62,1418)"
+    },
+    {
+        "ID": 24,
+        "Page Number": 5,
+        "Panel Region Vertices": "(70,618), (986,940)"
+    },
+    {
+        "ID": 25,
+        "Page Number": 5,
+        "Panel Region Vertices": "(66,48), (774,620)"
+    },
+    {
+        "ID": 26,
+        "Page Number": 5,
+        "Panel Region Vertices": "(772,76), (988,594)"
+    },
+    {
+        "ID": 27,
+        "Page Number": 5,
+        "Panel Region Vertices": "(345,948), (1004,1426)"
+    },
+    {
+        "ID": 28,
+        "Page Number": 6,
+        "Panel Region Vertices": "(692,504), (620,912), (982,912), (982,498)"
+    },
+    {
+        "ID": 29,
+        "Page Number": 6,
+        "Panel Region Vertices": "(67,496), (60,912), (604,914), (670,500)"
+    },
+    {
+        "ID": 30,
+        "Page Number": 6,
+        "Panel Region Vertices": "(360,920), (1002,1424)"
+    },
+    {
+        "ID": 31,
+        "Page Number": 6,
+        "Panel Region Vertices": "(64,938), (356,1414)"
+    },
+    {
+        "ID": 32,
+        "Page Number": 6,
+        "Panel Region Vertices": "(36,58), (1003,496)"
+    },
+    {
+        "ID": 33,
+        "Page Number": 6,
+        "Panel Region Vertices": "(704,58), (986,472)"
+    },
+    {
+        "ID": 34,
+        "Page Number": 7,
+        "Panel Region Vertices": "(662,936), (988,1406)"
+    },
+    {
+        "ID": 35,
+        "Page Number": 7,
+        "Panel Region Vertices": "(68,436), (340,896)"
+    },
+    {
+        "ID": 36,
+        "Page Number": 7,
+        "Panel Region Vertices": "(322,922), (662,1426)"
+    },
+    {
+        "ID": 37,
+        "Page Number": 7,
+        "Panel Region Vertices": "(620,434), (990,900)"
+    },
+    {
+        "ID": 38,
+        "Page Number": 7,
+        "Panel Region Vertices": "(70,924), (318,1408)"
+    },
+    {
+        "ID": 39,
+        "Page Number": 7,
+        "Panel Region Vertices": "(36,50), (1000,436)"
+    },
+    {
+        "ID": 40,
+        "Page Number": 7,
+        "Panel Region Vertices": "(370,436), (592,896)"
+    },
+    {
+        "ID": 41,
+        "Page Number": 8,
+        "Panel Region Vertices": "(80,94), (80,512), (304,510), (258,94)"
+    },
+    {
+        "ID": 42,
+        "Page Number": 8,
+        "Panel Region Vertices": "(262,65), (40,68), (40,530), (270,536), (1001,530), (1001,63)"
+    },
+    {
+        "ID": 43,
+        "Page Number": 8,
+        "Panel Region Vertices": "(42,534), (1004,920)"
+    },
+    {
+        "ID": 44,
+        "Page Number": 8,
+        "Panel Region Vertices": "(567,920), (476,1415), (1004,1412), (1002,920)"
+    },
+    {
+        "ID": 45,
+        "Page Number": 8,
+        "Panel Region Vertices": "(42,920), (566,922), (476,1414), (40,1412)"
+    },
+    {
+        "ID": 46,
+        "Page Number": 9,
+        "Panel Region Vertices": "(38,52), (1004,420)"
+    },
+    {
+        "ID": 47,
+        "Page Number": 9,
+        "Panel Region Vertices": "(630,422), (982,836)"
+    },
+    {
+        "ID": 48,
+        "Page Number": 9,
+        "Panel Region Vertices": "(64,866), (396,1404)"
+    },
+    {
+        "ID": 49,
+        "Page Number": 9,
+        "Panel Region Vertices": "(70,424), (602,840)"
+    },
+    {
+        "ID": 50,
+        "Page Number": 9,
+        "Panel Region Vertices": "(702,864), (1000,1424)"
+    },
+    {
+        "ID": 51,
+        "Page Number": 9,
+        "Panel Region Vertices": "(428,864), (700,1406)"
+    },
+    {
+        "ID": 52,
+        "Page Number": 10,
+        "Panel Region Vertices": "(72,408), (370,858)"
+    },
+    {
+        "ID": 53,
+        "Page Number": 10,
+        "Panel Region Vertices": "(700,388), (706,802), (768,820), (798,860), (854,884), (916,902), (1004,930), (1000,384)"
+    },
+    {
+        "ID": 54,
+        "Page Number": 10,
+        "Panel Region Vertices": "(132,896), (82,974), (96,1200), (164,1242), (398,1208), (590,1200), (626,1174), (716,932), (610,874)"
+    },
+    {
+        "ID": 55,
+        "Page Number": 10,
+        "Panel Region Vertices": "(72,76), (520,378)"
+    },
+    {
+        "ID": 56,
+        "Page Number": 10,
+        "Panel Region Vertices": "(398,406), (696,858)"
+    },
+    {
+        "ID": 57,
+        "Page Number": 10,
+        "Panel Region Vertices": "(68,1286), (100,1426), (1000,1428), (1000,930), (794,864), (708,852), (724,932), (628,1176), (594,1204), (382,1214), (162,1250)"
+    },
+    {
+        "ID": 58,
+        "Page Number": 10,
+        "Panel Region Vertices": "(546,74), (990,382)"
+    },
+    {
+        "ID": 59,
+        "Page Number": 11,
+        "Panel Region Vertices": "(38,66), (1000,1410)"
+    },
+    {
+        "ID": 60,
+        "Page Number": 12,
+        "Panel Region Vertices": "(626,369), (624,395), (636,405), (636,494), (625,518), (632,537), (634,606), (640,617), (631,637), (637,646), (625,670), (656,677), (694,669), (765,673), (777,667), (797,676), (920,667), (972,671), (975,653), (967,642), (983,568), (963,508), (981,363)"
+    },
+    {
+        "ID": 61,
+        "Page Number": 12,
+        "Panel Region Vertices": "(72,374), (80,399), (69,426), (86,448), (87,492), (78,509), (84,584), (71,611), (78,628), (76,650), (76,676), (235,677), (304,664), (437,668), (609,665), (608,619), (613,607), (603,596), (607,498), (597,469), (608,439), (596,429), (599,395), (616,365), (577,362), (450,366)"
+    },
+    {
+        "ID": 62,
+        "Page Number": 12,
+        "Panel Region Vertices": "(78,700), (972,1056)"
+    },
+    {
+        "ID": 63,
+        "Page Number": 12,
+        "Panel Region Vertices": "(86,136), (76,157), (92,214), (72,270), (92,300), (86,311), (90,325), (67,351), (220,353), (433,338), (541,347), (668,342), (773,351), (788,336), (804,346), (887,336), (969,337), (955,282), (970,264), (972,207), (969,175), (951,159), (954,133), (952,108), (974,87), (907,88), (807,96), (784,86), (684,85), (663,87), (492,87), (424,85), (335,97), (210,92), (105,98), (70,95)"
+    },
+    {
+        "ID": 64,
+        "Page Number": 12,
+        "Panel Region Vertices": "(38,1054), (1000,1414)"
+    },
+    {
+        "ID": 65,
+        "Page Number": 13,
+        "Panel Region Vertices": "(430,473), (981,805)"
+    },
+    {
+        "ID": 66,
+        "Page Number": 13,
+        "Panel Region Vertices": "(72,53), (442,471)"
+    },
+    {
+        "ID": 67,
+        "Page Number": 13,
+        "Panel Region Vertices": "(74,474), (404,808)"
+    },
+    {
+        "ID": 68,
+        "Page Number": 13,
+        "Panel Region Vertices": "(75,832), (393,1398)"
+    },
+    {
+        "ID": 69,
+        "Page Number": 13,
+        "Panel Region Vertices": "(445,75), (982,444)"
+    },
+    {
+        "ID": 70,
+        "Page Number": 13,
+        "Panel Region Vertices": "(36,810), (1001,1426)"
+    },
+    {
+        "ID": 71,
+        "Page Number": 14,
+        "Panel Region Vertices": "(333,404), (603,812)"
+    },
+    {
+        "ID": 72,
+        "Page Number": 14,
+        "Panel Region Vertices": "(68,79), (513,379)"
+    },
+    {
+        "ID": 73,
+        "Page Number": 14,
+        "Panel Region Vertices": "(625,402), (973,813)"
+    },
+    {
+        "ID": 74,
+        "Page Number": 14,
+        "Panel Region Vertices": "(539,78), (974,382)"
+    },
+    {
+        "ID": 75,
+        "Page Number": 14,
+        "Panel Region Vertices": "(38,808), (1002,1426)"
+    },
+    {
+        "ID": 76,
+        "Page Number": 14,
+        "Panel Region Vertices": "(68,404), (308,814)"
+    },
+    {
+        "ID": 77,
+        "Page Number": 15,
+        "Panel Region Vertices": "(72,59), (325,498)"
+    },
+    {
+        "ID": 78,
+        "Page Number": 15,
+        "Panel Region Vertices": "(323,57), (1002,525)"
+    },
+    {
+        "ID": 79,
+        "Page Number": 15,
+        "Panel Region Vertices": "(72,922), (358,1408)"
+    },
+    {
+        "ID": 80,
+        "Page Number": 15,
+        "Panel Region Vertices": "(364,901), (1002,1419)"
+    },
+    {
+        "ID": 81,
+        "Page Number": 15,
+        "Panel Region Vertices": "(36,523), (1001,897)"
+    },
+    {
+        "ID": 82,
+        "Page Number": 16,
+        "Panel Region Vertices": "(39,56), (1003,474)"
+    },
+    {
+        "ID": 83,
+        "Page Number": 16,
+        "Panel Region Vertices": "(37,955), (1003,1419)"
+    },
+    {
+        "ID": 84,
+        "Page Number": 16,
+        "Panel Region Vertices": "(69,469), (401,951)"
+    },
+    {
+        "ID": 85,
+        "Page Number": 16,
+        "Panel Region Vertices": "(427,471), (969,952)"
+    },
+    {
+        "ID": 86,
+        "Page Number": 16,
+        "Panel Region Vertices": "(786,988), (968,1399)"
+    },
+    {
+        "ID": 87,
+        "Page Number": 17,
+        "Panel Region Vertices": "(40,52), (1004,1420)"
+    }
+]
