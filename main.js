@@ -42,7 +42,7 @@ function processPanelData(panelData) {
     panelData.forEach((panel, index) => {
         let canvas = document.createElement('canvas');
         canvas.id = `panelCanvas-${index}`;
-        canvas.style.marginBottom = "10px"; // Adds space between each canvas
+        canvas.style.marginBottom = "40px"; // Adds space between each canvas
         document.body.appendChild(canvas);
         
         let ctx = canvas.getContext('2d');
