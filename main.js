@@ -56,6 +56,12 @@ function createAssociations(panelData, emotionData) {
     return allEmotionAssociations;
 }
 
+function formatVertices(vertexString) {
+    return vertexString.match(/\((\d+,\d+)\)/g)
+                        .map(s => s.replace(/[()]/g, '').split(',').map(Number))
+                        .map(([x, y]) => ({x, y}));
+}
+
 function downloadJSON(data, filename) {
     let blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
     let url = URL.createObjectURL(blob);
