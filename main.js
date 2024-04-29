@@ -1,4 +1,4 @@
-// Function to draw the panel on the canvas, adjusted to set canvas size dynamically
+// Function to draw the panel on the canvas, adjusted to set canvas size dynamically and without outline
 function drawPanel(ctx, image, vertices, isRectangle) {
     let minX, maxX, minY, maxY;
 
@@ -35,20 +35,18 @@ function drawPanel(ctx, image, vertices, isRectangle) {
 
     // Draw the image section corresponding to the bounding box
     ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, maxX - minX, maxY - minY);
-
-    // Optionally draw the outline
-    ctx.strokeStyle = 'red';
-    ctx.lineWidth = 3;
-    ctx.stroke();
 }
 
 // Process the panel data and create canvases
 function processPanelData(panelData) {
     panelData.forEach((panel, index) => {
         let canvas = document.createElement('canvas');
-        let ctx = canvas.getContext('2d');
+        canvas.id = `panelCanvas-${index}`;
+        canvas.style.border = "1px solid black"; // Optional, for better visibility of the panels
+        canvas.style.marginBottom = "10px"; // Adds space between each canvas
         document.body.appendChild(canvas);
-
+        
+        let ctx = canvas.getContext('2d');
         let image = new Image();
         image.src = `pages/page-${panel['Page Number']}.jpg`;
 
