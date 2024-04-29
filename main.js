@@ -44,78 +44,75 @@ function drawPanel(ctx, image, vertices, isRectangle) {
 }
 
 // Process the panel data and create canvases, and log emotion associations
+document.addEventListener('DOMContentLoaded', function() {
+    const downloadBtn = document.getElementById('downloadButton');
+    downloadBtn.addEventListener('click', function() {
+        fetch('./panel_data.json')
+            .then(response => response.json())
+            .then(panelData => fetch('./emotion_data.json')
+                .then(response => response.json())
+                .then(emotionData => {
+                    const associations = processPanelData(panelData, emotionData);
+                    downloadJSON(associations, 'emotion_associations.json');
+                })
+            )
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+});
+
 function processPanelData(panelData, emotionData) {
     let allEmotionAssociations = [];
+    
+    panelData.forEach(panel => {
+        let panelVertices = panel['Panel Region Vertices']
+            .match(/\((\d+,\d+)\)/g)
+            .map(s => s.replace(/[()]/g, '').split(',').map(Number))
+            .map(([x, y]) => ({x, y}));
 
-    panelData.forEach((panel, index) => {
-        let canvas = document.createElement('canvas');
-        canvas.id = `panelCanvas-${index}`;
-        canvas.style.marginBottom = "40px";
-        document.body.appendChild(canvas);
+        emotionData.forEach(emotion => {
+            if (emotion['Page Number'] === panel['Page Number']) {
+                let emotionVertices = emotion['Emotion Region Vertices']
+                    .match(/\((\d+,\d+)\)/g)
+                    .map(s => s.replace(/[()]/g, '').split(',').map(Number))
+                    .map(([x, y]) => ({x, y}));
 
-        let ctx = canvas.getContext('2d');
-        let image = new Image();
-        image.src = `pages/page-${panel['Page Number']}.jpg`;
+                let countInside = emotionVertices.reduce((count, vertex) => count + pointInPolygon(vertex, panelVertices), 0);
 
-        image.onload = function() {
-            let vertices = panel['Panel Region Vertices']
-                .match(/\((\d+,\d+)\)/g)
-                .map(s => s.replace(/[()]/g, '').split(',').map(Number))
-                .map(([x, y]) => ({x, y}));
-
-            drawPanel(ctx, image, vertices, vertices.length > 2);
-
-            let emotionAssociations = [];
-            emotionData.forEach(emotion => {
-                if (emotion['Page Number'] === panel['Page Number']) {
-                    let emotionVertices = emotion['Emotion Region Vertices']
-                        .match(/\((\d+,\d+)\)/g)
-                        .map(s => s.replace(/[()]/g, '').split(',').map(Number))
-                        .map(([x, y]) => ({x, y}));
-
-                    let countInside = emotionVertices.reduce((count, vertex) => count + pointInPolygon(vertex, vertices), 0);
-
-                    if (countInside > emotionVertices.length / 2) {
-                        emotionAssociations.push(emotion['Taxonomy Path']);
-                    }
+                if (countInside > emotionVertices.length / 2) {
+                    allEmotionAssociations.push({
+                        panelId: panel.id,
+                        taxonomyPath: emotion['Taxonomy Path'],
+                        emotionId: emotion.id
+                    });
                 }
-            });
-
-            if (emotionAssociations.length) {
-                allEmotionAssociations.push({
-                    panelId: `panelCanvas-${index}`,
-                    taxonomyPaths: emotionAssociations
-                });
             }
-
-            if (index === panelData.length - 1) { // Check if this is the last panel processed
-                downloadJSON(allEmotionAssociations, 'emotion_associations.json');
-            }
-        };
+        });
     });
+
+    return allEmotionAssociations;
 }
 
 function downloadJSON(data, filename) {
     let blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
     let url = URL.createObjectURL(blob);
     let a = document.createElement('a');
-    a.style.display = 'none';
     a.href = url;
     a.download = filename;
-    document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    Promise.all([
-        fetch('./panel_data.json').then(response => response.json()),
-        fetch('./emotion_data.json').then(response => response.json())
-    ]).then(([panelData, emotionData]) => {
-        processPanelData(panelData, emotionData);
-    }).catch(error => {
-        console.error('Error fetching data:', error);
-    });
-});
-
+function pointInPolygon(point, polygon) {
+    var x = point.x, y = point.y;
+    var inside = false;
+    for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+        var xi = polygon[i].x, yi = polygon[i].y;
+        var xj = polygon[j].x, yj = polygon[j].y;
+        var intersect = ((yi > y) != (yj > y))
+            && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+        if (intersect) inside = !inside;
+    }
+    return inside;
+}
