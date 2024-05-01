@@ -49,10 +49,18 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
             let vertices = formatVertices(panel['Panel Region Vertices']);
             drawPanel(ctx, image, vertices, vertices.length === 2);
 
-            // Find and display associated taxonomy paths under the panel
-            let associatedTexts = emotionAssociations.filter(assoc => assoc.panelId === panel.id);
-            let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', '); // Combine all associated texts
-            displayTaxonomyPaths(textContent, canvas);
+            // Debugging - Check what's being processed
+            console.log(`Processing panel ID: ${panel.id}`);
+
+            let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.id));
+            console.log(`Associated texts for panel ${panel.id}:`, associatedTexts);
+
+            if (associatedTexts.length > 0) {
+                let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', ');
+                displayTaxonomyPaths(textContent, canvas);
+            } else {
+                console.log(`No associations found for panel ${panel.id}`);
+            }
         };
     });
 }
@@ -61,6 +69,7 @@ function displayTaxonomyPaths(text, canvas) {
     let textDiv = document.createElement('div');
     textDiv.textContent = text;
     textDiv.style.marginTop = "5px";
+    textDiv.style.color = "red"; // Make text color red to ensure visibility
     canvas.parentNode.insertBefore(textDiv, canvas.nextSibling);
 }
 
