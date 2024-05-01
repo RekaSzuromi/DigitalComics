@@ -31,6 +31,10 @@ function loadComicData(comicName) {
 function clearExistingPanels() {
     const existingCanvas = document.querySelectorAll('canvas');
     existingCanvas.forEach(canvas => canvas.parentNode.removeChild(canvas));
+
+    // Remove all existing taxonomy text divs
+    const existingTextDivs = document.querySelectorAll('.taxonomy-text');
+    existingTextDivs.forEach(div => div.parentNode.removeChild(div));
 }
 
 function loadPanels(panelData, imagePath, emotionAssociations) {
