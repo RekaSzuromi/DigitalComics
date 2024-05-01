@@ -1,102 +1,102 @@
 [
- {
-  "ID": 1,
-  "Page Number": 1,
-  "Region Vertices": "(88,245), (89,624), (1168,601), (1172,238)"
- },
- {
-  "ID": 2,
-  "Page Number": 1,
-  "Region Vertices": "(86,884), (1166,1356)"
- },
- {
-  "ID": 3,
-  "Page Number": 1,
-  "Region Vertices": "(84,1385), (571,1735)"
- },
- {
-  "ID": 4,
-  "Page Number": 1,
-  "Region Vertices": "(878,272), (1175,506)"
- },
- {
-  "ID": 5,
-  "Page Number": 1,
-  "Region Vertices": "(394,637), (397,837), (1170,841), (1172,622)"
- },
- {
-  "ID": 6,
-  "Page Number": 1,
-  "Region Vertices": "(88,635), (363,832)"
- },
- {
-  "ID": 7,
-  "Page Number": 1,
-  "Region Vertices": "(596,1386), (767,1387), (805,1734), (594,1726)"
- },
- {
-  "ID": 8,
-  "Page Number": 1,
-  "Region Vertices": "(810,1734), (773,1383), (1163,1386), (1166,1730)"
- },
- {
-  "ID": 9,
-  "Page Number": 2,
-  "Region Vertices": "(50,1311), (1193,1726)"
- },
- {
-  "ID": 10,
-  "Page Number": 2,
-  "Region Vertices": "(621,592), (803,596), (767,925), (617,921)"
- },
- {
-  "ID": 11,
-  "Page Number": 2,
-  "Region Vertices": "(769,924), (810,600), (980,600), (989,919)"
- },
- {
-  "ID": 12,
-  "Page Number": 2,
-  "Region Vertices": "(41,599), (608,909)"
- },
- {
-  "ID": 13,
-  "Page Number": 2,
-  "Region Vertices": "(63,939), (63,1272), (601,1272), (537,939)"
- },
- {
-  "ID": 14,
-  "Page Number": 2,
-  "Region Vertices": "(50,37), (1193,567)"
- },
- {
-  "ID": 15,
-  "Page Number": 2,
-  "Region Vertices": "(998,923), (991,599), (1193,599), (1197,923)"
- },
- {
-  "ID": 16,
-  "Page Number": 2,
-  "Region Vertices": "(549,939), (619,1272), (1202,1272), (1197,939)"
- },
- {
-  "ID": 17,
-  "Page Number": 3,
-  "Region Vertices": "(86,600), (320,952)"
- },
- {
-  "ID": 18,
-  "Page Number": 3,
-  "Region Vertices": "(328,589), (326,959), (77,960), (66,1714), (1177,1721), (1159,587)"
- },
- {
-  "ID": 19,
-  "Page Number": 3,
-  "Region Vertices": "(78,48), (769,526)"
- },
- {
-  "ID": 20,
-  "Page Number": 3,
-  "Region Vertices": "(806,102), (1152,530)"
- }
+    {
+        "ID": 1,
+        "Page Number": 1,
+        "Region Vertices": "(88,245), (89,624), (1168,601), (1172,238)"
+    },
+    {
+        "ID": 2,
+        "Page Number": 1,
+        "Region Vertices": "(86,884), (1166,1356)"
+    },
+    {
+        "ID": 3,
+        "Page Number": 1,
+        "Region Vertices": "(84,1385), (571,1735)"
+    },
+    {
+        "ID": 4,
+        "Page Number": 1,
+        "Region Vertices": "(878,272), (1175,506)"
+    },
+    {
+        "ID": 5,
+        "Page Number": 1,
+        "Region Vertices": "(394,637), (397,837), (1170,841), (1172,622)"
+    },
+    {
+        "ID": 6,
+        "Page Number": 1,
+        "Region Vertices": "(88,635), (363,832)"
+    },
+    {
+        "ID": 7,
+        "Page Number": 1,
+        "Region Vertices": "(596,1386), (767,1387), (805,1734), (594,1726)"
+    },
+    {
+        "ID": 8,
+        "Page Number": 1,
+        "Region Vertices": "(810,1734), (773,1383), (1163,1386), (1166,1730)"
+    },
+    {
+        "ID": 9,
+        "Page Number": 2,
+        "Region Vertices": "(50,1311), (1193,1726)"
+    },
+    {
+        "ID": 10,
+        "Page Number": 2,
+        "Region Vertices": "(621,592), (803,596), (767,925), (617,921)"
+    },
+    {
+        "ID": 11,
+        "Page Number": 2,
+        "Region Vertices": "(769,924), (810,600), (980,600), (989,919)"
+    },
+    {
+        "ID": 12,
+        "Page Number": 2,
+        "Region Vertices": "(41,599), (608,909)"
+    },
+    {
+        "ID": 13,
+        "Page Number": 2,
+        "Region Vertices": "(63,939), (63,1272), (601,1272), (537,939)"
+    },
+    {
+        "ID": 14,
+        "Page Number": 2,
+        "Region Vertices": "(50,37), (1193,567)"
+    },
+    {
+        "ID": 15,
+        "Page Number": 2,
+        "Region Vertices": "(998,923), (991,599), (1193,599), (1197,923)"
+    },
+    {
+        "ID": 16,
+        "Page Number": 2,
+        "Region Vertices": "(549,939), (619,1272), (1202,1272), (1197,939)"
+    },
+    {
+        "ID": 17,
+        "Page Number": 3,
+        "Region Vertices": "(86,600), (320,952)"
+    },
+    {
+        "ID": 18,
+        "Page Number": 3,
+        "Region Vertices": "(328,589), (326,959), (77,960), (66,1714), (1177,1721), (1159,587)"
+    },
+    {
+        "ID": 19,
+        "Page Number": 3,
+        "Region Vertices": "(78,48), (769,526)"
+    },
+    {
+        "ID": 20,
+        "Page Number": 3,
+        "Region Vertices": "(806,102), (1152,530)"
+    }
 ]
