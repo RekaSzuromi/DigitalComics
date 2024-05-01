@@ -34,7 +34,7 @@ function clearExistingPanels() {
 }
 
 function loadPanels(panelData, imagePath, emotionAssociations) {
-    panelData.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+    panelData.sort((a, b) => parseInt(a.ID) - parseInt(b.ID));
 
     panelData.forEach(panel => {
         let canvas = document.createElement('canvas');
@@ -48,9 +48,6 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
         image.onload = () => {
             let vertices = formatVertices(panel['Panel Region Vertices']);
             drawPanel(ctx, image, vertices, vertices.length === 2);
-
-            // Debugging - Check what's being processed
-            console.log(`Processing panel ID: ${panel.ID}`);
 
             let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.ID));
             console.log(`Associated texts for panel ${panel.ID}:`, associatedTexts);
@@ -69,7 +66,6 @@ function displayTaxonomyPaths(text, canvas) {
     let textDiv = document.createElement('div');
     textDiv.textContent = text;
     textDiv.style.marginTop = "5px";
-    textDiv.style.color = "red"; // Make text color red to ensure visibility
     canvas.parentNode.insertBefore(textDiv, canvas.nextSibling);
 }
 
