@@ -8,49 +8,60 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function loadComicData(comicName) {
-    currentPanelUrl = `./${comicName}_panel_data.json`;
-    currentEmotionUrl = `./${comicName}_emotion_data.json`;
-    currentImagePath = `./${comicName}_pages/`; 
+    let currentPanelUrl = `./${comicName}_panel_data.json`;
+    let currentEmotionUrl = `./${comicName}_emotion_data.json`;
+    let emotionAssociationsUrl = `./${comicName}_emotion_associations.json`; // URL for the associations JSON
+    let currentImagePath = `./${comicName}_pages/`;
 
     Promise.all([
         fetch(currentPanelUrl).then(response => response.json()),
-        fetch(currentEmotionUrl).then(response => response.json())
-    ]).then(([panelData, emotionData]) => {
+        fetch(currentEmotionUrl).then(response => response.json()),
+        fetch(emotionAssociationsUrl).then(response => response.json()) // Fetch the associations JSON
+    ]).then(([panelData, emotionData, emotionAssociations]) => {
         clearExistingPanels();
-        loadPanels(panelData, currentImagePath);
-        document.getElementById('downloadButton').style.display = 'block'; // Show the download button now
-        document.getElementById('downloadButton').onclick = () => {
-            const associations = createAssociations(panelData, emotionData);
-            downloadJSON(associations, `${comicName}_emotion_associations.json`);
-        };
+        loadPanels(panelData, currentImagePath, emotionAssociations); // Pass emotionAssociations to loadPanels
+        document.getElementById('downloadButton').style.display = 'block';
     }).catch(error => {
         console.error('Error fetching data for ' + comicName + ':', error);
     });
 }
+
+
 
 function clearExistingPanels() {
     const existingCanvas = document.querySelectorAll('canvas');
     existingCanvas.forEach(canvas => canvas.parentNode.removeChild(canvas));
 }
 
-function loadPanels(panelData, currentImagePath) {
-    // Sort panelData by ID before creating and displaying panels
+function loadPanels(panelData, imagePath, emotionAssociations) {
     panelData.sort((a, b) => parseInt(a.id) - parseInt(b.id));
 
     panelData.forEach(panel => {
         let canvas = document.createElement('canvas');
-        canvas.id = `panelCanvas-${panel.id}`;  // Use panel id for identification
-        canvas.style.marginBottom = "20px";  // Adds space between each canvas
+        canvas.id = `panelCanvas-${panel.id}`;
+        canvas.style.marginBottom = "20px";
         document.body.appendChild(canvas);
 
         let ctx = canvas.getContext('2d');
         let image = new Image();
-        image.src = `${currentImagePath}page-${panel['Page Number']}.jpg`;
+        image.src = `${imagePath}page-${panel['Page Number']}.jpg`;
         image.onload = () => {
             let vertices = formatVertices(panel['Panel Region Vertices']);
             drawPanel(ctx, image, vertices, vertices.length === 2);
+
+            // Find and display associated taxonomy paths under the panel
+            let associatedTexts = emotionAssociations.filter(assoc => assoc.panelId === panel.id);
+            let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', '); // Combine all associated texts
+            displayTaxonomyPaths(textContent, canvas);
         };
     });
+}
+
+function displayTaxonomyPaths(text, canvas) {
+    let textDiv = document.createElement('div');
+    textDiv.textContent = text;
+    textDiv.style.marginTop = "5px";
+    canvas.parentNode.insertBefore(textDiv, canvas.nextSibling);
 }
 
 

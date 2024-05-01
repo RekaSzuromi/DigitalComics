@@ -1,0 +1,267 @@
+[
+  {
+    "panelId": 1,
+    "emotionId": 1,
+    "taxonomyPath": "VLT: Semantics: Continuity (v.6) / Character"
+  },
+  {
+    "panelId": 1,
+    "emotionId": 3,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion / Fear"
+  },
+  {
+    "panelId": 1,
+    "emotionId": 4,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion cue / Facial expression"
+  },
+  {
+    "panelId": 1,
+    "emotionId": 5,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Arousal"
+  },
+  {
+    "panelId": 1,
+    "emotionId": 10,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Valence / Slightly Positive"
+  },
+  {
+    "panelId": 2,
+    "emotionId": 2,
+    "taxonomyPath": "VLT: Semantics: Continuity (v.6) / Character"
+  },
+  {
+    "panelId": 2,
+    "emotionId": 6,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion / Fear"
+  },
+  {
+    "panelId": 2,
+    "emotionId": 7,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Arousal"
+  },
+  {
+    "panelId": 2,
+    "emotionId": 8,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion cue / Posture"
+  },
+  {
+    "panelId": 2,
+    "emotionId": 9,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion cue / Text"
+  },
+  {
+    "panelId": 2,
+    "emotionId": 11,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Valence / Negative"
+  },
+  {
+    "panelId": 3,
+    "emotionId": 13,
+    "taxonomyPath": "VLT: Semantics: Continuity (v.6) / Character"
+  },
+  {
+    "panelId": 3,
+    "emotionId": 14,
+    "taxonomyPath": "VLT: Semantics: Continuity (v.6) / Character"
+  },
+  {
+    "panelId": 3,
+    "emotionId": 17,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion / Anger"
+  },
+  {
+    "panelId": 3,
+    "emotionId": 18,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Arousal"
+  },
+  {
+    "panelId": 3,
+    "emotionId": 19,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion cue / Facial expression"
+  },
+  {
+    "panelId": 3,
+    "emotionId": 20,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion / Anger"
+  },
+  {
+    "panelId": 3,
+    "emotionId": 21,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Arousal"
+  },
+  {
+    "panelId": 3,
+    "emotionId": 22,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion cue / Facial expression"
+  },
+  {
+    "panelId": 3,
+    "emotionId": 26,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Valence / Slightly Negative"
+  },
+  {
+    "panelId": 3,
+    "emotionId": 27,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Valence / Slightly Negative"
+  },
+  {
+    "panelId": 4,
+    "emotionId": 12,
+    "taxonomyPath": "VLT: Semantics: Continuity (v.6) / Character"
+  },
+  {
+    "panelId": 4,
+    "emotionId": 24,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Valence / Negative"
+  },
+  {
+    "panelId": 4,
+    "emotionId": 25,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Arousal"
+  },
+  {
+    "panelId": 5,
+    "emotionId": 15,
+    "taxonomyPath": "VLT: Semantics: Continuity (v.6) / Character"
+  },
+  {
+    "panelId": 5,
+    "emotionId": 16,
+    "taxonomyPath": "VLT: Semantics: Continuity (v.6) / Character"
+  },
+  {
+    "panelId": 5,
+    "emotionId": 23,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion / Neutral/None"
+  },
+  {
+    "panelId": 5,
+    "emotionId": 28,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Valence / Slightly Negative"
+  },
+  {
+    "panelId": 5,
+    "emotionId": 29,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Arousal"
+  },
+  {
+    "panelId": 5,
+    "emotionId": 30,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Valence / Neutral"
+  },
+  {
+    "panelId": 6,
+    "emotionId": 35,
+    "taxonomyPath": "VLT: Semantics: Continuity (v.6) / Character"
+  },
+  {
+    "panelId": 6,
+    "emotionId": 43,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Arousal"
+  },
+  {
+    "panelId": 6,
+    "emotionId": 44,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion / Sadness"
+  },
+  {
+    "panelId": 6,
+    "emotionId": 50,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Valence / Slightly Positive"
+  },
+  {
+    "panelId": 6,
+    "emotionId": 51,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Emotion cue / Text"
+  },
+  {
+    "panelId": 7,
+    "emotionId": 33,
+    "taxonomyPath": "VLT: Semantics: Continuity (v.6) / Character"
+  },
+  {
+    "panelId": 7,
+    "emotionId": 38,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion / Sadness"
+  },
+  {
+    "panelId": 7,
+    "emotionId": 39,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Arousal"
+  },
+  {
+    "panelId": 7,
+    "emotionId": 47,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Valence / Slightly Positive"
+  },
+  {
+    "panelId": 7,
+    "emotionId": 48,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Emotion cue / Text"
+  },
+  {
+    "panelId": 8,
+    "emotionId": 32,
+    "taxonomyPath": "VLT: Semantics: Continuity (v.6) / Character"
+  },
+  {
+    "panelId": 9,
+    "emotionId": 34,
+    "taxonomyPath": "VLT: Semantics: Continuity (v.6) / Character"
+  },
+  {
+    "panelId": 9,
+    "emotionId": 40,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion / Happiness"
+  },
+  {
+    "panelId": 9,
+    "emotionId": 41,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Arousal"
+  },
+  {
+    "panelId": 9,
+    "emotionId": 42,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion cue / Text"
+  },
+  {
+    "panelId": 9,
+    "emotionId": 49,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Valence / Slightly Positive"
+  },
+  {
+    "panelId": 10,
+    "emotionId": 31,
+    "taxonomyPath": "VLT: Semantics: Continuity (v.6) / Character"
+  },
+  {
+    "panelId": 10,
+    "emotionId": 36,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Arousal"
+  },
+  {
+    "panelId": 10,
+    "emotionId": 37,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion / Sadness"
+  },
+  {
+    "panelId": 10,
+    "emotionId": 45,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Valence / Slightly Positive"
+  },
+  {
+    "panelId": 10,
+    "emotionId": 46,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.4) / Emotion cue / Text"
+  },
+  {
+    "panelId": 11,
+    "emotionId": 52,
+    "taxonomyPath": "VLT: Semantics: Continuity (v.6) / Character"
+  },
+  {
+    "panelId": 11,
+    "emotionId": 53,
+    "taxonomyPath": "VLT: Semantics: Emotion (v.3) / Emotion / Not-Identifiable"
+  }
+]
