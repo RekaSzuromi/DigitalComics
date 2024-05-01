@@ -1,0 +1,57 @@
+[
+ {
+  "ID": 1,
+  "Page Number": 1,
+  "Region Vertices": "(101,1322), (1168,1696)"
+ },
+ {
+  "ID": 2,
+  "Page Number": 1,
+  "Region Vertices": "(73,107), (1191,1288)"
+ },
+ {
+  "ID": 3,
+  "Page Number": 2,
+  "Region Vertices": "(93,642), (1168,1132)"
+ },
+ {
+  "ID": 4,
+  "Page Number": 2,
+  "Region Vertices": "(102,1182), (1168,1644)"
+ },
+ {
+  "ID": 5,
+  "Page Number": 2,
+  "Region Vertices": "(98,129), (1170,596)"
+ },
+ {
+  "ID": 6,
+  "Page Number": 3,
+  "Region Vertices": "(810,134), (984,549)"
+ },
+ {
+  "ID": 7,
+  "Page Number": 3,
+  "Region Vertices": "(104,125), (458,574)"
+ },
+ {
+  "ID": 8,
+  "Page Number": 3,
+  "Region Vertices": "(1000,136), (1084,547)"
+ },
+ {
+  "ID": 9,
+  "Page Number": 3,
+  "Region Vertices": "(100,594), (1150,1635)"
+ },
+ {
+  "ID": 10,
+  "Page Number": 3,
+  "Region Vertices": "(497,136), (787,551)"
+ },
+ {
+  "ID": 11,
+  "Page Number": 4,
+  "Region Vertices": "(91,127), (1150,1619)"
+ }
+]

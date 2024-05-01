@@ -1,17 +1,37 @@
+let currentPanelUrl = '';
+let currentEmotionUrl = '';
+let currentImagePath = '';
+
 document.addEventListener('DOMContentLoaded', function() {
-    Promise.all([
-        fetch('./panel_data.json').then(response => response.json()),
-        fetch('./emotion_data.json').then(response => response.json())
-    ]).then(([panelData, emotionData]) => {
-        loadPanels(panelData);
-        document.getElementById('downloadButton').addEventListener('click', () => {
-            const associations = createAssociations(panelData, emotionData);
-            downloadJSON(associations, 'emotion_associations.json');
-        });
-    }).catch(error => {
-        console.error('Error fetching data:', error);
-    });
+    // Initially hide the download button since no comic is selected
+    document.getElementById('downloadButton').style.display = 'none';
 });
+
+function loadComicData(comicName) {
+    currentPanelUrl = `./${comicName}_panel_data.json`;
+    currentEmotionUrl = `./${comicName}_emotion_data.json`;
+    currentImagePath = `./${comicName}_pages/`;
+
+    Promise.all([
+        fetch(currentPanelUrl).then(response => response.json()),
+        fetch(currentEmotionUrl).then(response => response.json())
+    ]).then(([panelData, emotionData]) => {
+        clearExistingPanels();
+        loadPanels(panelData, currentImagePath);
+        document.getElementById('downloadButton').style.display = 'block'; // Show the download button now
+        document.getElementById('downloadButton').onclick = () => {
+            const associations = createAssociations(panelData, emotionData);
+            downloadJSON(associations, `${comicName}_emotion_associations.json`);
+        };
+    }).catch(error => {
+        console.error('Error fetching data for ' + comicName + ':', error);
+    });
+}
+
+function clearExistingPanels() {
+    const existingCanvas = document.querySelectorAll('canvas');
+    existingCanvas.forEach(canvas => canvas.parentNode.removeChild(canvas));
+}
 
 function loadPanels(panelData) {
     // Sort panelData by ID before creating and displaying panels
@@ -25,7 +45,7 @@ function loadPanels(panelData) {
 
         let ctx = canvas.getContext('2d');
         let image = new Image();
-        image.src = `pages/page-${panel['Page Number']}.jpg`;
+        image.src = `${imagePath}page-${panel['Page Number']}.jpg`;
         image.onload = () => {
             let vertices = formatVertices(panel['Panel Region Vertices']);
             drawPanel(ctx, image, vertices, vertices.length === 2);
