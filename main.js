@@ -67,11 +67,20 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
 }
 
 function displayTaxonomyPaths(text, canvas) {
-    let textDiv = document.createElement('div');
-    textDiv.className = 'taxonomy-text'; 
-    textDiv.textContent = text;
-    textDiv.style.marginTop = "5px";
-    canvas.parentNode.insertBefore(textDiv, canvas.nextSibling);
+    // Define the regex pattern to match the specified taxonomy path formats
+    const regex = /VLT: Semantics: Emotion \(v\.\d\) \/ (Valence|Emotion) \/ .*/;
+
+    // Filter the text based on the regex pattern
+    let filteredText = text.split(', ').filter(path => regex.test(path)).join(', ');
+
+    // Only create and display the div if there is filtered text to show
+    if (filteredText.length > 0) {
+        let textDiv = document.createElement('div');
+        textDiv.className = 'taxonomy-text';  // Use this class for easy selection and removal
+        textDiv.textContent = filteredText;
+        textDiv.style.marginTop = "5px";
+        canvas.parentNode.insertBefore(textDiv, canvas.nextSibling);
+    }
 }
 
 
