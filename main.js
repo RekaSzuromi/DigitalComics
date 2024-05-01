@@ -33,7 +33,7 @@ function clearExistingPanels() {
     existingCanvas.forEach(canvas => canvas.parentNode.removeChild(canvas));
 }
 
-function loadPanels(panelData) {
+function loadPanels(panelData, currentImagePath) {
     // Sort panelData by ID before creating and displaying panels
     panelData.sort((a, b) => parseInt(a.id) - parseInt(b.id));
 
@@ -45,7 +45,7 @@ function loadPanels(panelData) {
 
         let ctx = canvas.getContext('2d');
         let image = new Image();
-        image.src = `${imagePath}page-${panel['Page Number']}.jpg`;
+        image.src = `${currentImagePath}page-${panel['Page Number']}.jpg`;
         image.onload = () => {
             let vertices = formatVertices(panel['Panel Region Vertices']);
             drawPanel(ctx, image, vertices, vertices.length === 2);
