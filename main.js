@@ -38,24 +38,29 @@ function clearExistingPanels() {
 }
 
 function loadPanels(panelData, imagePath, emotionAssociations) {
-    panelData.sort((a, b) => parseInt(a.ID) - parseInt(b.ID));
+    const viewportHeight = window.innerHeight;  // Get the current viewport height
+    const panelHeight = viewportHeight * 0.7;   // Calculate 70% of the viewport height
 
     panelData.forEach(panel => {
         let canvas = document.createElement('canvas');
         canvas.id = `panelCanvas-${panel.ID}`;
-        canvas.style.marginBottom = "20px";
+        canvas.style.marginBottom = "20px";  // Space between panels
         document.body.appendChild(canvas);
 
         let ctx = canvas.getContext('2d');
         let image = new Image();
         image.src = `${imagePath}page-${panel['Page Number']}.jpg`;
         image.onload = () => {
+            // Format vertices and determine if it is a rectangle based on the length of vertices
             let vertices = formatVertices(panel['Panel Region Vertices']);
-            drawPanel(ctx, image, vertices, vertices.length === 2);
+            let isRectangle = vertices.length === 2;
 
+            // Scale and draw panel based on viewport height
+            adjustAndDrawPanel(ctx, image, vertices, isRectangle, panelHeight, canvas);
+
+            // Process associated texts
             let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.ID));
             console.log(`Associated texts for panel ${panel.ID}:`, associatedTexts);
-
             if (associatedTexts.length > 0) {
                 let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', ');
                 displayTaxonomyPaths(textContent, canvas);
@@ -64,6 +69,36 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
             }
         };
     });
+}
+
+function adjustAndDrawPanel(ctx, image, vertices, isRectangle, targetHeight, canvas) {
+    // Calculate scaling factor to maintain aspect ratio
+    const scaleFactor = targetHeight / image.height;
+
+    // Set the new height and calculate the new width
+    canvas.style.height = `${targetHeight}px`;
+    canvas.style.width = `${image.width * scaleFactor}px`;
+
+    // Optionally, adjust the canvas drawing size if needed
+    canvas.width = image.width * scaleFactor;
+    canvas.height = targetHeight;
+
+    // Draw the image or polygon based on the vertices
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);  // Scale image to canvas size
+
+    // If the panel is not just an image (has vertices for polygons or rectangles)
+    if (vertices && vertices.length) {
+        // Clip or draw additional shapes based on vertices
+        ctx.beginPath();
+        ctx.moveTo(vertices[0].x, vertices[0].y);
+        vertices.forEach(v => ctx.lineTo(v.x, v.y));
+        ctx.closePath();
+        if (isRectangle) {
+            ctx.stroke();
+        } else {
+            ctx.clip();
+        }
+    }
 }
 
 function displayTaxonomyPaths(text, canvas) {
