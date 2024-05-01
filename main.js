@@ -38,7 +38,7 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
 
     panelData.forEach(panel => {
         let canvas = document.createElement('canvas');
-        canvas.id = `panelCanvas-${panel.id}`;
+        canvas.id = `panelCanvas-${panel.ID}`;
         canvas.style.marginBottom = "20px";
         document.body.appendChild(canvas);
 
@@ -50,16 +50,16 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
             drawPanel(ctx, image, vertices, vertices.length === 2);
 
             // Debugging - Check what's being processed
-            console.log(`Processing panel ID: ${panel.id}`);
+            console.log(`Processing panel ID: ${panel.ID}`);
 
-            let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.id));
-            console.log(`Associated texts for panel ${panel.id}:`, associatedTexts);
+            let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.ID));
+            console.log(`Associated texts for panel ${panel.ID}:`, associatedTexts);
 
             if (associatedTexts.length > 0) {
                 let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', ');
                 displayTaxonomyPaths(textContent, canvas);
             } else {
-                console.log(`No associations found for panel ${panel.id}`);
+                console.log(`No associations found for panel ${panel.ID}`);
             }
         };
     });
