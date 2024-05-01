@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function loadComicData(comicName) {
     currentPanelUrl = `./${comicName}_panel_data.json`;
     currentEmotionUrl = `./${comicName}_emotion_data.json`;
-    currentImagePath = `./${comicName}_pages/`;
+    currentImagePath = `./${comicName}_pages/`; 
 
     Promise.all([
         fetch(currentPanelUrl).then(response => response.json()),
