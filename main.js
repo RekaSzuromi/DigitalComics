@@ -68,6 +68,7 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
 
 function displayTaxonomyPaths(text, canvas) {
     let textDiv = document.createElement('div');
+    textDiv.className = 'taxonomy-text'; 
     textDiv.textContent = text;
     textDiv.style.marginTop = "5px";
     canvas.parentNode.insertBefore(textDiv, canvas.nextSibling);
