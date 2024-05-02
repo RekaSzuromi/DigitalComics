@@ -63,10 +63,16 @@ img {
 }
 
 .box {
-    width: 10%; /* Adjusts the width of the boxes to 10% of the container width */
-    background-color: red; /* Sets the box background color */
-    /* Height is dynamically set by JavaScript to match the panel height */
+    width: 10%; /* Maintain the width */
+    height: 100%; /* Full height of the container */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.2)); /* Default light to transparent gradient */
+    transition: background 0.3s ease; /* Smooth transition for background changes */
 }
+
+.box.right-box {
+    background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.2)); /* Gradient fades from right to left */
+}
+
 
 .panel {
     flex-grow: 1; /* Allows the panel to fill the space between the boxes */

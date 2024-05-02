@@ -133,7 +133,7 @@ function adjustPanelAndBoxes(canvas, leftBox, rightBox, image) {
 */
 
 
-
+/*
 function displayTaxonomyPaths(text, parentContainer, leftBox, rightBox) {
     if (!text) return; // No text to display if empty
 
@@ -166,6 +166,42 @@ function displayTaxonomyPaths(text, parentContainer, leftBox, rightBox) {
     let color = colors.length ? mostFrequentColor(colors) : 'transparent';
     leftBox.style.backgroundColor = color;
     rightBox.style.backgroundColor = color;
+}
+*/
+
+function displayTaxonomyPaths(text, parentContainer, leftBox, rightBox) {
+    if (!text) return; // No text to display if empty
+
+    let textDiv = document.createElement('div');
+    textDiv.className = 'taxonomy-text';
+    textDiv.textContent = text;
+    textDiv.style.width = "100%";
+    textDiv.style.textAlign = "center";
+    textDiv.style.marginTop = "10px";
+    textDiv.style.marginBottom = "20px";
+    parentContainer.after(textDiv);
+
+    const regex = /VLT: Semantics: Emotion \(v\.\d\) \/ (Valence|Emotion) \/ (.*)/;
+    let matches = text.match(regex);
+    let color = 'rgba(128, 128, 128, 0.5)'; // Default gray with reduced opacity
+
+    if (matches && matches.length > 2) {
+        let emotion = matches[2].split(' / ')[1]; // Assumes the format "Emotion / actual_emotion"
+        if (emotionColors[emotion]) {
+            color = `rgba(${hexToRgb(emotionColors[emotion]).join(',')}, 0.5)`; // Convert hex to RGB and apply transparency
+        }
+    }
+
+    setBoxBackground(leftBox, color, true);
+    setBoxBackground(rightBox, color, false);
+}
+
+// Helper to convert HEX to RGB
+function hexToRgb(hex) {
+    let r = parseInt(hex.slice(1, 3), 16),
+        g = parseInt(hex.slice(3, 5), 16),
+        b = parseInt(hex.slice(5, 7), 16);
+    return [r, g, b];
 }
 
 // Helper function to find the most frequent color in an array
@@ -318,4 +354,14 @@ function pointInPolygon(point, polygon) {
         if (intersect) inside = !inside;
     }
     return inside;
+}
+
+function setBoxBackground(box, color, isLeftBox) {
+    if (isLeftBox) {
+        // For the left box, fade from solid to transparent from left to right
+        box.style.background = `linear-gradient(to right, ${color} 0%, ${color} 50%, transparent 100%)`;
+    } else {
+        // For the right box, fade from solid to transparent from right to left
+        box.style.background = `linear-gradient(to left, ${color} 0%, ${color} 50%, transparent 100%)`;
+    }
 }
