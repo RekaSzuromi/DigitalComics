@@ -153,7 +153,7 @@ function displayTaxonomyPaths(text, parentContainer, leftBox, rightBox) {
         textDiv.style.textAlign = "center";
         textDiv.style.marginTop = "10px";
         textDiv.style.marginBottom = "20px";
-        parentContainer.appendChild(textDiv);
+        parentContainer.after(textDiv); 
     }
 
     // Process each filtered text to determine the color of the boxes
