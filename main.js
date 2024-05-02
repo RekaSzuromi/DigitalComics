@@ -26,7 +26,7 @@ function loadComicData(comicName) {
     });
 }
 
-
+ /*
 
 function clearExistingPanels() {
     const existingCanvas = document.querySelectorAll('canvas');
@@ -36,6 +36,17 @@ function clearExistingPanels() {
     const existingTextDivs = document.querySelectorAll('.taxonomy-text');
     existingTextDivs.forEach(div => div.parentNode.removeChild(div));
 }
+*/
+function clearExistingPanels() {
+    // Remove all existing containers, which includes panels and boxes
+    const existingContainers = document.querySelectorAll('.panel-container');
+    existingContainers.forEach(container => container.parentNode.removeChild(container));
+
+    // Remove all existing taxonomy text divs
+    const existingTextDivs = document.querySelectorAll('.taxonomy-text');
+    existingTextDivs.forEach(div => div.parentNode.removeChild(div));
+}
+
 
 function loadPanels(panelData, imagePath, emotionAssociations) {
     panelData.sort((a, b) => parseInt(a.ID) - parseInt(b.ID));
