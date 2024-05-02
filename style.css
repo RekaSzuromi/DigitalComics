@@ -53,12 +53,13 @@ img {
     border: 1px solid #ccc; /* Optional: adds a border around the canvas */
 }
 
+
 .panel-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px; /* space between each set of box-panel-box */
+    justify-content: space-between;
+    align-items: stretch; /* This will make all children of the container (including boxes) match the height of the tallest child */
 }
+
 
 .box {
     height: 70vh; /* 70% of the viewport height */

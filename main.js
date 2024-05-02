@@ -41,7 +41,6 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
     panelData.sort((a, b) => parseInt(a.ID) - parseInt(b.ID));
 
     panelData.forEach(panel => {
-        // Container for box-panel-box layout
         const container = document.createElement('div');
         container.className = 'panel-container';
         document.body.appendChild(container);
@@ -50,11 +49,11 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
         const leftBox = createBox();
         container.appendChild(leftBox);
 
-        // Canvas for the panel
+        // Canvas for the panel, without resizing
         let canvas = document.createElement('canvas');
         canvas.id = `panelCanvas-${panel.ID}`;
         container.appendChild(canvas);
-        
+
         // Create and append the right box
         const rightBox = createBox();
         container.appendChild(rightBox);
@@ -63,18 +62,18 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
         let image = new Image();
         image.src = `${imagePath}page-${panel['Page Number']}.jpg`;
         image.onload = () => {
-            adjustPanelAndBoxes(canvas, leftBox, rightBox, image); // Adjust the size and position of elements
-            let vertices = formatVertices(panel['Panel Region Vertices']);
-            drawPanel(ctx, image, vertices, vertices.length === 2);
+            canvas.width = image.width; // Original image width
+            canvas.height = image.height; // Original image height
+            ctx.drawImage(image, 0, 0, image.width, image.height);
+
+            [leftBox, rightBox].forEach(box => {
+                box.style.height = `${image.height}px`; // Match the height with the panel
+            });
 
             let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.ID));
-            console.log(`Associated texts for panel ${panel.ID}:`, associatedTexts);
-
             if (associatedTexts.length > 0) {
                 let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', ');
-                displayTaxonomyPaths(textContent, canvas);
-            } else {
-                console.log(`No associations found for panel ${panel.ID}`);
+                displayTaxonomyPaths(textContent);
             }
         };
     });
@@ -85,7 +84,7 @@ function createBox() {
     box.className = 'box';
     return box;
 }
-
+/*
 function adjustPanelAndBoxes(canvas, leftBox, rightBox, image) {
     const viewportHeight = window.innerHeight;
     const panelHeight = viewportHeight * 0.7;
@@ -102,10 +101,10 @@ function adjustPanelAndBoxes(canvas, leftBox, rightBox, image) {
         box.style.backgroundColor = 'red';
     });
 }
+*/
 
 
-
-function displayTaxonomyPaths(text, canvas) {
+function displayTaxonomyPaths(text) {
     // Define the regex pattern to match the specified taxonomy path formats
     const regex = /VLT: Semantics: Emotion \(v\.\d\) \/ (Valence|Emotion) \/ .*/;
 
@@ -118,7 +117,7 @@ function displayTaxonomyPaths(text, canvas) {
         textDiv.className = 'taxonomy-text';  // Use this class for easy selection and removal
         textDiv.textContent = filteredText;
         textDiv.style.marginTop = "5px";
-        canvas.parentNode.insertBefore(textDiv, canvas.nextSibling);
+        document.body.appendChild(textDiv); // Append directly to the body to ensure it appears in a separate row
     }
 }
 
