@@ -74,15 +74,15 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
             let vertices = formatVertices(panel['Panel Region Vertices']);
             let isRectangle = vertices.length === 2;
             drawPanel(ctx, canvas, image, vertices, isRectangle);
-
+        
             [leftBox, rightBox].forEach(box => {
-                box.style.height = `${canvas.height}px`; // Dynamically set the height
+                box.style.height = `${canvas.height}px`; // Match the height dynamically
             });
-
+        
             let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.ID));
             if (associatedTexts.length > 0) {
                 let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', ');
-                displayTaxonomyPaths(textContent, document.body); // Ensure text is added in a new block
+                displayTaxonomyPaths(textContent, container); // Pass the correct container
             }
         };
     });
@@ -116,7 +116,8 @@ function adjustPanelAndBoxes(canvas, leftBox, rightBox, image) {
 
 
 
-function displayTaxonomyPaths(text, container) {
+function displayTaxonomyPaths(text, parentContainer) {
+    if (!text) return; // No text to display
 
     // Define the regex pattern to match the specified taxonomy path formats
     const regex = /VLT: Semantics: Emotion \(v\.\d\) \/ (Valence|Emotion) \/ .*/;
@@ -128,16 +129,18 @@ function displayTaxonomyPaths(text, container) {
     if (filteredText.length > 0) {
         let textDiv = document.createElement('div');
         textDiv.className = 'taxonomy-text';
-        textDiv.textContent = text;
+        textDiv.textContent = filteredText;
         textDiv.style.width = "100%"; // Ensure it takes full width to display as a block
         textDiv.style.textAlign = "center";
         textDiv.style.marginTop = "10px";
         textDiv.style.marginBottom = "20px";
 
         // Append the text div below the container of the boxes and panel
-        parentContainer.appendChild(textDiv);
+        parentContainer.appendChild(textDiv); // Append the text right after the container for boxes and panels
     }
 }
+
+
 
 function displayTaxonomyPaths(text, parentContainer) {
     if (!text) return; // No text to display
