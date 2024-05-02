@@ -1,3 +1,22 @@
+const emotionColors = {
+    'Surprise': '#8F00FF',
+    'Excitement': '#FF0000',
+    'Amusement': '#FFFF00',
+    'Happiness': '#FFFD01',
+    'Neutral/None': '#808080',
+    'Wonder': '#87CEEB',
+    'Pride': '#9400D3',
+    'Fear': '#000000',
+    'Rejoicing': '#FFA500',
+    'Sadness': '#00008B',
+    'Shame': '#800000',
+    'Guilt': '#DC143C',
+    'Anger': '#FF0000',
+    'Relief': '#ADD8E6',
+    'Embarrassment': '#FFB6C1',
+    'Love': '#FF1493'
+};
+
 let currentPanelUrl = '';
 let currentEmotionUrl = '';
 let currentImagePath = '';
@@ -82,12 +101,11 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
             let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.ID));
             if (associatedTexts.length > 0) {
                 let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', ');
-                displayTaxonomyPaths(textContent, container); // Ensure text is added in a new block below
-            }
+                displayTaxonomyPaths(textContent, container, leftBox, rightBox); // Pass boxes along with the container
+            }            
         };
     });
 }
-
 
 
 function createBox() {
@@ -116,28 +134,60 @@ function adjustPanelAndBoxes(canvas, leftBox, rightBox, image) {
 
 
 
-function displayTaxonomyPaths(text, panelContainer) {
+function displayTaxonomyPaths(text, parentContainer, leftBox, rightBox) {
     if (!text) return; // No text to display if empty
 
     // Define the regex pattern to match the specified taxonomy path formats
-    const regex = /VLT: Semantics: Emotion \(v\.\d\) \/ (Valence|Emotion) \/ .*/;
+    const regex = /VLT: Semantics: Emotion \(v\.\d\) \/ (Valence|Emotion) \/ (.*)/;
 
-    // Filter the text based on the regex pattern
-    let filteredText = text.split(', ').filter(path => regex.test(path)).join(', ');
+    // Split the text into individual taxonomy paths and filter them
+    let filteredTexts = text.split(', ').filter(path => regex.test(path));
+    let displayedText = filteredTexts.join(', '); // Join the filtered texts for display
 
-    // Only create and display the div if there is filtered text to show
-    if (filteredText.length > 0) {
+    // Create and append the text div if there is any filtered text
+    if (displayedText.length > 0) {
         let textDiv = document.createElement('div');
         textDiv.className = 'taxonomy-text';
-        textDiv.textContent = filteredText;
-        textDiv.style.width = "100%"; // Ensure it takes full width to display as a block
+        textDiv.textContent = displayedText; // Display the filtered taxonomy text
+        textDiv.style.width = "100%";
         textDiv.style.textAlign = "center";
         textDiv.style.marginTop = "10px";
         textDiv.style.marginBottom = "20px";
-
-        // Append the text div after the panel-container to ensure it appears below the boxes and panel
-        panelContainer.after(textDiv); // This places the text directly below the container of the boxes and panel
+        parentContainer.appendChild(textDiv);
     }
+
+    // Process each filtered text to determine the color of the boxes
+    let colors = filteredTexts.map(text => {
+        let match = text.match(regex);
+        return match && match[2] ? emotionColors[match[2].trim()] || 'transparent' : 'transparent';
+    });
+
+    // Determine the most frequent color to set, or default to transparent if none found
+    let color = colors.length ? mostFrequentColor(colors) : 'transparent';
+    leftBox.style.backgroundColor = color;
+    rightBox.style.backgroundColor = color;
+}
+
+// Helper function to find the most frequent color in an array
+function mostFrequentColor(colors) {
+    let frequency = {};
+    let maxFreq = 0;
+    let mostFrequent = 'transparent';
+
+    colors.forEach(color => {
+        if (frequency[color]) {
+            frequency[color]++;
+        } else {
+            frequency[color] = 1;
+        }
+
+        if (frequency[color] > maxFreq) {
+            maxFreq = frequency[color];
+            mostFrequent = color;
+        }
+    });
+
+    return mostFrequent;
 }
 
 
