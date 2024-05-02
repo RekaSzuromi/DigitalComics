@@ -174,6 +174,45 @@ function drawPanel(ctx, image, vertices, isRectangle) {
     ctx.clip();
     ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, maxX - minX, maxY - minY);
 }
+function adjustAndDrawPanel(ctx, image, vertices, isRectangle, targetHeight, canvas) {
+    const viewportWidth = window.innerWidth;  // Get the current viewport width
+    const boxWidth = viewportWidth * 0.1;  // Calculate 10% of the viewport width
+
+    // Calculate scaling factor to maintain aspect ratio of the image
+    const scaleFactor = targetHeight / image.height;
+
+    // Set the new height and calculate the new width for the canvas
+    canvas.style.height = `${targetHeight}px`;
+    canvas.style.width = `${image.width * scaleFactor}px`;
+
+    // Optionally, adjust the canvas drawing size if needed
+    canvas.width = image.width * scaleFactor;
+    canvas.height = targetHeight;
+
+    // Draw the image or polygon based on the vertices
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);  // Scale image to canvas size
+
+    // Create and style the left and right boxes
+    createSideBox(canvas, targetHeight, boxWidth, 'left');
+    createSideBox(canvas, targetHeight, boxWidth, 'right');
+}
+
+function createSideBox(canvas, panelHeight, boxWidth, position) {
+    let boxDiv = document.createElement('div');
+    boxDiv.style.position = 'absolute';
+    boxDiv.style.height = `${panelHeight}px`;
+    boxDiv.style.width = `${boxWidth}px`;
+    boxDiv.style.backgroundColor = 'red';  // Initial color is red
+    boxDiv.style.top = canvas.offsetTop + 'px'; // Align top of the box with the canvas
+
+    if (position === 'left') {
+        boxDiv.style.left = `${canvas.offsetLeft - boxWidth}px`;  // Position to the left of the canvas
+    } else {
+        boxDiv.style.left = `${canvas.offsetLeft + canvas.offsetWidth}px`;  // Position to the right of the canvas
+    }
+
+    document.body.appendChild(boxDiv);  // Add the box to the body
+}
 
 function pointInPolygon(point, polygon) {
     var x = point.x, y = point.y;
