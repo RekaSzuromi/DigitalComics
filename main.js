@@ -41,15 +41,29 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
     panelData.sort((a, b) => parseInt(a.ID) - parseInt(b.ID));
 
     panelData.forEach(panel => {
+        // Container for box-panel-box layout
+        const container = document.createElement('div');
+        container.className = 'panel-container';
+        document.body.appendChild(container);
+
+        // Create and append the left box
+        const leftBox = createBox();
+        container.appendChild(leftBox);
+
+        // Canvas for the panel
         let canvas = document.createElement('canvas');
         canvas.id = `panelCanvas-${panel.ID}`;
-        canvas.style.marginBottom = "20px";
-        document.body.appendChild(canvas);
+        container.appendChild(canvas);
+        
+        // Create and append the right box
+        const rightBox = createBox();
+        container.appendChild(rightBox);
 
         let ctx = canvas.getContext('2d');
         let image = new Image();
         image.src = `${imagePath}page-${panel['Page Number']}.jpg`;
         image.onload = () => {
+            adjustPanelAndBoxes(canvas, leftBox, rightBox, image); // Adjust the size and position of elements
             let vertices = formatVertices(panel['Panel Region Vertices']);
             drawPanel(ctx, image, vertices, vertices.length === 2);
 
@@ -65,6 +79,30 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
         };
     });
 }
+
+function createBox() {
+    const box = document.createElement('div');
+    box.className = 'box';
+    return box;
+}
+
+function adjustPanelAndBoxes(canvas, leftBox, rightBox, image) {
+    const viewportHeight = window.innerHeight;
+    const panelHeight = viewportHeight * 0.7;
+    const boxWidth = window.innerWidth * 0.1;
+
+    canvas.style.height = `${panelHeight}px`;
+    canvas.style.width = `${window.innerWidth * 0.8}px`; // Assume canvas takes 80% of viewport width
+    canvas.height = panelHeight;
+    canvas.width = window.innerWidth * 0.8;
+
+    [leftBox, rightBox].forEach(box => {
+        box.style.width = `${boxWidth}px`;
+        box.style.height = `${panelHeight}px`;
+        box.style.backgroundColor = 'red';
+    });
+}
+
 
 
 function displayTaxonomyPaths(text, canvas) {
@@ -173,45 +211,6 @@ function drawPanel(ctx, image, vertices, isRectangle) {
     }
     ctx.clip();
     ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, maxX - minX, maxY - minY);
-}
-function adjustAndDrawPanel(ctx, image, vertices, isRectangle, targetHeight, canvas) {
-    const viewportWidth = window.innerWidth;  // Get the current viewport width
-    const boxWidth = viewportWidth * 0.1;  // Calculate 10% of the viewport width
-
-    // Calculate scaling factor to maintain aspect ratio of the image
-    const scaleFactor = targetHeight / image.height;
-
-    // Set the new height and calculate the new width for the canvas
-    canvas.style.height = `${targetHeight}px`;
-    canvas.style.width = `${image.width * scaleFactor}px`;
-
-    // Optionally, adjust the canvas drawing size if needed
-    canvas.width = image.width * scaleFactor;
-    canvas.height = targetHeight;
-
-    // Draw the image or polygon based on the vertices
-    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);  // Scale image to canvas size
-
-    // Create and style the left and right boxes
-    createSideBox(canvas, targetHeight, boxWidth, 'left');
-    createSideBox(canvas, targetHeight, boxWidth, 'right');
-}
-
-function createSideBox(canvas, panelHeight, boxWidth, position) {
-    let boxDiv = document.createElement('div');
-    boxDiv.style.position = 'absolute';
-    boxDiv.style.height = `${panelHeight}px`;
-    boxDiv.style.width = `${boxWidth}px`;
-    boxDiv.style.backgroundColor = 'red';  // Initial color is red
-    boxDiv.style.top = canvas.offsetTop + 'px'; // Align top of the box with the canvas
-
-    if (position === 'left') {
-        boxDiv.style.left = `${canvas.offsetLeft - boxWidth}px`;  // Position to the left of the canvas
-    } else {
-        boxDiv.style.left = `${canvas.offsetLeft + canvas.offsetWidth}px`;  // Position to the right of the canvas
-    }
-
-    document.body.appendChild(boxDiv);  // Add the box to the body
 }
 
 function pointInPolygon(point, polygon) {

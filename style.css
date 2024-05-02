@@ -53,3 +53,28 @@ img {
     border: 1px solid #ccc; /* Optional: adds a border around the canvas */
 }
 
+.panel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* space between each set of box-panel-box */
+}
+
+.box {
+    height: 70vh; /* 70% of the viewport height */
+    width: 10vw; /* 10% of the viewport width */
+    background-color: red; /* initial color, can be changed as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* for any text inside the box */
+}
+
+.panel {
+    width: 80vw; /* adjust based on your actual panel width requirements */
+    height: 70vh; /* matches the box height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* just an example */
+}
