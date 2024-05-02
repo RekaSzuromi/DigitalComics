@@ -48,6 +48,7 @@ function clearExistingPanels() {
 }
 
 
+
 function loadPanels(panelData, imagePath, emotionAssociations) {
     panelData.sort((a, b) => parseInt(a.ID) - parseInt(b.ID));
 
@@ -60,7 +61,7 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
         const leftBox = createBox();
         container.appendChild(leftBox);
 
-        // Canvas for the panel
+        // Canvas for the panel, without resizing
         let canvas = document.createElement('canvas');
         canvas.id = `panelCanvas-${panel.ID}`;
         container.appendChild(canvas);
@@ -73,24 +74,23 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
         let image = new Image();
         image.src = `${imagePath}page-${panel['Page Number']}.jpg`;
         image.onload = () => {
-            let vertices = formatVertices(panel['Panel Region Vertices']);
-            let isRectangle = vertices.length === 2;
-            drawPanel(ctx, canvas, image, vertices, isRectangle);
+            canvas.width = image.width;
+            canvas.height = image.height;
+            ctx.drawImage(image, 0, 0, image.width, image.height);
 
-            // Adjust boxes to match the height of the canvas after it has been resized
             [leftBox, rightBox].forEach(box => {
-                box.style.height = `${canvas.height}px`; // Match the height with the panel
+                box.style.height = `${canvas.height}px`;
             });
 
-            // Display associated taxonomy texts
             let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.ID));
             if (associatedTexts.length > 0) {
                 let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', ');
-                displayTaxonomyPaths(textContent);
+                displayTaxonomyPaths(textContent, container);
             }
         };
     });
 }
+
 
 function createBox() {
     const box = document.createElement('div');
@@ -117,7 +117,10 @@ function adjustPanelAndBoxes(canvas, leftBox, rightBox, image) {
 */
 
 
-function displayTaxonomyPaths(text) {
+
+function displayTaxonomyPaths(text, container) {
+    if (!text) return; // Exit if there's no text to display
+
     // Define the regex pattern to match the specified taxonomy path formats
     const regex = /VLT: Semantics: Emotion \(v\.\d\) \/ (Valence|Emotion) \/ .*/;
 
@@ -129,8 +132,9 @@ function displayTaxonomyPaths(text) {
         let textDiv = document.createElement('div');
         textDiv.className = 'taxonomy-text';  // Use this class for easy selection and removal
         textDiv.textContent = filteredText;
-        textDiv.style.marginTop = "10px";
-        document.body.appendChild(textDiv); // Append directly to the body to ensure it appears in a separate row
+        textDiv.style.marginTop = "20px"; // Adds more space between panels
+        textDiv.style.marginBottom = "20px"; // Adds space before the next panel
+        container.appendChild(textDiv); // Append directly to the specific panel's container
     }
 }
 
