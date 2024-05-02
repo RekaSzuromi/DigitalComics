@@ -140,25 +140,6 @@ function displayTaxonomyPaths(text, parentContainer) {
     }
 }
 
-
-
-function displayTaxonomyPaths(text, parentContainer) {
-    if (!text) return; // No text to display
-
-    let textDiv = document.createElement('div');
-    textDiv.className = 'taxonomy-text';
-    textDiv.textContent = text;
-    textDiv.style.width = "100%"; // Ensure it takes full width to display as a block
-    textDiv.style.textAlign = "center";
-    textDiv.style.marginTop = "10px";
-    textDiv.style.marginBottom = "20px";
-
-    // Append the text div below the container of the boxes and panel
-    parentContainer.appendChild(textDiv);
-}
-
-
-
 function createAssociations(panelData, emotionData) {
     let allEmotionAssociations = [];
 
