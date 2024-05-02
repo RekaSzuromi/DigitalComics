@@ -62,14 +62,23 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
         let image = new Image();
         image.src = `${imagePath}page-${panel['Page Number']}.jpg`;
         image.onload = () => {
-            canvas.width = image.width; // Original image width
-            canvas.height = image.height; // Original image height
-            ctx.drawImage(image, 0, 0, image.width, image.height);
-
+            // Setup canvas dimensions directly based on image dimensions
+            canvas.width = image.width;
+            canvas.height = image.height;
+        
+            // Get vertices and determine if it is a rectangle
+            let vertices = formatVertices(panel['Panel Region Vertices']);
+            let isRectangle = vertices.length === 2;
+        
+            // Use drawPanel to handle the drawing and clipping based on vertices
+            drawPanel(ctx, image, vertices, isRectangle);
+        
+            // Setup boxes height to match the panel
             [leftBox, rightBox].forEach(box => {
-                box.style.height = `${image.height}px`; // Match the height with the panel
+                box.style.height = `${canvas.height}px`; // Match the height with the clipped panel
             });
-
+        
+            // Display associated taxonomy paths if any
             let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.ID));
             if (associatedTexts.length > 0) {
                 let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', ');
@@ -190,7 +199,7 @@ function downloadJSON(data, filename) {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
-
+/*
 function drawPanel(ctx, image, vertices, isRectangle) {
     let minX = Math.min(...vertices.map(v => v.x)),
         maxX = Math.max(...vertices.map(v => v.x)),
@@ -210,6 +219,23 @@ function drawPanel(ctx, image, vertices, isRectangle) {
     }
     ctx.clip();
     ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, maxX - minX, maxY - minY);
+}
+*/
+function drawPanel(ctx, image, vertices, isRectangle) {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clear previous drawings
+
+    ctx.beginPath();
+    ctx.moveTo(vertices[0].x, vertices[0].y);
+    vertices.forEach((v, index) => {
+        if (index > 0) ctx.lineTo(v.x, v.y);
+    });
+    ctx.closePath();
+
+    if (!isRectangle) {
+        ctx.clip(); // Apply clipping path only if it's not a rectangle
+    }
+
+    ctx.drawImage(image, 0, 0);
 }
 
 function pointInPolygon(point, polygon) {
