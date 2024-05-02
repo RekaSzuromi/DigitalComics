@@ -1,20 +1,20 @@
 const emotionColors = {
-    'Surprise': 'rgba(143, 0, 255, 0.5)',
-    'Excitement': 'rgba(255, 0, 0, 0.5)',
-    'Amusement': 'rgba(255, 255, 0, 0.5)',
-    'Happiness': 'rgba(255, 253, 1, 0.5)',
-    'Neutral/None': 'rgba(128, 128, 128, 0.5)',
-    'Wonder': 'rgba(135, 206, 235, 0.5)',
-    'Pride': 'rgba(148, 0, 211, 0.5)',
-    'Fear': 'rgba(0, 0, 0, 0.5)',
-    'Rejoicing': 'rgba(255, 165, 0, 0.5)',
-    'Sadness': 'rgba(0, 0, 139, 0.5)',
-    'Shame': 'rgba(128, 0, 0, 0.5)',
-    'Guilt': 'rgba(220, 20, 60, 0.5)',
-    'Anger': 'rgba(255, 0, 0, 0.5)',
-    'Relief': 'rgba(173, 216, 230, 0.5)',
-    'Embarrassment': 'rgba(255, 182, 193, 0.5)',
-    'Love': 'rgba(255, 20, 147, 0.5)'
+    'Surprise': '#8F00FF',
+    'Excitement': '#FF0000',
+    'Amusement': '#FFFF00',
+    'Happiness': '#FFFD01',
+    'Neutral/None': '#808080',
+    'Wonder': '#87CEEB',
+    'Pride': '#9400D3',
+    'Fear': '#000000',
+    'Rejoicing': '#FFA500',
+    'Sadness': '#00008B',
+    'Shame': '#800000',
+    'Guilt': '#DC143C',
+    'Anger': '#FF0000',
+    'Relief': '#ADD8E6',
+    'Embarrassment': '#FFB6C1',
+    'Love': '#FF1493'
 };
 
 let currentPanelUrl = '';
@@ -133,7 +133,7 @@ function adjustPanelAndBoxes(canvas, leftBox, rightBox, image) {
 */
 
 
-/*
+
 function displayTaxonomyPaths(text, parentContainer, leftBox, rightBox) {
     if (!text) return; // No text to display if empty
 
@@ -166,42 +166,6 @@ function displayTaxonomyPaths(text, parentContainer, leftBox, rightBox) {
     let color = colors.length ? mostFrequentColor(colors) : 'transparent';
     leftBox.style.backgroundColor = color;
     rightBox.style.backgroundColor = color;
-}
-*/
-
-function displayTaxonomyPaths(text, parentContainer, leftBox, rightBox) {
-    if (!text) return; // No text to display if empty
-
-    let emotion = extractEmotionFromText(text);
-    let color = emotionColors[emotion] || 'transparent'; // Default to transparent if no match
-
-    setBoxBackground(leftBox, color, true);
-    setBoxBackground(rightBox, color, false);
-
-    // Display the text
-    let textDiv = document.createElement('div');
-    textDiv.className = 'taxonomy-text';
-    textDiv.textContent = text;
-    textDiv.style.width = "100%";
-    textDiv.style.textAlign = "center";
-    textDiv.style.marginTop = "10px";
-    textDiv.style.marginBottom = "20px";
-    parentContainer.after(textDiv);
-}
-
-// Helper function to extract emotion from text
-function extractEmotionFromText(text) {
-    const regex = /VLT: Semantics: Emotion \(v\.\d\) \/ (Valence|Emotion) \/ (.*)/;
-    let match = text.match(regex);
-    return match && match[2] ? match[2] : null;
-}
-
-// Helper to convert HEX to RGB
-function hexToRgb(hex) {
-    let r = parseInt(hex.slice(1, 3), 16),
-        g = parseInt(hex.slice(3, 5), 16),
-        b = parseInt(hex.slice(5, 7), 16);
-    return [r, g, b];
 }
 
 // Helper function to find the most frequent color in an array
@@ -355,17 +319,3 @@ function pointInPolygon(point, polygon) {
     }
     return inside;
 }
-
-// Function to set box background with a gradient
-function setBoxBackground(box, color, isLeftBox) {
-    let gradientStart = color;
-    let gradientEnd = 'rgba(255, 255, 255, 0)';
-    
-    if (isLeftBox) {
-        box.style.background = `linear-gradient(to right, ${gradientStart}, ${gradientEnd})`;
-    } else {
-        box.style.background = `linear-gradient(to left, ${gradientStart}, ${gradientEnd})`;
-    }
-}
-
-
