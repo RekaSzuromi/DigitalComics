@@ -57,16 +57,13 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
         container.className = 'panel-container';
         document.body.appendChild(container);
 
-        // Create and append the left box
         const leftBox = createBox();
         container.appendChild(leftBox);
 
-        // Canvas for the panel, without resizing
         let canvas = document.createElement('canvas');
         canvas.id = `panelCanvas-${panel.ID}`;
         container.appendChild(canvas);
 
-        // Create and append the right box
         const rightBox = createBox();
         container.appendChild(rightBox);
 
@@ -74,18 +71,18 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
         let image = new Image();
         image.src = `${imagePath}page-${panel['Page Number']}.jpg`;
         image.onload = () => {
-            canvas.width = image.width;
-            canvas.height = image.height;
-            ctx.drawImage(image, 0, 0, image.width, image.height);
+            let vertices = formatVertices(panel['Panel Region Vertices']);
+            let isRectangle = vertices.length === 2;
+            drawPanel(ctx, canvas, image, vertices, isRectangle);
 
             [leftBox, rightBox].forEach(box => {
-                box.style.height = `${canvas.height}px`;
+                box.style.height = `${canvas.height}px`; // Match height with the panel
             });
 
             let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.ID));
             if (associatedTexts.length > 0) {
                 let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', ');
-                displayTaxonomyPaths(textContent, container);
+                displayTaxonomyPaths(textContent, document.body); // Change container for text to be outside the panel-container
             }
         };
     });
@@ -119,7 +116,6 @@ function adjustPanelAndBoxes(canvas, leftBox, rightBox, image) {
 
 
 function displayTaxonomyPaths(text, container) {
-    if (!text) return; // Exit if there's no text to display
 
     // Define the regex pattern to match the specified taxonomy path formats
     const regex = /VLT: Semantics: Emotion \(v\.\d\) \/ (Valence|Emotion) \/ .*/;
@@ -130,13 +126,33 @@ function displayTaxonomyPaths(text, container) {
     // Only create and display the div if there is filtered text to show
     if (filteredText.length > 0) {
         let textDiv = document.createElement('div');
-        textDiv.className = 'taxonomy-text';  // Use this class for easy selection and removal
-        textDiv.textContent = filteredText;
-        textDiv.style.marginTop = "20px"; // Adds more space between panels
-        textDiv.style.marginBottom = "20px"; // Adds space before the next panel
-        container.appendChild(textDiv); // Append directly to the specific panel's container
+        textDiv.className = 'taxonomy-text';
+        textDiv.textContent = text;
+        textDiv.style.width = "100%"; // Ensure it takes full width to display as a block
+        textDiv.style.textAlign = "center";
+        textDiv.style.marginTop = "10px";
+        textDiv.style.marginBottom = "20px";
+
+        // Append the text div below the container of the boxes and panel
+        parentContainer.appendChild(textDiv);
     }
 }
+
+function displayTaxonomyPaths(text, parentContainer) {
+    if (!text) return; // No text to display
+
+    let textDiv = document.createElement('div');
+    textDiv.className = 'taxonomy-text';
+    textDiv.textContent = text;
+    textDiv.style.width = "100%"; // Ensure it takes full width to display as a block
+    textDiv.style.textAlign = "center";
+    textDiv.style.marginTop = "10px";
+    textDiv.style.marginBottom = "20px";
+
+    // Append the text div below the container of the boxes and panel
+    parentContainer.appendChild(textDiv);
+}
+
 
 
 function createAssociations(panelData, emotionData) {
@@ -231,31 +247,28 @@ function drawPanel(ctx, image, vertices, isRectangle) {
 */
 function drawPanel(ctx, canvas, image, vertices, isRectangle) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Setup path for clipping
     ctx.beginPath();
-    ctx.moveTo(vertices[0].x, vertices[0].y);
+    ctx.moveTo(vertices[0].x - vertices[0].x, vertices[0].y - vertices[0].y); // Normalize to start at (0,0)
     vertices.forEach((vertex, index) => {
-        ctx.lineTo(vertex.x, vertex.y);
+        ctx.lineTo(vertex.x - vertices[0].x, vertex.y - vertices[0].y);
     });
     ctx.closePath();
-
-    // Only apply clipping if it's a polygon
     if (!isRectangle) {
-        ctx.clip();
+        ctx.clip(); // Apply clipping path only if it's not a rectangle
     }
 
-    // Resize canvas to the bounding box of the polygon or rectangle
-    if (vertices.length) {
-        let minX = Math.min(...vertices.map(v => v.x));
-        let maxX = Math.max(...vertices.map(v => v.x));
-        let minY = Math.min(...vertices.map(v => v.y));
-        let maxY = Math.max(...vertices.map(v => v.y));
-        canvas.width = maxX - minX;
-        canvas.height = maxY - minY;
-        ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, canvas.width, canvas.height);
-    } else {
-        ctx.drawImage(image, 0, 0);
-    }
+    // Adjust canvas size to fit the clipped region
+    let minX = Math.min(...vertices.map(v => v.x));
+    let maxX = Math.max(...vertices.map(v => v.x));
+    let minY = Math.min(...vertices.map(v => v.y));
+    let maxY = Math.max(...vertices.map(v => v.y));
+    canvas.width = maxX - minX;
+    canvas.height = maxY - minY;
+    ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, canvas.width, canvas.height);
 }
+
 
 
 function pointInPolygon(point, polygon) {
