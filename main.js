@@ -76,17 +76,18 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
             drawPanel(ctx, canvas, image, vertices, isRectangle);
 
             [leftBox, rightBox].forEach(box => {
-                box.style.height = `${canvas.height}px`; // Match height with the panel
+                box.style.height = `${canvas.height}px`; // Dynamically set the height
             });
 
             let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.ID));
             if (associatedTexts.length > 0) {
                 let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', ');
-                displayTaxonomyPaths(textContent, document.body); // Change container for text to be outside the panel-container
+                displayTaxonomyPaths(textContent, document.body); // Ensure text is added in a new block
             }
         };
     });
 }
+
 
 
 function createBox() {

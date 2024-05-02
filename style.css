@@ -53,29 +53,33 @@ img {
     border: 1px solid #ccc; /* Optional: adds a border around the canvas */
 }
 
-
 .panel-container {
     display: flex;
-    justify-content: space-between;
-    align-items: stretch; /* This will make all children of the container (including boxes) match the height of the tallest child */
+    justify-content: space-between; /* Keeps boxes and panel aligned properly */
+    align-items: center; /* Vertically aligns items in the container */
+    width: 100%; /* Ensures the container spans the full width */
+    padding: 20px 0; /* Adds padding to the top and bottom */
+    margin-bottom: 20px; /* Adds more space below each container */
 }
 
-
 .box {
-    height: 70vh; /* 70% of the viewport height */
-    width: 10vw; /* 10% of the viewport width */
-    background-color: red; /* initial color, can be changed as needed */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white; /* for any text inside the box */
+    width: 10%; /* Adjusts the width of the boxes to 10% of the container width */
+    background-color: red; /* Sets the box background color */
+    /* Height is dynamically set by JavaScript to match the panel height */
 }
 
 .panel {
-    width: 80vw; /* adjust based on your actual panel width requirements */
-    height: 70vh; /* matches the box height */
+    flex-grow: 1; /* Allows the panel to fill the space between the boxes */
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0; /* just an example */
+    margin: 0 20px; /* Adds margin to the left and right for some breathing room */
 }
+
+.taxonomy-text {
+    width: 100%; /* Ensures the taxonomy text spans the full width for better alignment */
+    text-align: center; /* Centers the text */
+    margin-top: 10px; /* Adds space above the text */
+    margin-bottom: 30px; /* Adds more space below the text, increasing separation from the next row */
+}
+
