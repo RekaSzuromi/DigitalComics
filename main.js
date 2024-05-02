@@ -74,15 +74,15 @@ function loadPanels(panelData, imagePath, emotionAssociations) {
             let vertices = formatVertices(panel['Panel Region Vertices']);
             let isRectangle = vertices.length === 2;
             drawPanel(ctx, canvas, image, vertices, isRectangle);
-        
+
             [leftBox, rightBox].forEach(box => {
-                box.style.height = `${canvas.height}px`; // Match the height dynamically
+                box.style.height = `${canvas.height}px`; // Dynamically set the height
             });
-        
+
             let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.ID));
             if (associatedTexts.length > 0) {
                 let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', ');
-                displayTaxonomyPaths(textContent, container); // Pass the correct container
+                displayTaxonomyPaths(textContent, container); // Ensure text is added in a new block below
             }
         };
     });
@@ -116,8 +116,8 @@ function adjustPanelAndBoxes(canvas, leftBox, rightBox, image) {
 
 
 
-function displayTaxonomyPaths(text, parentContainer) {
-    if (!text) return; // No text to display
+function displayTaxonomyPaths(text, panelContainer) {
+    if (!text) return; // No text to display if empty
 
     // Define the regex pattern to match the specified taxonomy path formats
     const regex = /VLT: Semantics: Emotion \(v\.\d\) \/ (Valence|Emotion) \/ .*/;
@@ -135,10 +135,11 @@ function displayTaxonomyPaths(text, parentContainer) {
         textDiv.style.marginTop = "10px";
         textDiv.style.marginBottom = "20px";
 
-        // Append the text div below the container of the boxes and panel
-        parentContainer.appendChild(textDiv); // Append the text right after the container for boxes and panels
+        // Append the text div after the panel-container to ensure it appears below the boxes and panel
+        panelContainer.after(textDiv); // This places the text directly below the container of the boxes and panel
     }
 }
+
 
 function createAssociations(panelData, emotionData) {
     let allEmotionAssociations = [];
