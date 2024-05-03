@@ -2,24 +2,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Digital Comics Panel Viewer</title>
     <link rel="stylesheet" href="style.css">
     <script src="main.js"></script>
 </head>
 <body>
     <h1>DigitalComics</h1>
-    <p>Enhancing Emotional Engagement in Digital Comics through Ambient Interfaces</p> 
-    <p>panelbypanel</p> 
-    <button onclick="loadComicData('comic1')">Comic 1</button>
-    <button onclick="loadComicData('comic2')">Comic 2</button>
-    <button onclick="loadComicData('comic3')">Comic 3</button>
-    <button onclick="loadComicData('comic4')">Comic 4</button>
-    <button onclick="loadComicData('comic5')">Comic 5</button>
-    <button onclick="loadComicData('comic6')">Comic 6</button>
-    <button id="downloadButton" style="margin: 20px;">Download Emotion Associations</button>  
+    <p>Enhancing Emotional Engagement in Digital Comics through Ambient Interfaces</p>
+    <div class="button-container">
+        <button onclick="loadComicData('comic1')">Comic 1</button>
+        <button onclick="loadComicData('comic2')">Comic 2</button>
+        <button onclick="loadComicData('comic3')">Comic 3</button>
+        <button onclick="loadComicData('comic4')">Comic 4</button>
+        <button onclick="loadComicData('comic5')">Comic 5</button>
+        <button onclick="loadComicData('comic6')">Comic 6</button>
+    </div>
     <div id="panelDisplayContainer"></div>
     <button id="prev">Previous</button>
     <button id="next">Next</button>
-    
+    <button id="downloadButton" style="display:none; margin: 20px;">Download Emotion Associations</button>
 </body>
 </html>

@@ -6,92 +6,39 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: Arial, sans-serif; /* Example font */
+    font-family: Arial, sans-serif;
 }
 
 h1 {
     margin-top: 20px;
-    font-size: 2em; /* Larger heading */
+    font-size: 2em;
 }
 
 p {
-    margin: 10px auto; /* Centered with some margin */
-    width: 80%; /* Responsive width */
-    text-align: center; /* Centering text */
+    margin: 10px auto;
+    width: 80%;
+    text-align: center;
 }
 
-.container {
-    display: grid;
-    gap: 20px; /* Margin between pictures */
-    width: 100%;
-    max-width: 960px; /* Container max width */
-    justify-content: center; /* Centering the grid items */
-    padding: 20px; /* Padding around the grid */
-}
-
-img {
-    width: 100%; /* Adjusts image width within the container */
-    max-width: 300px; /* Maximum image width */
-    display: block; /* Removes extra space below images */
-}
-
-.center {
-    justify-self: center;
-}
-
-.left {
-    justify-self: start;
-}
-
-.right {
-    justify-self: end;
-}
-
-#polygon-container {
-    width: auto; /* Adjust based on your layout needs */
-    margin: 20px auto;
-    border: 1px solid #ccc; /* Optional: adds a border around the canvas */
-}
-
-.panel-container {
-    display: flex;
-    justify-content: space-between; /* Keeps boxes and panel aligned properly */
-    align-items: center; /* Vertically aligns items in the container */
-    width: 100%; /* Ensures the container spans the full width */
-    padding: 20px 0; /* Adds padding to the top and bottom */
-    margin-bottom: 20px; /* Adds more space below each container */
-}
-
-.box {
-    width: 10%; /* Adjusts the width of the boxes to 10% of the container width */
-    background-color: red; /* Sets the box background color */
-    /* Height is dynamically set by JavaScript to match the panel height */
-}
-
-.panel {
-    flex-grow: 1; /* Allows the panel to fill the space between the boxes */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 20px; /* Adds margin to the left and right for some breathing room */
-}
-
-.taxonomy-text {
-    width: 100%; /* Ensures the taxonomy text spans the full width for better alignment */
-    text-align: center; /* Centers the text */
-    margin-top: 10px; /* Adds space above the text */
-    margin-bottom: 30px; /* Adds more space below the text, increasing separation from the next row */
+.button-container {
+    margin-bottom: 20px;
 }
 
 #panelDisplayContainer {
-    width: 80%; /* Adjust based on your preference */
-    margin: 20px auto;
+    width: 100%; /* Full width for better control */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    overflow: hidden;
 }
 
-
 button {
+    cursor: pointer;
+    margin: 5px;
+}
+
+#prev, #next {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
@@ -104,14 +51,4 @@ button {
 
 #next {
     right: 10px;
-}
-
-.panel-container {
-    width: 100%;
-    text-align: center;
-    position: relative;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }

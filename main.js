@@ -1,66 +1,42 @@
 let currentPanelUrl = '';
 let currentEmotionUrl = '';
 let currentImagePath = '';
+let currentPanelIndex = 0;
+let panelData = [];
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initially hide the download button since no comic is selected
-    document.getElementById('downloadButton').style.display = 'none';
     document.getElementById('next').addEventListener('click', () => navigate(1));
     document.getElementById('prev').addEventListener('click', () => navigate(-1));
 });
 
 function loadComicData(comicName) {
-    let currentPanelUrl = `./${comicName}_panel_data.json`;
-    let currentImagePath = `./${comicName}_pages/`;
+    currentPanelUrl = `./${comicName}_panel_data.json`;
+    currentImagePath = `./${comicName}_pages/`;
 
     fetch(currentPanelUrl).then(response => response.json())
-    .then(panelData => {
-        clearExistingPanels();
-        loadPanels(panelData, currentImagePath);
+    .then(data => {
+        panelData = data;
+        currentPanelIndex = 0; // Reset index for new comic
+        displayPanel(currentPanelIndex);
         document.getElementById('downloadButton').style.display = 'block';
     }).catch(error => {
         console.error('Error fetching data for ' + comicName + ':', error);
     });
 }
 
-function clearExistingPanels() {
-    // Remove all existing panel containers
-    const existingContainer = document.querySelector('.panel-container');
-    if (existingContainer) {
-        existingContainer.parentNode.removeChild(existingContainer);
-    }
-}
-
-function loadPanels(panelData, imagePath) {
-    // Sort panels by ID
-    panelData.sort((a, b) => parseInt(a.ID) - parseInt(b.ID));
-    window.currentPanelIndex = 0;
-    window.panelData = panelData;
-    window.imagePath = imagePath;
-
-    // Create a container for the panel and navigation
-    const container = document.createElement('div');
-    container.className = 'panel-container';
-    document.body.appendChild(container);
-
-    displayPanel(window.currentPanelIndex);
-}
-
 function displayPanel(index) {
-    const container = document.querySelector('.panel-container');
+    const container = document.getElementById('panelDisplayContainer');
     container.innerHTML = '';  // Clear previous content
 
     let canvas = document.createElement('canvas');
-    canvas.id = `panelCanvas-${window.panelData[index].ID}`;
-    container.appendChild(canvas);
-
     let ctx = canvas.getContext('2d');
     let image = new Image();
-    image.src = `${window.imagePath}page-${window.panelData[index]['Page Number']}.jpg`;
+    image.src = `${currentImagePath}page-${panelData[index]['Page Number']}.jpg`;
 
     image.onload = () => {
-        let vertices = formatVertices(window.panelData[index]['Panel Region Vertices']);
+        let vertices = formatVertices(panelData[index]['Panel Region Vertices']);
         drawPanel(ctx, canvas, image, vertices, vertices.length === 2);
+        container.appendChild(canvas);
     };
 }
 
@@ -83,9 +59,8 @@ function drawPanel(ctx, canvas, image, vertices, isRectangle) {
 }
 
 function navigate(direction) {
-    const newIndex = window.currentPanelIndex + direction;
-    if (newIndex >= 0 && newIndex < window.panelData.length) {
-        window.currentPanelIndex = newIndex;
-        displayPanel(window.currentPanelIndex);
-    }
+    currentPanelIndex += direction;
+    if (currentPanelIndex >= panelData.length) currentPanelIndex = 0;
+    if (currentPanelIndex < 0) currentPanelIndex = panelData.length - 1;
+    displayPanel(currentPanelIndex);
 }
