@@ -83,3 +83,35 @@ img {
     margin-bottom: 30px; /* Adds more space below the text, increasing separation from the next row */
 }
 
+#panelDisplayContainer {
+    width: 80%; /* Adjust based on your preference */
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+
+button {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+
+#prev {
+    left: 10px;
+}
+
+#next {
+    right: 10px;
+}
+
+.panel-container {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
