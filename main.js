@@ -88,14 +88,17 @@ function formatVertices(vertexString) {
 }
 
 function drawPanel(ctx, canvas, image, vertices, isRectangle) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.beginPath();
-    ctx.moveTo(vertices[0].x, vertices[0].y);
-    vertices.slice(1).forEach(v => ctx.lineTo(v.x, v.y));
-    ctx.closePath();
-    if (!isRectangle) ctx.clip();
-    ctx.drawImage(image, 0, 0);
+    let minX = Math.min(...vertices.map(v => v.x));
+    let maxX = Math.max(...vertices.map(v => v.x));
+    let minY = Math.min(...vertices.map(v => v.y));
+    let maxY = Math.max(...vertices.map(v => v.y));
+
+    canvas.width = maxX - minX;
+    canvas.height = maxY - minY;
+
+    ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, canvas.width, canvas.height);
 }
+
 
 function navigate(delta) {
     currentPanelIndex += delta;
