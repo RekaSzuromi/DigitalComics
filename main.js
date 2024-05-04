@@ -1,4 +1,4 @@
-const alphaLevel = 0.1  // Easily change this to adjust the transparency globally
+const alphaLevel = 0.05  // Easily change this to adjust the transparency globally
 
 const emotionColors = {
     'Surprise': `rgba(143, 0, 255, ${alphaLevel})`,
