@@ -58,6 +58,6 @@ button {
 }
 
 body {
-    background: radial-gradient(circle at center, var(--emotion-color) 0%, rgba(255, 255, 255, 0) 70%);
+    background: radial-gradient(circle at center, var(--emotion-color) 0%, transparent 70%);
     transition: background-color 0.3s; /* Smooth transition for color change */
 }

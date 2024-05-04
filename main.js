@@ -73,20 +73,23 @@ function displayPanel(index) {
 
 function updateBackgroundColor(panelId) {
     const associatedEmotions = emotionAssociations.filter(e => e.panelId === panelId);
-    let color = 'rgba(255, 255, 255, 0)'; // Default to transparent if no emotion color is found
+    let defaultColor = 'rgba(255, 255, 255, 0)'; // Default to transparent if no emotion color is found
+
+    // This will hold the final CSS color string
+    let gradientColor = defaultColor;
 
     for (let emotion of associatedEmotions) {
         const match = emotion.taxonomyPath.match(/Emotion \(v\.\d\) \/ Emotion \/ (.+)/);
-        if (match && emotionColors[match[1]]) {
-            let rgb = emotionColors[match[1]];
-            color = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alphaLevel})`; // Create RGBA color string with transparency
-            break;
+        if (match && emotionColors[match[1].trim()]) {
+            gradientColor = emotionColors[match[1].trim()]; // Use the trimmed emotion key to match colors
+            break; // Break after the first match for simplicity
         }
     }
 
-    // Set a radial gradient from the center
-    document.body.style.background = `radial-gradient(circle at center, ${color} 0%, transparent 70%)`;
+    // Use CSS variable to control background gradient dynamically
+    document.documentElement.style.setProperty('--emotion-color', gradientColor);
 }
+
 
 
 function formatVertices(vertexString) {
