@@ -79,7 +79,7 @@ function updateBackgroundColor(panelId) {
         const match = emotion.taxonomyPath.match(/Emotion \(v\.\d\) \/ Emotion \/ (.+)/);
         if (match && emotionColors[match[1]]) {
             let rgb = emotionColors[match[1]];
-            color = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alphaValue})`; // Create RGBA color string with transparency
+            color = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alphaLevel})`; // Create RGBA color string with transparency
             break;
         }
     }
