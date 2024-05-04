@@ -57,7 +57,9 @@ button {
     --emotion-color: rgba(255, 255, 255, 0); /* Default transparent color */
 }
 
+
 body {
-    background: radial-gradient(circle at center, var(--emotion-color) 0%, transparent 70%);
-    transition: background-color 0.3s; /* Smooth transition for color change */
+        background: radial-gradient(circle at center, transparent 70%, var(--emotion-color) 100%);
+        transition: background-color 0.3s; /* Smooth transition for color change */
 }
+    
