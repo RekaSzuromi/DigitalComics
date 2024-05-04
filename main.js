@@ -73,17 +73,19 @@ function displayPanel(index) {
 
 function updateBackgroundColor(panelId) {
     const associatedEmotions = emotionAssociations.filter(e => e.panelId === panelId);
-    let color = 'transparent'; // Default color if no match found
+    let rgbString = '255, 255, 255'; // Default to white if no emotion color is found
 
     for (let emotion of associatedEmotions) {
         const match = emotion.taxonomyPath.match(/Emotion \(v\.\d\) \/ Emotion \/ (.+)/);
         if (match && emotionColors[match[1]]) {
-            color = emotionColors[match[1]]; // Set the background color based on the emotion
-            break; // Exit once a match is found
+            let rgb = emotionColors[match[1]];
+            rgbString = `${rgb[0]}, ${rgb[1]}, ${rgb[2]}`; // Convert color to string format
+            break;
         }
     }
 
-    document.body.style.backgroundColor = color;
+    // Set the CSS variable to the new color with transparency
+    document.documentElement.style.setProperty('--emotion-color', `rgba(${rgbString}, ${alphaValue})`);
 }
 
 function formatVertices(vertexString) {

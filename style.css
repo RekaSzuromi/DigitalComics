@@ -1,4 +1,4 @@
-body, html {
+html {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -51,4 +51,13 @@ button {
 
 #next {
     right: 10px;
+}
+
+:root {
+    --emotion-color: rgba(255, 255, 255, 0); /* Default transparent color */
+}
+
+body {
+    background: radial-gradient(circle at center, var(--emotion-color) 0%, rgba(255, 255, 255, 0) 70%);
+    transition: background-color 0.3s; /* Smooth transition for color change */
 }
