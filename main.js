@@ -22,9 +22,9 @@ let currentEmotionUrl = '';
 let currentImagePath = '';
 let panelData = [];
 let emotionAssociations = [];
+let currentPanelIndex = 0; // Initialize currentPanelIndex
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initially hide the download button since no comic is selected
     document.getElementById('downloadButton').style.display = 'none';
     document.getElementById('next').addEventListener('click', () => navigate(1));
     document.getElementById('prev').addEventListener('click', () => navigate(-1));
@@ -41,7 +41,8 @@ function loadComicData(comicName) {
     ]).then(([data, associations]) => {
         panelData = data;
         emotionAssociations = associations;
-        displayPanel(0); // Display the first panel initially
+        currentPanelIndex = 0; // Reset index when loading new comic data
+        displayPanel(currentPanelIndex); // Display the first panel initially
         document.getElementById('downloadButton').style.display = 'block';
     }).catch(error => {
         console.error('Error fetching data:', error);
@@ -51,7 +52,7 @@ function loadComicData(comicName) {
 function displayPanel(index) {
     const panel = panelData[index];
     const container = document.getElementById('panelDisplayContainer');
-    container.innerHTML = '';  // Clear previous content
+    container.innerHTML = ''; // Clear previous content
 
     let canvas = document.createElement('canvas');
     let ctx = canvas.getContext('2d');
@@ -98,7 +99,6 @@ function drawPanel(ctx, canvas, image, vertices, isRectangle) {
 
     ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, canvas.width, canvas.height);
 }
-
 
 function navigate(direction) {
     currentPanelIndex += direction;
