@@ -1,21 +1,22 @@
 const emotionColors = {
-    'Surprise': '#8F00FF',
-    'Excitement': '#FF0000',
-    'Amusement': '#FFFF00',
-    'Happiness': '#FFFD01',
-    'Neutral/None': '#808080',
-    'Wonder': '#87CEEB',
-    'Pride': '#9400D3',
-    'Fear': '#000000',
-    'Rejoicing': '#FFA500',
-    'Sadness': '#00008B',
-    'Shame': '#800000',
-    'Guilt': '#DC143C',
-    'Anger': '#FF0000',
-    'Relief': '#ADD8E6',
-    'Embarrassment': '#FFB6C1',
-    'Love': '#FF1493'
+    'Surprise': 'rgb(143, 0, 255)',
+    'Excitement': 'rgb(255, 0, 0)',
+    'Amusement': 'rgb(255, 255, 0)',
+    'Happiness': 'rgb(255, 253, 1)',
+    'Neutral/None': 'rgb(128, 128, 128)',
+    'Wonder': 'rgb(135, 206, 235)',
+    'Pride': 'rgb(148, 0, 211)',
+    'Fear': 'rgb(0, 0, 0)',
+    'Rejoicing': 'rgb(255, 165, 0)',
+    'Sadness': 'rgb(0, 0, 139)',
+    'Shame': 'rgb(128, 0, 0)',
+    'Guilt': 'rgb(220, 20, 60)',
+    'Anger': 'rgb(255, 0, 0)',
+    'Relief': 'rgb(173, 216, 230)',
+    'Embarrassment': 'rgb(255, 182, 193)',
+    'Love': 'rgb(255, 20, 147)'
 };
+
 
 let currentPanelUrl = '';
 let currentEmotionUrl = '';
