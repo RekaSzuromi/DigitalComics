@@ -1,4 +1,4 @@
-const alphaLevel = 0.2;  // Easily change this to adjust the transparency globally
+const alphaLevel = 0.5;  // Easily change this to adjust the transparency globally
 
 const emotionColors = {
     'Surprise': `rgba(143, 0, 255, ${alphaLevel})`,
@@ -73,20 +73,21 @@ function displayPanel(index) {
 
 function updateBackgroundColor(panelId) {
     const associatedEmotions = emotionAssociations.filter(e => e.panelId === panelId);
-    let rgbString = '255, 255, 255'; // Default to white if no emotion color is found
+    let color = 'rgba(255, 255, 255, 0)'; // Default to transparent if no emotion color is found
 
     for (let emotion of associatedEmotions) {
         const match = emotion.taxonomyPath.match(/Emotion \(v\.\d\) \/ Emotion \/ (.+)/);
         if (match && emotionColors[match[1]]) {
             let rgb = emotionColors[match[1]];
-            rgbString = `${rgb[0]}, ${rgb[1]}, ${rgb[2]}`; // Convert color to string format
+            color = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alphaValue})`; // Create RGBA color string with transparency
             break;
         }
     }
 
-    // Set the CSS variable to the new color with transparency
-    document.documentElement.style.setProperty('--emotion-color', `rgba(${rgbString}, ${alphaValue})`);
+    // Set a radial gradient from the center
+    document.body.style.background = `radial-gradient(circle at center, ${color} 0%, transparent 70%)`;
 }
+
 
 function formatVertices(vertexString) {
     return vertexString.match(/\((\d+,\d+)\)/g)
