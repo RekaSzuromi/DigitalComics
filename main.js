@@ -1,21 +1,24 @@
+const alphaLevel = 0.2;  // Easily change this to adjust the transparency globally
+
 const emotionColors = {
-    'Surprise': 'rgb(143, 0, 255)',
-    'Excitement': 'rgb(255, 0, 0)',
-    'Amusement': 'rgb(255, 255, 0)',
-    'Happiness': 'rgb(255, 253, 1)',
-    'Neutral/None': 'rgb(128, 128, 128)',
-    'Wonder': 'rgb(135, 206, 235)',
-    'Pride': 'rgb(148, 0, 211)',
-    'Fear': 'rgb(0, 0, 0)',
-    'Rejoicing': 'rgb(255, 165, 0)',
-    'Sadness': 'rgb(0, 0, 139)',
-    'Shame': 'rgb(128, 0, 0)',
-    'Guilt': 'rgb(220, 20, 60)',
-    'Anger': 'rgb(255, 0, 0)',
-    'Relief': 'rgb(173, 216, 230)',
-    'Embarrassment': 'rgb(255, 182, 193)',
-    'Love': 'rgb(255, 20, 147)'
+    'Surprise': `rgba(143, 0, 255, ${alphaLevel})`,
+    'Excitement': `rgba(255, 0, 0, ${alphaLevel})`,
+    'Amusement': `rgba(255, 255, 0, ${alphaLevel})`,
+    'Happiness': `rgba(255, 253, 1, ${alphaLevel})`,
+    'Neutral/None': `rgba(128, 128, 128, ${alphaLevel})`,
+    'Wonder': `rgba(135, 206, 235, ${alphaLevel})`,
+    'Pride': `rgba(148, 0, 211, ${alphaLevel})`,
+    'Fear': `rgba(0, 0, 0, ${alphaLevel})`,
+    'Rejoicing': `rgba(255, 165, 0, ${alphaLevel})`,
+    'Sadness': `rgba(0, 0, 139, ${alphaLevel})`,
+    'Shame': `rgba(128, 0, 0, ${alphaLevel})`,
+    'Guilt': `rgba(220, 20, 60, ${alphaLevel})`,
+    'Anger': `rgba(255, 0, 0, ${alphaLevel})`,
+    'Relief': `rgba(173, 216, 230, ${alphaLevel})`,
+    'Embarrassment': `rgba(255, 182, 193, ${alphaLevel})`,
+    'Love': `rgba(255, 20, 147, ${alphaLevel})`
 };
+
 
 
 let currentPanelUrl = '';
