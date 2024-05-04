@@ -59,7 +59,7 @@ button {
 
 
 body {
-        background: radial-gradient(circle at center, transparent 70%, var(--emotion-color) 50%);
+        background: radial-gradient(circle at center, transparent 20%, var(--emotion-color) 90%);
         transition: background-color 0.3s; /* Smooth transition for color change */
 }
     
