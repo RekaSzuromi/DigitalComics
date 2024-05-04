@@ -100,8 +100,8 @@ function drawPanel(ctx, canvas, image, vertices, isRectangle) {
 }
 
 
-function navigate(delta) {
-    currentPanelIndex += delta;
+function navigate(direction) {
+    currentPanelIndex += direction;
     if (currentPanelIndex >= panelData.length) currentPanelIndex = 0;
     if (currentPanelIndex < 0) currentPanelIndex = panelData.length - 1;
     displayPanel(currentPanelIndex);
