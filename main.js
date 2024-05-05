@@ -27,11 +27,13 @@ let currentImagePath = '';
 let panelData = [];
 let emotionAssociations = [];
 let currentPanelIndex = 0; // Initialize currentPanelIndex
+const audioPlayer = new Audio();
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('downloadButton').style.display = 'none';
     document.getElementById('next').addEventListener('click', () => navigate(1));
     document.getElementById('prev').addEventListener('click', () => navigate(-1));
+    loadComicData('comic1');  // Default comic loaded initially
 });
 
 function loadComicData(comicName) {
@@ -90,7 +92,27 @@ function updateBackgroundColor(panelId) {
     document.documentElement.style.setProperty('--emotion-color', gradientColor);
 }
 
+function playEmotionMusic(emotion) {
+    const mp3File = `./music/${emotion}.mp3`;
+    const wavFile = `./music/${emotion}.wav`;
 
+    fetch(mp3File)
+        .then(response => {
+            if (response.ok) {
+                audioPlayer.src = mp3File;
+                audioPlayer.play();
+            } else {
+                return fetch(wavFile);
+            }
+        })
+        .then(response => {
+            if (response && response.ok) {
+                audioPlayer.src = wavFile;
+                audioPlayer.play();
+            }
+        })
+        .catch(error => console.log(`No audio file found for ${emotion}`));
+}
 
 function formatVertices(vertexString) {
     return vertexString.match(/\((\d+,\d+)\)/g)
