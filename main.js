@@ -27,13 +27,11 @@ let currentImagePath = '';
 let panelData = [];
 let emotionAssociations = [];
 let currentPanelIndex = 0; // Initialize currentPanelIndex
-const audioPlayer = new Audio();
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('downloadButton').style.display = 'none';
     document.getElementById('next').addEventListener('click', () => navigate(1));
     document.getElementById('prev').addEventListener('click', () => navigate(-1));
-    loadComicData('comic1');  // Default comic loaded initially
 });
 
 function loadComicData(comicName) {
@@ -92,55 +90,7 @@ function updateBackgroundColor(panelId) {
     document.documentElement.style.setProperty('--emotion-color', gradientColor);
 }
 
-function playEmotionMusic(emotion) {
-    // Check for both mp3 and wav files for broader compatibility
-    const mp3File = `./music/${emotion}.mp3`;
-    const wavFile = `./music/${emotion}.wav`;
 
-    // Try loading MP3 file first
-    fetch(mp3File)
-        .then(response => {
-            if (response.ok) {
-                audioPlayer.src = mp3File;
-                audioPlayer.load();  // Important to reload the new source
-                audioPlayer.play().catch(e => handleAutoplayException(e));
-            } else {
-                // If MP3 isn't available, try WAV file
-                return fetch(wavFile);
-            }
-        })
-        .then(response => {
-            if (response && response.ok) {
-                audioPlayer.src = wavFile;
-                audioPlayer.load();  // Reload for new source
-                audioPlayer.play().catch(e => handleAutoplayException(e));
-            }
-        })
-        .catch(error => {
-            console.log(`No audio file found for ${emotion}. Error: ${error}`);
-            // Attempt to play to trigger browser's autoplay policy compliance
-            audioPlayer.play().catch(e => console.log('Autoplay blocked by browser'));
-        });
-}
-
-// Handling browser's autoplay policy
-function handleAutoplayException(e) {
-    console.log('Autoplay was prevented:', e);
-    // Fallback or UI indication might be necessary here
-    // Example: Show play button to user to initiate playback
-}
-function initialAudioPlay() {
-    document.getElementById('startButton').style.display = 'none'; // Hide start button after use
-    // Attempt to play silent audio to unlock further play
-    audioPlayer.src = 'silence.mp3'; // A short silent mp3 file
-    audioPlayer.play().then(() => {
-        console.log('Audio unlocked');
-        displayPanel(currentPanelIndex); // Display the initial panel with sound
-    }).catch(e => {
-        console.log('Audio still locked', e);
-        // You might need to inform the user or handle differently
-    });
-}
 
 function formatVertices(vertexString) {
     return vertexString.match(/\((\d+,\d+)\)/g)
