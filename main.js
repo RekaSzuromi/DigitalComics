@@ -115,4 +115,16 @@ function navigate(direction) {
     if (currentPanelIndex >= panelData.length) currentPanelIndex = 0;
     if (currentPanelIndex < 0) currentPanelIndex = panelData.length - 1;
     displayPanel(currentPanelIndex);
+    
+    // Play audio on navigating to the next panel
+    if (direction > 0) { // Checks if the navigation direction is "next"
+        playAudio();
+    }
+}
+
+function playAudio() {
+    var audioPlayer = document.getElementById('audioPlayer');
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0; // Rewind to the start
+    audioPlayer.play();
 }
