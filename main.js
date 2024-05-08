@@ -117,27 +117,29 @@ function navigate(direction) {
 
     displayPanel(currentPanelIndex);
 
-    // Check if the upcoming panel has the emotion 'Happiness' before playing audio
-    if (direction > 0 && hasHappinessEmotion(currentPanelIndex)) { 
-        playAudio();
+    // Attempt to play emotion-specific audio when navigating to a new panel
+    const emotion = getPanelEmotion(currentPanelIndex);
+    if (direction > 0 && emotion) {
+        playAudio(`./music/${emotion}.wav`);
     }
 }
 
-function hasHappinessEmotion(panelIndex) {
+function getPanelEmotion(panelIndex) {
     const panelId = panelData[panelIndex].ID;
     const associatedEmotions = emotionAssociations.filter(e => e.panelId === panelId);
     for (let emotion of associatedEmotions) {
         const match = emotion.taxonomyPath.match(/Emotion \(v\.\d\) \/ Emotion \/ (.+)/);
-        if (match && emotionColors[match[1].trim()] === emotionColors['Happiness']) {
-            return true; // Return true if the matched emotion is 'Happiness'
+        if (match && emotionColors[match[1].trim()]) {
+            return match[1].trim(); // Return the matched emotion
         }
     }
-    return false; // Return false if 'Happiness' is not found
+    return null; // Return null if no valid emotion is found
 }
 
-function playAudio() {
+function playAudio(audioFilePath) {
     var audioPlayer = document.getElementById('audioPlayer');
+    audioPlayer.src = audioFilePath; // Set the new source for the audio player
     audioPlayer.pause();
-    audioPlayer.currentTime = 0; // Rewind to the start
+    audioPlayer.load(); // Reload the new audio file
     audioPlayer.play();
 }
