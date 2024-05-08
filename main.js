@@ -31,7 +31,15 @@ let currentPanelIndex = 0; // Initialize currentPanelIndex
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('downloadButton').style.display = 'none';
     document.getElementById('next').addEventListener('click', () => navigate(1));
-    document.getElementById('prev').addEventListener('click', () => navigate(-1));
+    document.getElementById('prev').addEventListener('click', () => {
+        stopAudio(); // Stop audio when previous button is clicked
+        navigate(-1);
+    });
+
+    // Add similar stopAudio calls for any other buttons that require stopping the audio
+    // Example:
+    const comicButtons = document.querySelectorAll('.button-container button');
+    comicButtons.forEach(button => button.addEventListener('click', stopAudio));
 });
 
 function loadComicData(comicName) {
@@ -118,9 +126,15 @@ function navigate(direction) {
     displayPanel(currentPanelIndex);
 
     // Attempt to play emotion-specific audio when navigating to a new panel
-    const emotion = getPanelEmotion(currentPanelIndex);
-    if (direction > 0 && emotion) {
-        playAudio(`./music/${emotion}.wav`);
+    if (direction > 0) {
+        const emotion = getPanelEmotion(currentPanelIndex);
+        if (emotion) {
+            playAudio(`./music/${emotion}.wav`);
+        } else {
+            stopAudio(); // Stop the audio if there's no emotion
+        }
+    } else {
+        stopAudio(); // Ensure audio is stopped if navigating backward or via other buttons
     }
 }
 
@@ -136,10 +150,21 @@ function getPanelEmotion(panelIndex) {
     return null; // Return null if no valid emotion is found
 }
 
+
+
 function playAudio(audioFilePath) {
     var audioPlayer = document.getElementById('audioPlayer');
-    audioPlayer.src = audioFilePath; // Set the new source for the audio player
+    audioPlayer.src = audioFilePath;
     audioPlayer.pause();
-    audioPlayer.load(); // Reload the new audio file
-    audioPlayer.play();
+    audioPlayer.load();
+
+    audioPlayer.play().catch(error => {
+        console.log(`No file for emotion: ${audioFilePath.split('/').pop().split('.')[0]}`);
+    });
+}
+
+function stopAudio() {
+    var audioPlayer = document.getElementById('audioPlayer');
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0;
 }
