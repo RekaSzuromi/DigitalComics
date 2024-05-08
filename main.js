@@ -114,12 +114,25 @@ function navigate(direction) {
     currentPanelIndex += direction;
     if (currentPanelIndex >= panelData.length) currentPanelIndex = 0;
     if (currentPanelIndex < 0) currentPanelIndex = panelData.length - 1;
+
     displayPanel(currentPanelIndex);
-    
-    // Play audio on navigating to the next panel
-    if (direction > 0) { // Checks if the navigation direction is "next"
+
+    // Check if the upcoming panel has the emotion 'Happiness' before playing audio
+    if (direction > 0 && hasHappinessEmotion(currentPanelIndex)) { 
         playAudio();
     }
+}
+
+function hasHappinessEmotion(panelIndex) {
+    const panelId = panelData[panelIndex].ID;
+    const associatedEmotions = emotionAssociations.filter(e => e.panelId === panelId);
+    for (let emotion of associatedEmotions) {
+        const match = emotion.taxonomyPath.match(/Emotion \(v\.\d\) \/ Emotion \/ (.+)/);
+        if (match && emotionColors[match[1].trim()] === emotionColors['Happiness']) {
+            return true; // Return true if the matched emotion is 'Happiness'
+        }
+    }
+    return false; // Return false if 'Happiness' is not found
 }
 
 function playAudio() {
