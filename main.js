@@ -27,6 +27,8 @@ let currentImagePath = '';
 let panelData = [];
 let emotionAssociations = [];
 let currentPanelIndex = 0; // Initialize currentPanelIndex
+let currentValence = 'Neutral'; // Default valence
+
 
 document.addEventListener('DOMContentLoaded', function() {
     setupNavigation();
@@ -36,8 +38,10 @@ document.addEventListener('mousemove', function(e) {
     var circle = document.getElementById('cursorCircle');
     circle.style.left = e.clientX + 'px';
     circle.style.top = e.clientY + 'px';
-    circle.style.visibility = 'visible';  // Make sure the circle is visible when moving
+    // Only make the circle visible if the valence is not neutral
+    circle.style.visibility = (currentValence === 'Neutral') ? 'hidden' : 'visible';
 });
+
 
 function setupNavigation() {
     document.getElementById('downloadButton').style.display = 'none';
@@ -90,12 +94,13 @@ function displayPanel(index) {
         drawPanel(ctx, canvas, image, vertices, vertices.length === 2);
         container.appendChild(canvas);
         updateBackgroundColor(panel.ID);
-        const valence = getPanelValence(index);  // Retrieve the valence for the current panel
+        const valence = getPanelValence(index) || 'Neutral';  // Default to 'Neutral' if undefined
         updateCursorCircle(valence);  // Update the cursor based on the valence
     };
 
     image.src = `${currentImagePath}page-${panel['Page Number']}.jpg`;
 }
+
 
 
 function updateBackgroundColor(panelId) {
@@ -175,32 +180,29 @@ function getPanelValence(panelIndex) {
 
 function updateCursorCircle(valence) {
     const cursorCircle = document.getElementById('cursorCircle');
+    currentValence = valence; // Update global valence variable
     switch (valence) {
         case 'Negative':
             cursorCircle.style.backgroundImage = "radial-gradient(circle at center, rgba(115, 105, 105, 0.418) 0%, rgba(255, 255, 0, 0.01) 40%)";
-            cursorCircle.style.visibility = 'visible';
             break;
         case 'Slightly Negative':
             cursorCircle.style.backgroundImage = "radial-gradient(circle at center, rgba(207, 200, 200, 0.418) 0%, rgba(255, 255, 0, 0.01) 40%)";
-            cursorCircle.style.visibility = 'visible';
             break;
         case 'Neutral':
             cursorCircle.style.visibility = 'hidden';
             break;
         case 'Slightly Positive':
             cursorCircle.style.backgroundImage = "radial-gradient(circle at center, rgba(214, 250, 53, 0.418) 0%, rgba(255, 255, 0, 0.01) 40%)";
-            cursorCircle.style.visibility = 'visible';
             break;
         case 'Positive':
             cursorCircle.style.backgroundImage = "radial-gradient(circle at center, rgba(255, 255, 0, 0.418) 0%, rgba(255, 255, 0, 0.01) 40%)";
-            cursorCircle.style.visibility = 'visible';
             break;
         default:
-            cursorCircle.style.visibility = 'hidden';
+            cursorCircle.style.visibility = 'hidden'; // Handle no valence data like 'Neutral'
+            currentValence = 'Neutral'; // Reset to neutral if undefined
             break;
     }
 }
-
 
 function handleAudioForCurrentPanel() {
     const emotion = getPanelEmotion(currentPanelIndex);
