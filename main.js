@@ -29,50 +29,50 @@ let emotionAssociations = [];
 let currentPanelIndex = 0; // Initialize currentPanelIndex
 
 document.addEventListener('DOMContentLoaded', function() {
+    setupNavigation();
+    setupComicButtons();
+});
+
+function setupNavigation() {
     document.getElementById('downloadButton').style.display = 'none';
     document.getElementById('next').addEventListener('click', () => navigate(1));
     document.getElementById('prev').addEventListener('click', () => navigate(-1));
+}
 
+function setupComicButtons() {
     const comicButtons = document.querySelectorAll('.button-container button');
     comicButtons.forEach(button => {
-        button.removeEventListener('click', handleComicButtonClick);  // Unbind first to avoid multiple bindings
-        button.addEventListener('click', handleComicButtonClick);
+        button.removeEventListener('click', comicButtonClickHandler);
+        button.addEventListener('click', comicButtonClickHandler);
     });
-});
+}
 
-function handleComicButtonClick() {
+function comicButtonClickHandler() {
     var comicName = this.textContent.toLowerCase().replace(/\s/g, ''); // Convert to lower case and remove spaces
     loadComicData(comicName);
 }
 
-
 async function loadComicData(comicName) {
-    stopAudio();  // Ensure any currently playing audio is stopped before loading new comic
-    currentPanelUrl = `./${comicName}_panel_data.json`;
-    currentImagePath = `./${comicName}_pages/`;
-    let emotionAssociationsUrl = `./${comicName}_emotion_associations.json`;
-
+    stopAudio();  // Stop any playing audio first
     try {
-        const [dataResponse, associationsResponse] = await Promise.all([
-            fetch(currentPanelUrl),
-            fetch(emotionAssociationsUrl)
-        ]);
+        const dataResponse = await fetch(`./${comicName}_panel_data.json`);
+        const associationsResponse = await fetch(`./${comicName}_emotion_associations.json`);
+
         panelData = await dataResponse.json();
         emotionAssociations = await associationsResponse.json();
-
-        currentPanelIndex = 0;  // Reset index when loading new comic data
-        if (panelData.length > 0) { // Check if panel data is not empty
-            displayPanel(currentPanelIndex);  // Display the first panel initially
-        }
-        handleAudioForCurrentPanel();  // Handle audio after the first panel is displayed
+        
+        currentPanelIndex = 0; // Reset index when loading new comic data
+        displayPanel(currentPanelIndex);  // Call displayPanel once data is confirmed loaded
+        handleAudioForCurrentPanel();
         document.getElementById('downloadButton').style.display = 'block';
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 }
 
+
 function displayPanel(index) {
-    console.log("Displaying panel at index:", index);  // Log when and which panel is displayed
+    console.log("Displaying panel at index:", index);  // Helps identify multiple calls
 
     const panel = panelData[index];
     if (!panel) {
@@ -81,6 +81,9 @@ function displayPanel(index) {
     }
 
     const container = document.getElementById('panelDisplayContainer');
+    if (container.innerHTML !== '') {
+        console.warn('Attempt to display panel without clearing:', index);
+    }
     container.innerHTML = '';  // Clear previous content to ensure no duplication
 
     let canvas = document.createElement('canvas');
@@ -100,6 +103,7 @@ function displayPanel(index) {
 
     image.src = `${currentImagePath}page-${panel['Page Number']}.jpg`;
 }
+
 
 
 function updateBackgroundColor(panelId) {
