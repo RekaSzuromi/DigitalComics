@@ -39,14 +39,14 @@ button {
 }
 
 #prev, #next {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1000;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 5px;
-    padding: 5px 10px;
+    font-size: 32px; /* Larger font size for bigger arrows */
+    font-weight: bold; /* Keep the arrow bold */
+    cursor: pointer; /* Ensures the cursor changes to pointer on hover */
+    padding: 10px 15px; /* Adjust padding for better button usability */
+    border: none; /* Removes the border */
+    background: none; /* Removes the background */
+    color: #333; /* Sets the arrow color; change as needed */
+    outline: none; /* Removes the outline to ensure no border on focus */
 }
 
 #prev {
