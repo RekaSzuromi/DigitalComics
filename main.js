@@ -65,7 +65,6 @@ function loadComicData(comicName) {
 
 
 function displayPanel(index) {
-    console.log("Displaying panel at index:", index);  // Helps identify multiple calls
 
     const panel = panelData[index];
     if (!panel) {
@@ -74,9 +73,6 @@ function displayPanel(index) {
     }
 
     const container = document.getElementById('panelDisplayContainer');
-    if (container.innerHTML !== '') {
-        console.warn('Attempt to display panel without clearing:', index);
-    }
     container.innerHTML = '';  // Clear previous content to ensure no duplication
 
     let canvas = document.createElement('canvas');
