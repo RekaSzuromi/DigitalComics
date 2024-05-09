@@ -44,7 +44,7 @@ button {
     top: 50%;
     transform: translateY(-50%);
     z-index: 1000;
-    font-size: 32px; /* Larger font size for bigger arrows */
+    font-size: 52px; /* Larger font size for bigger arrows */
     font-weight: bold; /* Keep the arrow bold */
     cursor: pointer; /* Ensures the cursor changes to pointer on hover */
     padding: 10px 15px; /* Adjust padding for better button usability */
