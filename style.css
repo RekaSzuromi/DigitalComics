@@ -51,6 +51,7 @@ button {
 
 #prev {
     left: 10px;
+    transform: scaleX(-1); /* Flips the arrow to point left */
 }
 
 #next {
