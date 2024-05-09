@@ -165,7 +165,6 @@ function playAudio(audioFilePath) {
     });
 }
 
-
 function stopAudio() {
     var audioPlayer = document.getElementById('audioPlayer');
     audioPlayer.pause();
