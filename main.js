@@ -31,15 +31,15 @@ let currentPanelIndex = 0; // Initialize currentPanelIndex
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('downloadButton').style.display = 'none';
     document.getElementById('next').addEventListener('click', () => navigate(1));
-    document.getElementById('prev').addEventListener('click', () => {
-        stopAudio(); // Stop audio when previous button is clicked
-        navigate(-1);
-    });
+    document.getElementById('prev').addEventListener('click', () => navigate(-1));
 
-    // Add similar stopAudio calls for any other buttons that require stopping the audio
-    // Example:
+    // Add audio playback control for comic buttons
     const comicButtons = document.querySelectorAll('.button-container button');
-    comicButtons.forEach(button => button.addEventListener('click', stopAudio));
+    comicButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            loadComicData(this.textContent.trim()); // Assuming button text is the comic name
+        });
+    });
 });
 
 function loadComicData(comicName) {
@@ -56,6 +56,9 @@ function loadComicData(comicName) {
         currentPanelIndex = 0; // Reset index when loading new comic data
         displayPanel(currentPanelIndex); // Display the first panel initially
         document.getElementById('downloadButton').style.display = 'block';
+
+        // Handle audio for the first panel of the new comic
+        handleAudioForCurrentPanel();
     }).catch(error => {
         console.error('Error fetching data:', error);
     });
@@ -125,18 +128,10 @@ function navigate(direction) {
 
     displayPanel(currentPanelIndex);
 
-    // Attempt to play emotion-specific audio when navigating to a new panel
-    if (direction > 0) {
-        const emotion = getPanelEmotion(currentPanelIndex);
-        if (emotion) {
-            playAudio(`./music/${emotion}.wav`);
-        } else {
-            stopAudio(); // Stop the audio if there's no emotion
-        }
-    } else {
-        stopAudio(); // Ensure audio is stopped if navigating backward or via other buttons
-    }
+    // Play emotion-specific audio based on the current panel
+    handleAudioForCurrentPanel();
 }
+
 
 function getPanelEmotion(panelIndex) {
     const panelId = panelData[panelIndex].ID;
@@ -150,7 +145,14 @@ function getPanelEmotion(panelIndex) {
     return null; // Return null if no valid emotion is found
 }
 
-
+function handleAudioForCurrentPanel() {
+    const emotion = getPanelEmotion(currentPanelIndex);
+    if (emotion) {
+        playAudio(`./music/${emotion}.wav`);
+    } else {
+        stopAudio(); // Stop the audio if there's no emotion
+    }
+}
 
 function playAudio(audioFilePath) {
     var audioPlayer = document.getElementById('audioPlayer');
@@ -162,6 +164,7 @@ function playAudio(audioFilePath) {
         console.log(`No file for emotion: ${audioFilePath.split('/').pop().split('.')[0]}`);
     });
 }
+
 
 function stopAudio() {
     var audioPlayer = document.getElementById('audioPlayer');
