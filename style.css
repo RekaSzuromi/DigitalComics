@@ -74,16 +74,17 @@ body {
 }
 
 #cursorCircle {
-    width: 80px;  /* Diameter of the circle */
-    height: 80px;  /* Diameter of the circle */
+    width: 60px;  /* Diameter of the circle */
+    height: 60px;  /* Diameter of the circle */
     border-radius: 50%;  /* Makes the div a circle */
-    background-image: radial-gradient(circle, rgba(255, 255, 0, 0.8) 80%, rgba(255, 255, 255, 0.01) 100%);  /* Yellow gradient background */
+    background-image: radial-gradient(circle at center, rgba(255, 255, 0, 0.8) 30%, rgba(255, 255, 0, 0.01) 100%);  /* Yellow gradient background */
     position: absolute;
     pointer-events: none;  /* Ensures the circle doesn't interfere with clicking */
     z-index: 10000;  /* Ensures the circle appears above other elements */
-    /*opacity: 0.75;   Makes the circle slightly transparent */
+    opacity: 0.75;  /* Makes the circle slightly transparent */
     transform: translate(-50%, -50%);  /* Centers the circle on the cursor */
     visibility: hidden;  /* Initially hidden, shown via JavaScript when moving */
 }
+
 
 
