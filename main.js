@@ -52,30 +52,31 @@ function comicButtonClickHandler() {
     loadComicData(comicName);
 }
 
-async function loadComicData(comicName) {
-    stopAudio();  // Ensure any currently playing audio is stopped before loading new comic
+function loadComicData(comicName) {
+    stopAudio();  // Stop any playing audio first
+
     currentPanelUrl = `./${comicName}_panel_data.json`;
     currentImagePath = `./${comicName}_pages/`;
     let emotionAssociationsUrl = `./${comicName}_emotion_associations.json`;
 
-    try {
-        const [dataResponse, associationsResponse] = await Promise.all([
-            fetch(currentPanelUrl),
-            fetch(emotionAssociationsUrl)
-        ]);
-        panelData = await dataResponse.json();
-        emotionAssociations = await associationsResponse.json();
-
-        currentPanelIndex = 0;  // Reset index when loading new comic data
-        if (panelData.length > 0) { // Check if panel data is not empty
-            displayPanel(currentPanelIndex);  // Display the first panel initially
-        }
-        handleAudioForCurrentPanel();  // Handle audio after the first panel is displayed
+    Promise.all([
+        fetch(currentPanelUrl).then(response => response.json()),
+        fetch(emotionAssociationsUrl).then(response => response.json())
+    ])
+    .then(([data, associations]) => {
+        panelData = data;
+        emotionAssociations = associations;
+        
+        currentPanelIndex = 0; // Reset index when loading new comic data
+        displayPanel(currentPanelIndex);  // Call displayPanel once data is confirmed loaded
+        handleAudioForCurrentPanel(); // Handle audio for the displayed panel
         document.getElementById('downloadButton').style.display = 'block';
-    } catch (error) {
+    })
+    .catch(error => {
         console.error('Error fetching data:', error);
-    }
+    });
 }
+
 
 function displayPanel(index) {
     console.log("Displaying panel at index:", index);  // Helps identify multiple calls
@@ -157,7 +158,7 @@ function navigate(direction) {
     if (currentPanelIndex >= panelData.length) currentPanelIndex = 0;
     if (currentPanelIndex < 0) currentPanelIndex = panelData.length - 1;
 
-    //displayPanel(currentPanelIndex);
+    displayPanel(currentPanelIndex);
     handleAudioForCurrentPanel();
 }
 
