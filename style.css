@@ -81,7 +81,7 @@ body {
     position: absolute;
     pointer-events: none;  /* Ensures the circle doesn't interfere with clicking */
     z-index: 10000;  /* Ensures the circle appears above other elements */
-    opacity: 0.75;  /* Makes the circle slightly transparent */
+    /*opacity: 0.75;   Makes the circle slightly transparent */
     transform: translate(-50%, -50%);  /* Centers the circle on the cursor */
     visibility: hidden;  /* Initially hidden, shown via JavaScript when moving */
 }
