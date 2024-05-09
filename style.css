@@ -43,6 +43,10 @@ button {
     top: 50%;
     transform: translateY(-50%);
     z-index: 1000;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px 10px;
 }
 
 #prev {
