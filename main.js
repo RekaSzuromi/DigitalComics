@@ -35,15 +35,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const comicButtons = document.querySelectorAll('.button-container button');
     comicButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            var comicName = this.textContent.toLowerCase().replace(/\s/g, ''); // Convert to lower case and remove spaces
-            loadComicData(comicName);
-        });
+        button.removeEventListener('click', handleComicButtonClick);  // Unbind first to avoid multiple bindings
+        button.addEventListener('click', handleComicButtonClick);
     });
 });
 
+function handleComicButtonClick() {
+    var comicName = this.textContent.toLowerCase().replace(/\s/g, ''); // Convert to lower case and remove spaces
+    loadComicData(comicName);
+}
+
+
 async function loadComicData(comicName) {
-    stopAudio(); // Ensure any currently playing audio is stopped before loading new comic
+    stopAudio();  // Ensure any currently playing audio is stopped before loading new comic
     currentPanelUrl = `./${comicName}_panel_data.json`;
     currentImagePath = `./${comicName}_pages/`;
     let emotionAssociationsUrl = `./${comicName}_emotion_associations.json`;
@@ -55,10 +59,12 @@ async function loadComicData(comicName) {
         ]);
         panelData = await dataResponse.json();
         emotionAssociations = await associationsResponse.json();
-        
-        currentPanelIndex = 0; // Reset index when loading new comic data
-        displayPanel(currentPanelIndex); // Display the first panel initially
-        handleAudioForCurrentPanel(); // Handle audio after the first panel is displayed
+
+        currentPanelIndex = 0;  // Reset index when loading new comic data
+        if (panelData.length > 0) { // Check if panel data is not empty
+            displayPanel(currentPanelIndex);  // Display the first panel initially
+        }
+        handleAudioForCurrentPanel();  // Handle audio after the first panel is displayed
         document.getElementById('downloadButton').style.display = 'block';
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -66,24 +72,35 @@ async function loadComicData(comicName) {
 }
 
 function displayPanel(index) {
+    console.log("Displaying panel at index:", index);  // Log when and which panel is displayed
+
     const panel = panelData[index];
+    if (!panel) {
+        console.error("No panel data available");
+        return;
+    }
+
     const container = document.getElementById('panelDisplayContainer');
-    container.innerHTML = ''; // Clear previous content to ensure no duplication
+    container.innerHTML = '';  // Clear previous content to ensure no duplication
 
     let canvas = document.createElement('canvas');
     let ctx = canvas.getContext('2d');
     let image = new Image();
+
     image.onload = () => {
         let vertices = formatVertices(panel['Panel Region Vertices']);
         drawPanel(ctx, canvas, image, vertices, vertices.length === 2);
         container.appendChild(canvas);
         updateBackgroundColor(panel.ID);
     };
+    
     image.onerror = () => {
         console.error("Failed to load image at " + image.src);
     };
+
     image.src = `${currentImagePath}page-${panel['Page Number']}.jpg`;
 }
+
 
 function updateBackgroundColor(panelId) {
     const associatedEmotions = emotionAssociations.filter(e => e.panelId === panelId);
