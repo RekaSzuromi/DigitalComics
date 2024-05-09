@@ -72,4 +72,18 @@ body {
         background: radial-gradient(circle at center, transparent 30%, var(--emotion-color) 100%);
         transition: background-color 0.3s; /* Smooth transition for color change */
 }
+
+#cursorCircle {
+    width: 20px;  /* Diameter of the circle */
+    height: 20px;  /* Diameter of the circle */
+    border-radius: 50%;  /* Makes the div a circle */
+    background-color: yellow;  /* Yellow background */
+    position: absolute;
+    pointer-events: none;  /* Ensures the circle doesn't interfere with clicking */
+    z-index: 10000;  /* Ensures the circle appears above other elements */
+    opacity: 0.75;  /* Makes the circle slightly transparent */
+    transform: translate(-50%, -50%);  /* Centers the circle on the cursor */
+    visibility: hidden;  /* Initially hidden, shown via JavaScript when moving */
+}
+
     

@@ -32,6 +32,13 @@ document.addEventListener('DOMContentLoaded', function() {
     setupNavigation();
 });
 
+document.addEventListener('mousemove', function(e) {
+    var circle = document.getElementById('cursorCircle');
+    circle.style.left = e.clientX + 'px';
+    circle.style.top = e.clientY + 'px';
+    circle.style.visibility = 'visible';  // Make sure the circle is visible when moving
+});
+
 function setupNavigation() {
     document.getElementById('downloadButton').style.display = 'none';
     document.getElementById('next').addEventListener('click', () => navigate(1));
