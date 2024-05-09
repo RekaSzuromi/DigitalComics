@@ -72,7 +72,6 @@ function loadComicData(comicName) {
 
 
 function displayPanel(index) {
-
     const panel = panelData[index];
     if (!panel) {
         console.error("No panel data available");
@@ -80,7 +79,7 @@ function displayPanel(index) {
     }
 
     const container = document.getElementById('panelDisplayContainer');
-    container.innerHTML = '';  // Clear previous content to ensure no duplication
+    container.innerHTML = '';  // Clear previous content
 
     let canvas = document.createElement('canvas');
     let ctx = canvas.getContext('2d');
@@ -91,15 +90,12 @@ function displayPanel(index) {
         drawPanel(ctx, canvas, image, vertices, vertices.length === 2);
         container.appendChild(canvas);
         updateBackgroundColor(panel.ID);
-    };
-    
-    image.onerror = () => {
-        console.error("Failed to load image at " + image.src);
+        const valence = getPanelValence(index);  // Retrieve the valence for the current panel
+        updateCursorCircle(valence);  // Update the cursor based on the valence
     };
 
     image.src = `${currentImagePath}page-${panel['Page Number']}.jpg`;
 }
-
 
 
 function updateBackgroundColor(panelId) {
@@ -164,6 +160,47 @@ function getPanelEmotion(panelIndex) {
     }
     return null; // Return null if no valid emotion is found
 }
+
+function getPanelValence(panelIndex) {
+    const panelId = panelData[panelIndex].ID;
+    const associatedValences = emotionAssociations.filter(e => e.panelId === panelId);
+    for (let valence of associatedValences) {
+        const match = valence.taxonomyPath.match(/Valence \/ (.+)/);
+        if (match) {
+            return match[1].trim(); // Return the matched valence
+        }
+    }
+    return null; // Return null if no valid valence is found
+}
+
+function updateCursorCircle(valence) {
+    const cursorCircle = document.getElementById('cursorCircle');
+    switch (valence) {
+        case 'Negative':
+            cursorCircle.style.backgroundImage = "radial-gradient(circle at center, rgba(115, 105, 105, 0.418) 0%, rgba(255, 255, 0, 0.01) 40%)";
+            cursorCircle.style.visibility = 'visible';
+            break;
+        case 'Slightly Negative':
+            cursorCircle.style.backgroundImage = "radial-gradient(circle at center, rgba(207, 200, 200, 0.418) 0%, rgba(255, 255, 0, 0.01) 40%)";
+            cursorCircle.style.visibility = 'visible';
+            break;
+        case 'Neutral':
+            cursorCircle.style.visibility = 'hidden';
+            break;
+        case 'Slightly Positive':
+            cursorCircle.style.backgroundImage = "radial-gradient(circle at center, rgba(214, 250, 53, 0.418) 0%, rgba(255, 255, 0, 0.01) 40%)";
+            cursorCircle.style.visibility = 'visible';
+            break;
+        case 'Positive':
+            cursorCircle.style.backgroundImage = "radial-gradient(circle at center, rgba(255, 255, 0, 0.418) 0%, rgba(255, 255, 0, 0.01) 40%)";
+            cursorCircle.style.visibility = 'visible';
+            break;
+        default:
+            cursorCircle.style.visibility = 'hidden';
+            break;
+    }
+}
+
 
 function handleAudioForCurrentPanel() {
     const emotion = getPanelEmotion(currentPanelIndex);
