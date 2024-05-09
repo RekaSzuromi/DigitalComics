@@ -39,19 +39,6 @@ function setupNavigation() {
     document.getElementById('prev').addEventListener('click', () => navigate(-1));
 }
 
-function setupComicButtons() {
-    const comicButtons = document.querySelectorAll('.button-container button');
-    comicButtons.forEach(button => {
-        button.removeEventListener('click', comicButtonClickHandler);
-        button.addEventListener('click', comicButtonClickHandler);
-    });
-}
-
-function comicButtonClickHandler() {
-    var comicName = this.textContent.toLowerCase().replace(/\s/g, ''); // Convert to lower case and remove spaces
-    loadComicData(comicName);
-}
-
 function loadComicData(comicName) {
     stopAudio();  // Stop any playing audio first
 
