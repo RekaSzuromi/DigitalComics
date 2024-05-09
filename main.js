@@ -33,55 +33,54 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('next').addEventListener('click', () => navigate(1));
     document.getElementById('prev').addEventListener('click', () => navigate(-1));
 
-    // Modify the way comic data is loaded based on button text
     const comicButtons = document.querySelectorAll('.button-container button');
     comicButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Modify the text to fit the file naming convention
             var comicName = this.textContent.toLowerCase().replace(/\s/g, ''); // Convert to lower case and remove spaces
             loadComicData(comicName);
         });
     });
 });
 
-function loadComicData(comicName) {
+async function loadComicData(comicName) {
     currentPanelUrl = `./${comicName}_panel_data.json`;
     currentImagePath = `./${comicName}_pages/`;
     let emotionAssociationsUrl = `./${comicName}_emotion_associations.json`;
 
-    Promise.all([
-        fetch(currentPanelUrl).then(response => response.json()),
-        fetch(emotionAssociationsUrl).then(response => response.json())
-    ]).then(([data, associations]) => {
-        panelData = data;
-        emotionAssociations = associations;
+    try {
+        const [dataResponse, associationsResponse] = await Promise.all([
+            fetch(currentPanelUrl),
+            fetch(emotionAssociationsUrl)
+        ]);
+        panelData = await dataResponse.json();
+        emotionAssociations = await associationsResponse.json();
+        
         currentPanelIndex = 0; // Reset index when loading new comic data
         displayPanel(currentPanelIndex); // Display the first panel initially
         document.getElementById('downloadButton').style.display = 'block';
-
-        // Handle audio for the first panel of the new comic
-        handleAudioForCurrentPanel();
-    }).catch(error => {
+    } catch (error) {
         console.error('Error fetching data:', error);
-    });
+    }
 }
 
 function displayPanel(index) {
     const panel = panelData[index];
     const container = document.getElementById('panelDisplayContainer');
-    container.innerHTML = ''; // Clear previous content
+    container.innerHTML = ''; // Clear previous content to ensure no duplication
 
     let canvas = document.createElement('canvas');
     let ctx = canvas.getContext('2d');
     let image = new Image();
-    image.src = `${currentImagePath}page-${panel['Page Number']}.jpg`;
-
     image.onload = () => {
         let vertices = formatVertices(panel['Panel Region Vertices']);
         drawPanel(ctx, canvas, image, vertices, vertices.length === 2);
         container.appendChild(canvas);
         updateBackgroundColor(panel.ID);
     };
+    image.onerror = () => {
+        console.error("Failed to load image at " + image.src);
+    };
+    image.src = `${currentImagePath}page-${panel['Page Number']}.jpg`;
 }
 
 function updateBackgroundColor(panelId) {
