@@ -30,7 +30,6 @@ let currentPanelIndex = 0; // Initialize currentPanelIndex
 
 document.addEventListener('DOMContentLoaded', function() {
     setupNavigation();
-    setupComicButtons();
 });
 
 function setupNavigation() {
