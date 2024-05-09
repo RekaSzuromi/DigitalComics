@@ -77,7 +77,7 @@ body {
     width: 60px;  /* Diameter of the circle */
     height: 60px;  /* Diameter of the circle */
     border-radius: 50%;  /* Makes the div a circle */
-    background-image: radial-gradient(circle at center, rgba(255, 255, 0, 0.8) 80%, rgba(255, 255, 0, 0.01) 100%);  /* Yellow gradient background */
+    background-image: radial-gradient(circle at center, rgba(255, 255, 0, 0.8) 0%, rgba(255, 255, 0, 0.01) 70%);  /* Yellow gradient background */
     position: absolute;
     pointer-events: none;  /* Ensures the circle doesn't interfere with clicking */
     z-index: 10000;  /* Ensures the circle appears above other elements */
