@@ -33,11 +33,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('next').addEventListener('click', () => navigate(1));
     document.getElementById('prev').addEventListener('click', () => navigate(-1));
 
-    // Add audio playback control for comic buttons
+    // Modify the way comic data is loaded based on button text
     const comicButtons = document.querySelectorAll('.button-container button');
     comicButtons.forEach(button => {
         button.addEventListener('click', function() {
-            loadComicData(this.textContent.trim()); // Assuming button text is the comic name
+            // Modify the text to fit the file naming convention
+            var comicName = this.textContent.toLowerCase().replace(/\s/g, ''); // Convert to lower case and remove spaces
+            loadComicData(comicName);
         });
     });
 });
