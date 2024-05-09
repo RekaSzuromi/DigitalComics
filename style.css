@@ -74,8 +74,8 @@ body {
 }
 
 #cursorCircle {
-    width: 80px;  /* Diameter of the circle */
-    height: 80px;  /* Diameter of the circle */
+    width: 120px;  /* Diameter of the circle */
+    height: 120px;  /* Diameter of the circle */
     border-radius: 50%;  /* Makes the div a circle */
     background-image: radial-gradient(circle at center, rgba(255, 255, 0, 0.418) 0%, rgba(255, 255, 0, 0.01) 40%);  /* Yellow gradient background */
     position: absolute;
