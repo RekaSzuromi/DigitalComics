@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function loadComicData(comicName) {
+    stopAudio(); // Ensure any currently playing audio is stopped before loading new comic
     currentPanelUrl = `./${comicName}_panel_data.json`;
     currentImagePath = `./${comicName}_pages/`;
     let emotionAssociationsUrl = `./${comicName}_emotion_associations.json`;
@@ -57,6 +58,7 @@ async function loadComicData(comicName) {
         
         currentPanelIndex = 0; // Reset index when loading new comic data
         displayPanel(currentPanelIndex); // Display the first panel initially
+        handleAudioForCurrentPanel(); // Handle audio after the first panel is displayed
         document.getElementById('downloadButton').style.display = 'block';
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -123,15 +125,15 @@ function drawPanel(ctx, canvas, image, vertices, isRectangle) {
 }
 
 function navigate(direction) {
+    stopAudio(); // Ensure to stop current audio when navigating panels
     currentPanelIndex += direction;
     if (currentPanelIndex >= panelData.length) currentPanelIndex = 0;
     if (currentPanelIndex < 0) currentPanelIndex = panelData.length - 1;
 
     displayPanel(currentPanelIndex);
-
-    // Play emotion-specific audio based on the current panel
     handleAudioForCurrentPanel();
 }
+
 
 
 function getPanelEmotion(panelIndex) {
