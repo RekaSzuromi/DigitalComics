@@ -143,8 +143,10 @@ body {
     visibility: hidden;  /* Initially hidden, shown via JavaScript when moving */
 }
 
+/*
 body #downloadButton {
     display: none !important;
 }
+*/
 
 

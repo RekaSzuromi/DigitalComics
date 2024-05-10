@@ -32,7 +32,7 @@ let currentValence = 'Neutral'; // Default valence
 
 document.addEventListener('DOMContentLoaded', function() {
     setupNavigation();
-    document.getElementById('downloadButton').style.display = 'none';  // Ensure button is hidden on load
+    //document.getElementById('downloadButton').style.display = 'none';  // Ensure button is hidden on load
 
     document.getElementById('backButton').addEventListener('click', function() {
         // Hide comic navigation and content elements
