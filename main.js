@@ -32,6 +32,7 @@ let currentValence = 'Neutral'; // Default valence
 
 document.addEventListener('DOMContentLoaded', function() {
     setupNavigation();
+    document.getElementById('downloadButton').style.display = 'none';  // Ensure button is hidden on load
 });
 
 document.addEventListener('mousemove', function(e) {

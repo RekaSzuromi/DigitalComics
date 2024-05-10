@@ -86,9 +86,8 @@ body {
     visibility: hidden;  /* Initially hidden, shown via JavaScript when moving */
 }
 
-#downloadButton {
-    display: none;
+body #downloadButton {
+    display: none !important;
 }
-
 
 
