@@ -35,6 +35,16 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('downloadButton').style.display = 'none';  // Ensure button is hidden on load
 });
 
+document.getElementById('backButton').addEventListener('click', function() {
+    document.querySelector('.button-container').style.display = 'flex'; // Restore comic buttons
+    document.querySelector('h1').style.display = 'block'; // Show title
+    document.querySelector('p').style.display = 'block'; // Show subtitle
+    document.getElementById('panelDisplayContainer').innerHTML = ''; // Clear the panel display
+    document.getElementById('prev').style.display = 'none'; // Hide navigation buttons
+    document.getElementById('next').style.display = 'none'; // Hide navigation buttons
+    this.style.display = 'none'; // Hide back button
+});
+
 document.addEventListener('mousemove', function(e) {
     var circle = document.getElementById('cursorCircle');
     circle.style.left = e.clientX + 'px';
@@ -70,6 +80,11 @@ function loadComicData(comicName) {
         handleAudioForCurrentPanel(); // Handle audio for the displayed panel
         document.getElementById('downloadButton').style.display = 'block';
         showNavigationButtons(); // Show navigation buttons
+        document.querySelector('.button-container').style.display = 'none';
+        document.querySelector('h1').style.display = 'none';
+        document.querySelector('p').style.display = 'none';
+        document.getElementById('backButton').style.display = 'block'; // Show back button
+
     })
     .catch(error => {
         console.error('Error fetching data:', error);
