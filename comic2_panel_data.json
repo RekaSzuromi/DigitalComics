@@ -1,14 +1,18 @@
 [
-    
     {
-        "ID": 2,
+        "ID": 1,
         "Page Number": 5,
         "Panel Region Vertices": "(115,365), (1013,989)"
     },
     {
-        "ID": 3,
+        "ID": 2,
         "Page Number": 5,
         "Panel Region Vertices": "(114,1018), (1014,1419)"
+    },
+    {
+        "ID": 3,
+        "Page Number": 5,
+        "Panel Region Vertices": "(114,117), (1014,337)"
     },
     {
         "ID": 4,
@@ -23,27 +27,27 @@
     {
         "ID": 6,
         "Page Number": 6,
-        "Panel Region Vertices": "(395,833), (739,1412)"
+        "Panel Region Vertices": "(762,833), (996,1414)"
     },
     {
         "ID": 7,
         "Page Number": 6,
-        "Panel Region Vertices": "(762,833), (996,1414)"
+        "Panel Region Vertices": "(395,833), (739,1412)"
     },
     {
         "ID": 8,
         "Page Number": 7,
-        "Panel Region Vertices": "(117,118), (1013,579)"
+        "Panel Region Vertices": "(579,601), (1012,988)"
     },
     {
         "ID": 9,
         "Page Number": 7,
-        "Panel Region Vertices": "(117,600), (557,988)"
+        "Panel Region Vertices": "(117,118), (1013,579)"
     },
     {
         "ID": 10,
         "Page Number": 7,
-        "Panel Region Vertices": "(579,601), (1012,988)"
+        "Panel Region Vertices": "(117,600), (557,988)"
     },
     {
         "ID": 11,
@@ -53,12 +57,12 @@
     {
         "ID": 12,
         "Page Number": 8,
-        "Panel Region Vertices": "(201,118), (914,446)"
+        "Panel Region Vertices": "(201,465), (913,680)"
     },
     {
         "ID": 13,
         "Page Number": 8,
-        "Panel Region Vertices": "(201,465), (913,680)"
+        "Panel Region Vertices": "(201,118), (914,446)"
     },
     {
         "ID": 14,
@@ -68,12 +72,12 @@
     {
         "ID": 15,
         "Page Number": 9,
-        "Panel Region Vertices": "(116,117), (1005,424)"
+        "Panel Region Vertices": "(116,1111), (1004,1415)"
     },
     {
         "ID": 16,
         "Page Number": 9,
-        "Panel Region Vertices": "(116,451), (1005,753)"
+        "Panel Region Vertices": "(116,117), (1005,424)"
     },
     {
         "ID": 17,
@@ -83,7 +87,7 @@
     {
         "ID": 18,
         "Page Number": 9,
-        "Panel Region Vertices": "(116,1111), (1004,1415)"
+        "Panel Region Vertices": "(116,451), (1005,753)"
     },
     {
         "ID": 19,
@@ -103,42 +107,42 @@
     {
         "ID": 22,
         "Page Number": 10,
-        "Panel Region Vertices": "(108,1037), (551,1413)"
+        "Panel Region Vertices": "(568,1039), (1011,1415)"
     },
     {
         "ID": 23,
         "Page Number": 10,
-        "Panel Region Vertices": "(568,1039), (1011,1415)"
+        "Panel Region Vertices": "(108,1037), (551,1413)"
     },
     {
         "ID": 24,
         "Page Number": 11,
-        "Panel Region Vertices": "(0,0), (1122,773)"
+        "Panel Region Vertices": "(561,807), (1019,1068)"
     },
     {
         "ID": 25,
         "Page Number": 11,
-        "Panel Region Vertices": "(43,801), (547,1411)"
+        "Panel Region Vertices": "(561,1088), (1019,1411)"
     },
     {
         "ID": 26,
         "Page Number": 11,
-        "Panel Region Vertices": "(561,807), (1019,1068)"
+        "Panel Region Vertices": "(43,801), (547,1411)"
     },
     {
         "ID": 27,
         "Page Number": 11,
-        "Panel Region Vertices": "(561,1088), (1019,1411)"
+        "Panel Region Vertices": "(0,0), (1122,773)"
     },
     {
         "ID": 28,
         "Page Number": 12,
-        "Panel Region Vertices": "(116,108), (348,571)"
+        "Panel Region Vertices": "(372,111), (1007,572)"
     },
     {
         "ID": 29,
         "Page Number": 12,
-        "Panel Region Vertices": "(372,111), (1007,572)"
+        "Panel Region Vertices": "(48,977), (1091,1487)"
     },
     {
         "ID": 30,
@@ -153,22 +157,22 @@
     {
         "ID": 32,
         "Page Number": 12,
-        "Panel Region Vertices": "(48,977), (1091,1487)"
+        "Panel Region Vertices": "(116,108), (348,571)"
     },
     {
         "ID": 33,
         "Page Number": 13,
-        "Panel Region Vertices": "(0,0), (1122,544)"
+        "Panel Region Vertices": "(731,960), (727,569), (1009,567), (1012,948)"
     },
     {
         "ID": 34,
         "Page Number": 13,
-        "Panel Region Vertices": "(117,568), (705,565), (703,963), (116,991)"
+        "Panel Region Vertices": "(0,0), (1122,544)"
     },
     {
         "ID": 35,
         "Page Number": 13,
-        "Panel Region Vertices": "(731,960), (727,569), (1009,567), (1012,948)"
+        "Panel Region Vertices": "(784,989), (1013,981), (1013,1418), (784,1417)"
     },
     {
         "ID": 36,
@@ -178,32 +182,32 @@
     {
         "ID": 37,
         "Page Number": 13,
-        "Panel Region Vertices": "(423,1009), (757,993), (760,1417), (423,1415)"
+        "Panel Region Vertices": "(117,568), (705,565), (703,963), (116,991)"
     },
     {
         "ID": 38,
         "Page Number": 13,
-        "Panel Region Vertices": "(784,989), (1013,981), (1013,1418), (784,1417)"
+        "Panel Region Vertices": "(423,1009), (757,993), (760,1417), (423,1415)"
     },
     {
         "ID": 39,
         "Page Number": 14,
-        "Panel Region Vertices": "(116,112), (1016,620)"
+        "Panel Region Vertices": "(113,640), (641,1012)"
     },
     {
         "ID": 40,
         "Page Number": 14,
-        "Panel Region Vertices": "(113,640), (641,1012)"
+        "Panel Region Vertices": "(663,641), (1013,1015)"
     },
     {
         "ID": 41,
         "Page Number": 14,
-        "Panel Region Vertices": "(663,641), (1013,1015)"
+        "Panel Region Vertices": "(516,1037), (405,1535), (0,1535), (0,1033)"
     },
     {
         "ID": 42,
         "Page Number": 14,
-        "Panel Region Vertices": "(516,1037), (405,1535), (0,1535), (0,1033)"
+        "Panel Region Vertices": "(116,112), (1016,620)"
     },
     {
         "ID": 43,
@@ -228,22 +232,106 @@
     {
         "ID": 47,
         "Page Number": 15,
-        "Panel Region Vertices": "(142,961), (479,945), (621,936), (676,938), (674,1417), (143,1416)"
+        "Panel Region Vertices": "(701,955), (769,952), (944,946), (947,1467), (701,1467)"
     },
     {
         "ID": 48,
         "Page Number": 15,
-        "Panel Region Vertices": "(701,955), (769,952), (944,946), (947,1467), (701,1467)"
+        "Panel Region Vertices": "(142,961), (479,945), (621,936), (676,938), (674,1417), (143,1416)"
     },
     {
         "ID": 49,
         "Page Number": 16,
-        "Panel Region Vertices": "(112,74), (639,449)"
+        "Panel Region Vertices": "(740,479), (995,786)"
     },
     {
         "ID": 50,
         "Page Number": 16,
         "Panel Region Vertices": "(686,115), (994,459)"
+    },
+    {
+        "ID": 51,
+        "Page Number": 16,
+        "Panel Region Vertices": "(127,480), (723,786)"
+    },
+    {
+        "ID": 52,
+        "Page Number": 16,
+        "Panel Region Vertices": "(94,817), (1030,1535)"
+    },
+    {
+        "ID": 53,
+        "Page Number": 16,
+        "Panel Region Vertices": "(112,74), (639,449)"
+    },
+    {
+        "ID": 54,
+        "Page Number": 17,
+        "Panel Region Vertices": "(115,119), (513,679)"
+    },
+    {
+        "ID": 55,
+        "Page Number": 17,
+        "Panel Region Vertices": "(535,122), (1008,680)"
+    },
+    {
+        "ID": 56,
+        "Page Number": 17,
+        "Panel Region Vertices": "(117,706), (391,1418)"
+    },
+    {
+        "ID": 57,
+        "Page Number": 17,
+        "Panel Region Vertices": "(418,708), (763,1419)"
+    },
+    {
+        "ID": 58,
+        "Page Number": 17,
+        "Panel Region Vertices": "(787,709), (1007,1419)"
+    },
+    {
+        "ID": 59,
+        "Page Number": 18,
+        "Panel Region Vertices": "(136,116), (983,458)"
+    },
+    {
+        "ID": 60,
+        "Page Number": 18,
+        "Panel Region Vertices": "(139,475), (982,479), (986,770), (944,772), (886,814), (138,816)"
+    },
+    {
+        "ID": 61,
+        "Page Number": 18,
+        "Panel Region Vertices": "(136,832), (966,1140)"
+    },
+    {
+        "ID": 62,
+        "Page Number": 18,
+        "Panel Region Vertices": "(615,1533), (626,1485), (639,1418), (632,1398), (627,1381), (639,1355), (615,1380), (596,1410), (571,1400), (551,1380), (498,1250), (488,1231), (435,1270), (461,1316), (427,1327), (363,1238), (390,1217), (415,1251), (485,1198), (500,1159), (541,1132), (558,1140), (618,1099), (613,1092), (605,1081), (597,1073), (591,1065), (581,1066), (573,1061), (576,1045), (580,1028), (571,1009), (565,991), (562,980), (550,983), (550,971), (542,965), (543,940), (556,927), (577,908), (605,899), (625,890), (656,894), (680,900), (693,901), (714,921), (721,944), (721,978), (716,1012), (723,1018), (789,968), (860,911), (875,892), (860,870), (845,850), (945,773), (1047,771), (1042,813), (1024,869), (939,951), (926,937), (895,920), (852,947), (728,1045), (736,1064), (773,1064), (774,1084), (812,1106), (836,1123), (862,1170), (878,1219), (890,1256), (905,1315), (905,1327), (895,1356), (890,1389), (873,1459), (877,1531)"
+    },
+    {
+        "ID": 63,
+        "Page Number": 19,
+        "Panel Region Vertices": "(116,117), (1009,849)"
+    },
+    {
+        "ID": 64,
+        "Page Number": 19,
+        "Panel Region Vertices": "(174,880), (968,1418)"
+    },
+    {
+        "ID": 65,
+        "Page Number": 20,
+        "Panel Region Vertices": "(116,117), (1013,518)"
+    },
+    {
+        "ID": 66,
+        "Page Number": 20,
+        "Panel Region Vertices": "(119,991), (1014,1419)"
+    },
+    {
+        "ID": 67,
+        "Page Number": 20,
+        "Panel Region Vertices": "(117,541), (1013,971)"
     }
-    
 ]
