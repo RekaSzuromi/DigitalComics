@@ -1,26 +1,3 @@
-const emotionColors = {
-    'Surprise': '#8F00FF',
-    'Excitement': '#FF0000',
-    'Amusement': '#FFFF00',
-    'Happiness': '#FFFD01',
-    'Neutral/None': '#808080',
-    'Wonder': '#87CEEB',
-    'Pride': '#9400D3',
-    'Fear': '#000000',
-    'Rejoicing': '#FFA500',
-    'Sadness': '#00008B',
-    'Shame': '#800000',
-    'Guilt': '#DC143C',
-    'Anger': '#FF0000',
-    'Relief': '#ADD8E6',
-    'Embarrassment': '#FFB6C1',
-    'Love': '#FF1493'
-};
-
-let currentPanelUrl = '';
-let currentEmotionUrl = '';
-let currentImagePath = '';
-
 document.addEventListener('DOMContentLoaded', function() {
     Promise.all([
         fetch('./panel_data.json').then(response => response.json()),
@@ -36,170 +13,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function loadComicData(comicName) {
-    let currentPanelUrl = `./${comicName}_panel_data.json`;
-    let currentEmotionUrl = `./${comicName}_emotion_data.json`;
-    let emotionAssociationsUrl = `./${comicName}_emotion_associations.json`; // URL for the associations JSON
-    let currentImagePath = `./${comicName}_pages/`;
-
-    Promise.all([
-        fetch(currentPanelUrl).then(response => response.json()),
-        fetch(currentEmotionUrl).then(response => response.json()),
-        fetch(emotionAssociationsUrl).then(response => response.json()) // Fetch the associations JSON
-    ]).then(([panelData, emotionData, emotionAssociations]) => {
-        clearExistingPanels();
-        loadPanels(panelData, currentImagePath, emotionAssociations); // Pass emotionAssociations to loadPanels
-        document.getElementById('downloadButton').style.display = 'block';
-    }).catch(error => {
-        console.error('Error fetching data for ' + comicName + ':', error);
-    });
-}
-
- /*
-
-function clearExistingPanels() {
-    const existingCanvas = document.querySelectorAll('canvas');
-    existingCanvas.forEach(canvas => canvas.parentNode.removeChild(canvas));
-
-    // Remove all existing taxonomy text divs
-    const existingTextDivs = document.querySelectorAll('.taxonomy-text');
-    existingTextDivs.forEach(div => div.parentNode.removeChild(div));
-}
-*/
-function clearExistingPanels() {
-    // Remove all existing containers, which includes panels and boxes
-    const existingContainers = document.querySelectorAll('.panel-container');
-    existingContainers.forEach(container => container.parentNode.removeChild(container));
-
-    // Remove all existing taxonomy text divs
-    const existingTextDivs = document.querySelectorAll('.taxonomy-text');
-    existingTextDivs.forEach(div => div.parentNode.removeChild(div));
-}
-
-
-
-function loadPanels(panelData, imagePath, emotionAssociations) {
-    panelData.sort((a, b) => parseInt(a.ID) - parseInt(b.ID));
-
+function loadPanels(panelData) {
     panelData.forEach(panel => {
-        const container = document.createElement('div');
-        container.className = 'panel-container';
-        document.body.appendChild(container);
-
-        const leftBox = createBox();
-        container.appendChild(leftBox);
-
         let canvas = document.createElement('canvas');
-        canvas.id = `panelCanvas-${panel.ID}`;
-        container.appendChild(canvas);
-
-        const rightBox = createBox();
-        container.appendChild(rightBox);
+        canvas.id = `panelCanvas-${panel.id}`;  // Assume 'id' is part of the panel data
+        canvas.style.marginBottom = "20px";  // Adds space between each canvas
+        document.body.appendChild(canvas);
 
         let ctx = canvas.getContext('2d');
         let image = new Image();
-        image.src = `${imagePath}page-${panel['Page Number']}.jpg`;
+        image.src = `pages/page-${panel['Page Number']}.jpg`;
         image.onload = () => {
             let vertices = formatVertices(panel['Panel Region Vertices']);
-            let isRectangle = vertices.length === 2;
-            drawPanel(ctx, canvas, image, vertices, isRectangle);
-
-            [leftBox, rightBox].forEach(box => {
-                box.style.height = `${canvas.height}px`; // Dynamically set the height
-            });
-
-            let associatedTexts = emotionAssociations.filter(assoc => parseInt(assoc.panelId) === parseInt(panel.ID));
-            if (associatedTexts.length > 0) {
-                let textContent = associatedTexts.map(assoc => assoc.taxonomyPath).join(', ');
-                displayTaxonomyPaths(textContent, container, leftBox, rightBox); // Pass boxes along with the container
-            }            
+            drawPanel(ctx, image, vertices, vertices.length === 2);
         };
     });
 }
-
-
-function createBox() {
-    const box = document.createElement('div');
-    box.className = 'box';
-    return box;
-}
-/*
-function adjustPanelAndBoxes(canvas, leftBox, rightBox, image) {
-    const viewportHeight = window.innerHeight;
-    const panelHeight = viewportHeight * 0.7;
-    const boxWidth = window.innerWidth * 0.1;
-
-    canvas.style.height = `${panelHeight}px`;
-    canvas.style.width = `${window.innerWidth * 0.8}px`; // Assume canvas takes 80% of viewport width
-    canvas.height = panelHeight;
-    canvas.width = window.innerWidth * 0.8;
-
-    [leftBox, rightBox].forEach(box => {
-        box.style.width = `${boxWidth}px`;
-        box.style.height = `${panelHeight}px`;
-        box.style.backgroundColor = 'red';
-    });
-}
-*/
-
-
-
-function displayTaxonomyPaths(text, parentContainer, leftBox, rightBox) {
-    if (!text) return; // No text to display if empty
-
-    // Define the regex pattern to match the specified taxonomy path formats
-    const regex = /VLT: Semantics: Emotion \(v\.\d\) \/ (Valence|Emotion) \/ (.*)/;
-
-    // Split the text into individual taxonomy paths and filter them
-    let filteredTexts = text.split(', ').filter(path => regex.test(path));
-    let displayedText = filteredTexts.join(', '); // Join the filtered texts for display
-
-    // Create and append the text div if there is any filtered text
-    if (displayedText.length > 0) {
-        let textDiv = document.createElement('div');
-        textDiv.className = 'taxonomy-text';
-        textDiv.textContent = displayedText; // Display the filtered taxonomy text
-        textDiv.style.width = "100%";
-        textDiv.style.textAlign = "center";
-        textDiv.style.marginTop = "10px";
-        textDiv.style.marginBottom = "20px";
-        parentContainer.after(textDiv); 
-    }
-
-    // Process each filtered text to determine the color of the boxes
-    let colors = filteredTexts.map(text => {
-        let match = text.match(regex);
-        return match && match[2] ? emotionColors[match[2].trim()] || 'transparent' : 'transparent';
-    });
-
-    // Determine the most frequent color to set, or default to transparent if none found
-    let color = colors.length ? mostFrequentColor(colors) : 'transparent';
-    leftBox.style.backgroundColor = color;
-    rightBox.style.backgroundColor = color;
-}
-
-// Helper function to find the most frequent color in an array
-function mostFrequentColor(colors) {
-    let frequency = {};
-    let maxFreq = 0;
-    let mostFrequent = 'transparent';
-
-    colors.forEach(color => {
-        if (frequency[color]) {
-            frequency[color]++;
-        } else {
-            frequency[color] = 1;
-        }
-
-        if (frequency[color] > maxFreq) {
-            maxFreq = frequency[color];
-            mostFrequent = color;
-        }
-    });
-
-    return mostFrequent;
-}
-
 
 function createAssociations(panelData, emotionData) {
     let allEmotionAssociations = [];
@@ -269,7 +98,7 @@ function downloadJSON(data, filename) {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
-/*
+
 function drawPanel(ctx, image, vertices, isRectangle) {
     let minX = Math.min(...vertices.map(v => v.x)),
         maxX = Math.max(...vertices.map(v => v.x)),
@@ -290,32 +119,6 @@ function drawPanel(ctx, image, vertices, isRectangle) {
     ctx.clip();
     ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, maxX - minX, maxY - minY);
 }
-*/
-function drawPanel(ctx, canvas, image, vertices, isRectangle) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Setup path for clipping
-    ctx.beginPath();
-    ctx.moveTo(vertices[0].x - vertices[0].x, vertices[0].y - vertices[0].y); // Normalize to start at (0,0)
-    vertices.forEach((vertex, index) => {
-        ctx.lineTo(vertex.x - vertices[0].x, vertex.y - vertices[0].y);
-    });
-    ctx.closePath();
-    if (!isRectangle) {
-        ctx.clip(); // Apply clipping path only if it's not a rectangle
-    }
-
-    // Adjust canvas size to fit the clipped region
-    let minX = Math.min(...vertices.map(v => v.x));
-    let maxX = Math.max(...vertices.map(v => v.x));
-    let minY = Math.min(...vertices.map(v => v.y));
-    let maxY = Math.max(...vertices.map(v => v.y));
-    canvas.width = maxX - minX;
-    canvas.height = maxY - minY;
-    ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, canvas.width, canvas.height);
-}
-
-
 
 function pointInPolygon(point, polygon) {
     var x = point.x, y = point.y;
