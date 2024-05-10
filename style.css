@@ -52,7 +52,7 @@ p {
     flex-grow: 1;  /* Allows the paragraph to take available space */
     padding: 0 10px;  /* Padding inside the card for text */
     overflow: auto;  /* Enables scrolling if content overflows */
-    font-size: 19px;
+    font-size: 17px;
 }
 
 .card button {
