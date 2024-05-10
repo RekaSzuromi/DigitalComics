@@ -68,10 +68,16 @@ function loadComicData(comicName) {
         displayPanel(currentPanelIndex);  // Call displayPanel once data is confirmed loaded
         handleAudioForCurrentPanel(); // Handle audio for the displayed panel
         document.getElementById('downloadButton').style.display = 'block';
+        showNavigationButtons(); // Show navigation buttons
     })
     .catch(error => {
         console.error('Error fetching data:', error);
     });
+}
+
+function showNavigationButtons() {
+    document.getElementById('prev').style.display = 'inline-block';  // Show the previous button
+    document.getElementById('next').style.display = 'inline-block';  // Show the next button
 }
 
 

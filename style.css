@@ -40,6 +40,7 @@ button {
 
 
 #prev, #next {
+    display: none; 
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
