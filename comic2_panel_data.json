@@ -1,5 +1,10 @@
 [
     {
+        "ID": 1,
+        "Page Number": 5,
+        "Panel Region Vertices": "(114,117), (1014,337)"
+    },
+    {
         "ID": 2,
         "Page Number": 5,
         "Panel Region Vertices": "(115,365), (1013,989)"
@@ -8,11 +13,6 @@
         "ID": 3,
         "Page Number": 5,
         "Panel Region Vertices": "(114,1018), (1014,1419)"
-    },
-    {
-        "ID": 1,
-        "Page Number": 5,
-        "Panel Region Vertices": "(114,117), (1014,337)"
     },
     {
         "ID": 4,
