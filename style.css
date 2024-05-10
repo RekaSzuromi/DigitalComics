@@ -22,6 +22,7 @@ p {
 
 .card {
     width: 300px;  /* Adjust width as needed */
+    height: 500px;  /* Fixed height for all cards */
     margin: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Subtle shadow */
     border-radius: 10px;  /* Rounded corners */
@@ -35,9 +36,8 @@ p {
 
 .card img {
     width: 100%;  /* Make the image cover the card width */
-    height: auto;  /* Maintain aspect ratio */
-    border-top-left-radius: 10px;  /* Round the top corners */
-    border-top-right-radius: 10px;
+    height: 40%;  /* Fixed height for all images */
+    object-fit: cover;  /* Ensures the image covers the area without distorting */
 }
 
 .card h2 {
@@ -46,6 +46,28 @@ p {
 
 .card p {
     padding: 0 10px;  /* Padding inside the card for text */
+    overflow: hidden;  /* Prevents text overflow */
+    text-overflow: ellipsis;  /* Adds ellipsis (...) if text is too long */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;  /* Number of lines allowed */
+    -webkit-box-orient: vertical;
+}
+
+.card button {
+    margin-top: auto;  /* Pushes the button to the bottom of the card */
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF;  /* Modern blue color */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;  /* Smooth transitions for hover effects */
+}
+
+.card button:hover {
+    background-color: #0056b3;  /* Darker shade of button color on hover */
+    transform: translateY(-3px);  /* Slight raise effect on hover */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);  /* Shadow for depth */
 }
 
 .button-container {
