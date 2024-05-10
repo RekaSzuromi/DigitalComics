@@ -45,14 +45,14 @@ p {
 .card h2 {
     margin-top: 10px;
     margin-bottom: 5px;
-    font-size: 2em;
+    font-size: 28px;
 }
 
 .card p {
     flex-grow: 1;  /* Allows the paragraph to take available space */
     padding: 0 10px;  /* Padding inside the card for text */
     overflow: auto;  /* Enables scrolling if content overflows */
-    font-size: 1em;
+    font-size: 19px;
 }
 
 .card button {
