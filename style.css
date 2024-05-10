@@ -37,9 +37,10 @@ p {
 
 .card img {
     width: 100%;  /* Make the image cover the card width */
-    height: 30%;  /* Adjusted height for images */
+    height: 40%;  /* Adjusted height for images */
     object-fit: cover;  /* Ensures the image covers the area without distorting */
 }
+
 
 .card h2 {
     margin-top: 10px;
@@ -66,7 +67,7 @@ p {
 
 .card button:hover {
     background-color: #f8f9fa;  /* Slightly grey background on hover */
-    color: #007BFF;  /* Change text color on hover for visual feedback */
+    color: #001e3f;  /* Change text color on hover for visual feedback */
 }
 
 .button-container {
