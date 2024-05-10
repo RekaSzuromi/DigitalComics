@@ -84,7 +84,13 @@ function loadComicData(comicName) {
         fetch(emotionAssociationsUrl).then(response => response.json())
     ])
     .then(([data, associations]) => {
-        panelData = data;
+        if (comicName === 'comic1') {
+            panelData = data.filter(panel => panel['Page Number'] >= 7 && panel['Page Number'] <= 16);
+        } else if (comicName === 'comic2') {
+            panelData = data.filter(panel => panel['Page Number'] <= 16);
+        } else {
+            panelData = data; // For other comics, no filtering applied
+        }
         emotionAssociations = associations;
         
         currentPanelIndex = 0; // Reset index when loading new comic data
