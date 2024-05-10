@@ -35,13 +35,25 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('downloadButton').style.display = 'none';  // Ensure button is hidden on load
 
     document.getElementById('backButton').addEventListener('click', function() {
-        document.querySelector('.button-container').style.display = 'flex'; // Restore comic buttons
-        document.querySelector('h1').style.display = 'block'; // Show title
-        document.querySelector('p').style.display = 'block'; // Show subtitle
-        document.getElementById('panelDisplayContainer').innerHTML = ''; // Clear the panel display
-        document.getElementById('prev').style.display = 'none'; // Hide navigation buttons
-        document.getElementById('next').style.display = 'none'; // Hide navigation buttons
-        this.style.display = 'none'; // Hide back button
+        // Hide comic navigation and content elements
+        document.querySelector('.button-container').style.display = 'flex';
+        document.querySelector('h1').style.display = 'block';
+        document.querySelector('p').style.display = 'block';
+        document.getElementById('panelDisplayContainer').innerHTML = '';
+        document.getElementById('prev').style.display = 'none';
+        document.getElementById('next').style.display = 'none';
+        this.style.display = 'none'; // Hide the back button
+
+        // Stop the audio playback
+        stopAudio();
+
+        // Reset the background color to default
+        document.documentElement.style.setProperty('--emotion-color', 'rgba(255, 255, 255, 0)');
+
+        // Disable the cursor effect by setting currentValence to 'Neutral'
+        currentValence = 'Neutral';
+        var cursorCircle = document.getElementById('cursorCircle');
+        cursorCircle.style.visibility = 'hidden';
     });
 });
 
