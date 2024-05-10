@@ -22,8 +22,18 @@ let currentEmotionUrl = '';
 let currentImagePath = '';
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initially hide the download button since no comic is selected
-    document.getElementById('downloadButton').style.display = 'none';
+    Promise.all([
+        fetch('./panel_data.json').then(response => response.json()),
+        fetch('./emotion_data.json').then(response => response.json())
+    ]).then(([panelData, emotionData]) => {
+        loadPanels(panelData);
+        document.getElementById('downloadButton').addEventListener('click', () => {
+            const associations = createAssociations(panelData, emotionData);
+            downloadJSON(associations, 'emotion_associations.json');
+        });
+    }).catch(error => {
+        console.error('Error fetching data:', error);
+    });
 });
 
 function loadComicData(comicName) {
