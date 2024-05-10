@@ -21,53 +21,52 @@ p {
 }
 
 .card {
-    width: 300px;  /* Adjust width as needed */
+    width: 300px;  /* Consistent width for all cards */
     height: 500px;  /* Fixed height for all cards */
     margin: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Subtle shadow */
     border-radius: 10px;  /* Rounded corners */
     overflow: hidden;  /* Ensures nothing spills out of the rounded corners */
-    background: white;  /* Optional: sets a background color for the card */
+    background: white;  /* Sets a background color for the card */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: 10px;  /* Padding around the contents */
 }
 
 .card img {
     width: 100%;  /* Make the image cover the card width */
-    height: 40%;  /* Fixed height for all images */
+    height: 30%;  /* Adjusted height for images */
     object-fit: cover;  /* Ensures the image covers the area without distorting */
 }
 
 .card h2 {
-    margin: 10px 0;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
 .card p {
+    flex-grow: 1;  /* Allows the paragraph to take available space */
     padding: 0 10px;  /* Padding inside the card for text */
-    overflow: hidden;  /* Prevents text overflow */
-    text-overflow: ellipsis;  /* Adds ellipsis (...) if text is too long */
-    display: -webkit-box;
-    -webkit-line-clamp: 3;  /* Number of lines allowed */
-    -webkit-box-orient: vertical;
+    overflow: auto;  /* Enables scrolling if content overflows */
 }
 
 .card button {
-    margin-top: auto;  /* Pushes the button to the bottom of the card */
-    padding: 10px 20px;
-    border: none;
-    background-color: #007BFF;  /* Modern blue color */
-    color: white;
-    border-radius: 5px;
+    margin-top: 10px;
+    padding: 12px 25px;
+    border: 2px solid grey;  /* Grey border as specified */
+    background-color: white;  /* White background */
+    color: #333;  /* Dark text for better contrast */
+    font-weight: bold;  /* Bold text */
+    border-radius: 15px;  /* More rounded corners */
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;  /* Smooth transitions for hover effects */
+    transition: background-color 0.3s, color 0.3s;  /* Smooth transition for hover effects */
 }
 
 .card button:hover {
-    background-color: #0056b3;  /* Darker shade of button color on hover */
-    transform: translateY(-3px);  /* Slight raise effect on hover */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);  /* Shadow for depth */
+    background-color: #f8f9fa;  /* Slightly grey background on hover */
+    color: #007BFF;  /* Change text color on hover for visual feedback */
 }
 
 .button-container {
@@ -76,6 +75,7 @@ p {
     justify-content: center;
     align-items: center;
 }
+
 
 
 #panelDisplayContainer {
