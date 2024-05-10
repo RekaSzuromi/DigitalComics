@@ -22,9 +22,9 @@ p {
 
 .card {
     width: 350px;  /* Consistent width for all cards */
-    height: 600px;  /* Fixed height for all cards */
+    height: 580px;  /* Fixed height for all cards */
     margin: 30px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Subtle shadow */
+    box-shadow: 0 6px 10px rgba(0,0,0,0.1);  /* Subtle shadow */
     border-radius: 15px;  /* Rounded corners */
     overflow: hidden;  /* Ensures nothing spills out of the rounded corners */
     background: white;  /* Sets a background color for the card */
@@ -45,12 +45,14 @@ p {
 .card h2 {
     margin-top: 10px;
     margin-bottom: 5px;
+    font-size: 2em;
 }
 
 .card p {
     flex-grow: 1;  /* Allows the paragraph to take available space */
     padding: 0 10px;  /* Padding inside the card for text */
     overflow: auto;  /* Enables scrolling if content overflows */
+    font-size: 1em;
 }
 
 .card button {
