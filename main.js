@@ -70,11 +70,14 @@ function createAssociations(panelData, emotionData) {
                     polygonContainsPolygon(panelVertices, emotionVertices);
 
                 if (isOverlap) {
+                    // Filter based on taxonomy path
+                    if (/^VLT: Semantics: Emotion \(v\.\d\) \/ (Valence|Emotion) \//.test(emotion['Taxonomy Path'])) {
                     allEmotionAssociations.push({
                         panelId: panel['ID'],  // Using 'ID' field
                         emotionId: emotion['ID'],  // Using 'ID' field
                         taxonomyPath: emotion['Taxonomy Path']
                     });
+                }
                 }
             }
         });
@@ -82,6 +85,7 @@ function createAssociations(panelData, emotionData) {
 
     return allEmotionAssociations;
 }
+
 
 function rectangleContainsPolygon(rectangleVertices, polygonVertices) {
     let [minRect, maxRect] = rectangleVertices;
