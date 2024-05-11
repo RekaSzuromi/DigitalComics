@@ -18,7 +18,7 @@
     {
         "ID": 5,
         "Page Number": 6,
-        "Panel Region Vertices": "(127,830), (372,1411)"
+        "Panel Region Vertices": "(58,830), (372,1411)"
     },
     {
         "ID": 6,
@@ -28,7 +28,7 @@
     {
         "ID": 7,
         "Page Number": 6,
-        "Panel Region Vertices": "(762,833), (996,1414)"
+        "Panel Region Vertices": "(762,833), (1028,1414)"
     },
     {
         "ID": 8,
@@ -43,7 +43,7 @@
     {
         "ID": 10,
         "Page Number": 7,
-        "Panel Region Vertices": "(579,601), (1012,988)"
+        "Panel Region Vertices": "(579,601), (1070,988)"
     },
     {
         "ID": 11,
@@ -128,7 +128,7 @@
     {
         "ID": 27,
         "Page Number": 11,
-        "Panel Region Vertices": "(561,1088), (1019,1411)"
+        "Panel Region Vertices": "(561,1088), (1019,1438)"
     },
     {
         "ID": 28,
