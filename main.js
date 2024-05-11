@@ -171,16 +171,36 @@ function formatVertices(vertexString) {
 }
 
 function drawPanel(ctx, canvas, image, vertices, isRectangle) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas for new drawing
+
+    // Calculate the bounds of the polygon/rectangle
     let minX = Math.min(...vertices.map(v => v.x));
     let maxX = Math.max(...vertices.map(v => v.x));
     let minY = Math.min(...vertices.map(v => v.y));
     let maxY = Math.max(...vertices.map(v => v.y));
 
+    // Set the canvas size to fit the polygon/rectangle
     canvas.width = maxX - minX;
     canvas.height = maxY - minY;
 
-    ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    if (isRectangle) {
+        // Draw rectangle if vertices define a rectangle
+        ctx.rect(0, 0, maxX - minX, maxY - minY);
+    } else {
+        // Draw polygon if vertices define a polygon
+        ctx.moveTo(vertices[0].x - minX, vertices[0].y - minY);
+        vertices.forEach((v, index) => {
+            ctx.lineTo(v.x - minX, v.y - minY);
+        });
+        ctx.closePath();
+    }
+    ctx.clip();  // Clip the context to the shape
+
+    // Draw the image within the clipped region
+    ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, maxX - minX, maxY - minY);
 }
+
 
 function navigate(direction) {
     stopAudio(); // Ensure to stop current audio when navigating panels
