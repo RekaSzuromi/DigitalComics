@@ -57,7 +57,7 @@ let currentValence = 'Neutral'; // Default valence
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Ensure elements are available in the DOM
+    // Handle opening the survey modal
     var surveyButton = document.getElementById('surveyButton');
     if (surveyButton) {
         surveyButton.addEventListener('click', function() {
@@ -65,21 +65,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    var closeButton = document.getElementsByClassName('close')[0];
+    // Handle closing the survey modal
+    var closeButton = document.querySelector('.close');  // Adjusted to use `querySelector` for simplicity
     if (closeButton) {
         closeButton.addEventListener('click', function() {
             document.getElementById('surveyModal').style.display = 'none';
         });
     }
 
-    var saveButton = document.getElementById('saveSurvey'); // Adjust if there are multiple buttons
+    // Handle saving the survey and closing the modal
+    var saveButton = document.querySelector('.comic-button'); // Adjusted to use `querySelector` and correct class name
     if (saveButton) {
         saveButton.addEventListener('click', function() {
-            console.log('Survey data saved.');
-            document.getElementById('surveyModal').style.display = 'none';
+            saveSurvey();
         });
     }
 });
+
+// Define the saveSurvey function
+function saveSurvey() {
+    console.log('Survey data saved.');
+    document.getElementById('surveyModal').style.display = 'none';
+    // You can add more logic here to actually process the survey data as needed
+}
 
 
 document.addEventListener('DOMContentLoaded', function() {
