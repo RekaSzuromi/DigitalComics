@@ -229,13 +229,15 @@ function navigate(direction) {
         // This condition checks if it's the last panel and direction is 'next'
         displayEndScreen();
     } else {
+        // Handle normal navigation
         currentPanelIndex += direction;
         if (currentPanelIndex >= panelData.length) {
             currentPanelIndex = 0;  // Wrap around to the first panel
-            document.getElementById('surveyButton').style.display = 'none'; // Hide survey button
         }
-        if (currentPanelIndex < 0) currentPanelIndex = panelData.length - 1; // Wrap around to the last panel
-
+        if (currentPanelIndex < 0) {
+            currentPanelIndex = panelData.length - 1; // Wrap around to the last panel
+        }
+        document.getElementById('next').style.display = 'inline-block'; // Ensure the next button is visible
         displayPanel(currentPanelIndex);
         handleAudioForCurrentPanel();
     }
@@ -243,10 +245,14 @@ function navigate(direction) {
 
 function displayEndScreen() {
     const container = document.getElementById('panelDisplayContainer');
-    container.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100vh;"><h2>The End - Question Time!</h2></div>';
+    container.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100vh;"><h2>End of Comic - Time for Questions!</h2></div>';
+
+    stopAudio();  // Stop any playing audio
+    document.getElementById('cursorCircle').style.visibility = 'hidden'; // Disable the cursor effect
 
     document.getElementById('surveyButton').style.display = 'block'; // Show the survey button
-    document.getElementById('next').style.display = 'none'; // Optionally hide the next button if not needed
+    document.getElementById('next').style.display = 'none'; // Hide the next button
+    document.documentElement.style.setProperty('--emotion-color', 'rgba(255, 255, 255, 0)'); // Reset background color
 }
 
 function getPanelEmotion(panelIndex) {
