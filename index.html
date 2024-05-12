@@ -44,27 +44,29 @@
     <audio id="audioPlayer" src="./music/Happiness.wav"></audio>
     <button id="downloadButton" style="display:none; margin: 20px;">Download Emotion Associations</button>
         <!-- Survey Modal -->
-    <div id="surveyModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Comic Feedback Survey</h2>
-            <p>Please rate your experience:</p>
-            <form id="surveyForm">
-                <!-- Example Question -->
-                <label for="question1">How much did you enjoy the comic?</label><br>
-                <div class="likert">
-                    <label><input type="radio" name="enjoyment" value="1"> 1</label>
-                    <label><input type="radio" name="enjoyment" value="2"> 2</label>
-                    <label><input type="radio" name="enjoyment" value="3"> 3</label>
-                    <label><input type="radio" name="enjoyment" value="4"> 4</label>
-                    <label><input type="radio" name="enjoyment" value="5"> 5</label>
-                </div>
-                <!-- Add more questions as needed -->
-                <button type="button" class="comic-button" onclick="saveSurvey()">Save</button>
-            </form>
-        </div>
-    </div>
-
+        <div id="surveyModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Survey</h2>
+                <form id="surveyForm">
+                    <div class="question">
+                        <label>Remote</label>
+                        <div class="options">
+                            <input type="radio" name="remote" value="1" /> 1
+                            <input type="radio" name="remote" value="2" /> 2
+                            <input type="radio" name="remote" value="3" /> 3
+                            <input type="radio" name="remote" value="4" /> 4
+                            <input type="radio" name="remote" value="5" /> 5
+                            <input type="radio" name="remote" value="6" /> 6
+                            <input type="radio" name="remote" value="7" /> 7
+                        </div>
+                        <label>Immediate</label>
+                    </div>
+                    <!-- Repeat for each pair in your survey -->
+                    <button type="button" class="comic-button" id="saveSurvey">Save</button>
+                </form>
+            </div>
+        </div>             
 </body>
 </html>
 

@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    var saveButton = document.querySelector('.comic-button'); // Adjust if there are multiple buttons
+    var saveButton = document.getElementById('saveSurvey'); // Adjust if there are multiple buttons
     if (saveButton) {
         saveButton.addEventListener('click', function() {
             console.log('Survey data saved.');
