@@ -51,7 +51,9 @@
                 <p class="survey-question-title">Please click on the number that best describes your evaluation of the reading experience.</p>
                 <form id="surveyForm">
                     <div class="question">
-                        <label>Remote</label>
+                        <div class="label-group">
+                            <label>Remote</label>
+                        </div>
                         <div class="options">
                             <input type="radio" name="remote" value="1" /><label>1</label>
                             <input type="radio" name="remote" value="2" /><label>2</label>
@@ -61,13 +63,15 @@
                             <input type="radio" name="remote" value="6" /><label>6</label>
                             <input type="radio" name="remote" value="7" /><label>7</label>
                         </div>
-                        <label>Immediate</label>
+                        <div class="label-group">
+                            <label>Immediate</label>
+                        </div>
                     </div>
-                    <!-- Repeat for each pair in your survey -->
+                    <!-- Repeat for other items -->
                     <button type="button" class="comic-button" id="saveSurvey">Save</button>
                 </form>
             </div>
-        </div>                        
+        </div>                     
 </body>
 </html>
 
