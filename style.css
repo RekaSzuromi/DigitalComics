@@ -210,9 +210,16 @@ body #downloadButton {
     margin-bottom: 20px;
 }
 
+.survey-question-title {
+    font-size: 16px;
+    margin-bottom: 20px; /* Space between question and options */
+    text-align: left; /* Aligns the survey question to the left */
+}
+
+
 .options {
     display: flex;
-    align-items: center;
+    align-items: left;
 }
 
 .options label {
