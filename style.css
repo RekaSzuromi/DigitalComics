@@ -22,7 +22,7 @@ p {
 
 .card {
     width: 380px;  /* Consistent width for all cards */
-    height: 580px;  /* Fixed height for all cards */
+    height: 610px;  /* Fixed height for all cards */
     margin: 30px;
     box-shadow: 0 6px 10px rgba(0,0,0,0.1);  /* Subtle shadow */
     border-radius: 15px;  /* Rounded corners */
