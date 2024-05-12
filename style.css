@@ -153,6 +153,21 @@ body #downloadButton {
 }
 
 
+.comic-button {
+    padding: 12px 25px;
+    border: 2px solid grey;
+    background-color: white;
+    color: #333;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.comic-button:hover {
+    background-color: #f8f9fa;
+    color: #001e3f;
+}
 
 
 
