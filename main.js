@@ -46,7 +46,7 @@ const emotionVolumes = {
     'Love': 0.007
 };
 
-
+let ambientEnabled = true;  // Global flag to control ambient features
 let currentPanelUrl = '';
 let currentEmotionUrl = '';
 let currentImagePath = '';
@@ -133,7 +133,8 @@ function setupNavigation() {
     document.getElementById('prev').addEventListener('click', () => navigate(-1));
 }
 
-function loadComicData(comicName) {
+function loadComicData(comicName, enableAmbient) {
+    ambientEnabled = enableAmbient;  // Set the global flag based on user choice
     stopAudio();  // Stop any playing audio first
 
     currentPanelUrl = `./${comicName}_panel_data.json`;
@@ -152,18 +153,17 @@ function loadComicData(comicName) {
         } else {
             panelData = data; // For other comics, no filtering applied
         }
-        emotionAssociations = associations;
-        
-        currentPanelIndex = 0; // Reset index when loading new comic data
-        displayPanel(currentPanelIndex);  // Call displayPanel once data is confirmed loaded
-        handleAudioForCurrentPanel(); // Handle audio for the displayed panel
-        document.getElementById('downloadButton').style.display = 'block';
-        showNavigationButtons(); // Show navigation buttons
+        emotionAssociations = ambientEnabled ? associations : [];  // Load or ignore emotions
+
+        currentPanelIndex = 0;
+        displayPanel(currentPanelIndex);
+        handleAudioForCurrentPanel();
+        document.getElementById('downloadButton').style.display = ambientEnabled ? 'block' : 'none';
+        showNavigationButtons();
         document.querySelector('.button-container').style.display = 'none';
         document.querySelector('h1').style.display = 'none';
         document.querySelector('p').style.display = 'none';
-        document.getElementById('backButton').style.display = 'block'; // Show back button
-
+        document.getElementById('backButton').style.display = 'block';
     })
     .catch(error => {
         console.error('Error fetching data:', error);
@@ -190,18 +190,19 @@ function displayPanel(index) {
         container.appendChild(canvas);
 
         const valence = getPanelValence(index) || 'Neutral';  // Default to 'Neutral' if undefined
-        canvas.style.filter = valenceFilters[valence];  // Apply the filter based on valence
-        updateBackgroundColor(panel.ID);
-        updateCursorCircle(valence);  // Update the cursor based on the valence
+        if (ambientEnabled) {
+            canvas.style.filter = valenceFilters[valence];
+            updateBackgroundColor(panel.ID);
+            updateCursorCircle(valence);
+        }
     };
 
     image.src = `${currentImagePath}page-${panel['Page Number']}.jpg`;
 }
 
 
-
-
 function updateBackgroundColor(panelId) {
+    if (!ambientEnabled) return;  // Skip updating background if ambient is disabled
     const associatedEmotions = emotionAssociations.filter(e => e.panelId === panelId);
     let defaultColor = 'rgba(255, 255, 255, 0)'; // Default to transparent if no emotion color is found
 
@@ -219,8 +220,6 @@ function updateBackgroundColor(panelId) {
     // Use CSS variable to control background gradient dynamically
     document.documentElement.style.setProperty('--emotion-color', gradientColor);
 }
-
-
 
 function formatVertices(vertexString) {
     return vertexString.match(/\((\d+,\d+)\)/g)
@@ -318,6 +317,10 @@ function getPanelValence(panelIndex) {
 }
 
 function updateCursorCircle(valence) {
+    if (!ambientEnabled) {
+        document.getElementById('cursorCircle').style.visibility = 'hidden';
+        return;
+    }
     const cursorCircle = document.getElementById('cursorCircle');
     currentValence = valence; // Update global valence variable
     switch (valence) {
@@ -344,6 +347,7 @@ function updateCursorCircle(valence) {
 }
 
 function handleAudioForCurrentPanel() {
+    if (!ambientEnabled) return;  // Skip audio handling if ambient is disabled
     const emotion = getPanelEmotion(currentPanelIndex);
     if (emotion) {
         const wavFile = `./music/${emotion}.wav`;
