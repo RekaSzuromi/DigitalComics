@@ -267,25 +267,50 @@ function updateCursorCircle(valence) {
 function handleAudioForCurrentPanel() {
     const emotion = getPanelEmotion(currentPanelIndex);
     if (emotion) {
-        playAudio(`./music/${emotion}.wav`);
+        // Check for both WAV and MP3 files, preferring WAV if both exist
+        const wavFile = `./music/${emotion}.wav`;
+        const mp3File = `./music/${emotion}.mp3`;
+
+        fetch(wavFile)
+            .then(response => {
+                if (response.ok) {
+                    playAudio(wavFile);
+                } else {
+                    // WAV not available, try MP3 file
+                    return fetch(mp3File);
+                }
+            })
+            .then(response => {
+                if (response && response.ok) {
+                    playAudio(mp3File);
+                }
+            })
+            .catch(error => {
+                console.log(`No audio file found for ${emotion}. Error: ${error}`);
+                stopAudio(); // Ensure to stop any currently playing audio if files are missing
+            });
     } else {
-        stopAudio(); // Stop the audio if there's no emotion
+        stopAudio(); // Stop the audio if there's no emotion associated
     }
 }
 
 function playAudio(audioFilePath) {
-    var audioPlayer = document.getElementById('audioPlayer');
+    const audioPlayer = document.getElementById('audioPlayer');
+    if (!audioPlayer) {
+        console.error("Audio player element not found");
+        return;
+    }
     audioPlayer.src = audioFilePath;
-    audioPlayer.pause();
-    audioPlayer.load();
-
+    audioPlayer.load();  // Important to reload the new source
     audioPlayer.play().catch(error => {
-        console.log(`No file for emotion: ${audioFilePath.split('/').pop().split('.')[0]}`);
+        console.log(`Failed to play audio: ${error}. File: ${audioFilePath}`);
     });
 }
 
 function stopAudio() {
-    var audioPlayer = document.getElementById('audioPlayer');
-    audioPlayer.pause();
-    audioPlayer.currentTime = 0;
+    const audioPlayer = document.getElementById('audioPlayer');
+    if (audioPlayer) {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;  // Reset the time
+    }
 }
