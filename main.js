@@ -31,7 +31,7 @@ const emotionVolumes = {
     'Surprise': 0.6,
     'Excitement': 0.2,
     'Amusement': 0.4,
-    'Happiness': 0.2,
+    'Happiness': 0,
     'Neutral/None': 0.4,
     'Wonder': 0.2,
     'Pride': 0.3,
@@ -326,6 +326,7 @@ function playAudio(audioFilePath, emotion) {
 
     // Set the volume based on the emotion, defaulting to 0.5 if not specified
     audioPlayer.volume = emotionVolumes[emotion] || 0.5;
+    console.log(`Playing ${emotion} at volume: ${volumeSetting}`);
 
     audioPlayer.src = audioFilePath;
     audioPlayer.load();  // Important to reload the new source
