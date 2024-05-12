@@ -224,18 +224,30 @@ function drawPanel(ctx, canvas, image, vertices, isRectangle) {
     ctx.drawImage(image, minX, minY, maxX - minX, maxY - minY, 0, 0, maxX - minX, maxY - minY);
 }
 
-
 function navigate(direction) {
-    stopAudio(); // Ensure to stop current audio when navigating panels
-    currentPanelIndex += direction;
-    if (currentPanelIndex >= panelData.length) currentPanelIndex = 0;
-    if (currentPanelIndex < 0) currentPanelIndex = panelData.length - 1;
+    if (direction === 1 && currentPanelIndex === panelData.length - 1) {
+        // This condition checks if it's the last panel and direction is 'next'
+        displayEndScreen();
+    } else {
+        currentPanelIndex += direction;
+        if (currentPanelIndex >= panelData.length) {
+            currentPanelIndex = 0;  // Wrap around to the first panel
+            document.getElementById('surveyButton').style.display = 'none'; // Hide survey button
+        }
+        if (currentPanelIndex < 0) currentPanelIndex = panelData.length - 1; // Wrap around to the last panel
 
-    displayPanel(currentPanelIndex);
-    handleAudioForCurrentPanel();
+        displayPanel(currentPanelIndex);
+        handleAudioForCurrentPanel();
+    }
 }
 
+function displayEndScreen() {
+    const container = document.getElementById('panelDisplayContainer');
+    container.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100vh;"><h2>The End - Question Time!</h2></div>';
 
+    document.getElementById('surveyButton').style.display = 'block'; // Show the survey button
+    document.getElementById('next').style.display = 'none'; // Optionally hide the next button if not needed
+}
 
 function getPanelEmotion(panelIndex) {
     const panelId = panelData[panelIndex].ID;
