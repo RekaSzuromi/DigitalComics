@@ -27,6 +27,25 @@ const valenceFilters = {
     'Positive': 'brightness(130%) contrast(90%)'
 };
 
+const emotionVolumes = {
+    'Surprise': 0.9,
+    'Excitement': 0.5,
+    'Amusement': 0.7,
+    'Happiness': 0.5,
+    'Neutral/None': 0.7,
+    'Wonder': 0.5,
+    'Pride': 0.6,
+    'Fear': 0.9,
+    'Rejoicing': 0.6,
+    'Sadness': 0.7,
+    'Shame': 0.7,
+    'Guilt': 0.7,
+    'Anger': 0.6,
+    'Relief': 0.7,
+    'Embarrassment': 0.6,
+    'Love': 0.8
+};
+
 
 let currentPanelUrl = '';
 let currentEmotionUrl = '';
@@ -298,18 +317,23 @@ function handleAudioForCurrentPanel() {
     }
 }
 
-function playAudio(audioFilePath) {
+function playAudio(audioFilePath, emotion) {
     const audioPlayer = document.getElementById('audioPlayer');
     if (!audioPlayer) {
         console.error("Audio player element not found");
         return;
     }
+
+    // Set the volume based on the emotion, defaulting to 0.5 if not specified
+    audioPlayer.volume = emotionVolumes[emotion] || 0.5;
+
     audioPlayer.src = audioFilePath;
     audioPlayer.load();  // Important to reload the new source
     audioPlayer.play().catch(error => {
         console.log(`Failed to play audio: ${error}. File: ${audioFilePath}`);
     });
 }
+
 
 function stopAudio() {
     const audioPlayer = document.getElementById('audioPlayer');
