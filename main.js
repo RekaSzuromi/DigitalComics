@@ -248,7 +248,10 @@ function displayEndScreen() {
     container.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100vh;"><h2>End of Comic - Time for Questions!</h2></div>';
 
     stopAudio();  // Stop any playing audio
-    document.getElementById('cursorCircle').style.visibility = 'hidden'; // Disable the cursor effect
+    // Disable the cursor effect by setting currentValence to 'Neutral'
+    currentValence = 'Neutral';
+    var cursorCircle = document.getElementById('cursorCircle');
+    cursorCircle.style.visibility = 'hidden';
 
     document.getElementById('surveyButton').style.display = 'block'; // Show the survey button
     document.getElementById('next').style.display = 'none'; // Hide the next button
