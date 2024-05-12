@@ -220,20 +220,10 @@ body #downloadButton {
 }
 
 .options input[type="radio"] {
-    margin: 0 5px; /* Space between radio buttons */
-}
-
-.comic-button {
-    display: block; /* Make the button a block to fit the width of the form */
-    width: 100%; /* Full width */
-    margin-top: 20px; /* Space from the last question */
-}
-
-.options input[type="radio"] {
     margin: 0 10px;
 }
 
-.comic-button {
+.saveSurvey {
     display: block; /* Make the button a block to fit the width of the form */
     width: 100%; /* Full width */
     margin-top: 20px; /* Space from the last question */
