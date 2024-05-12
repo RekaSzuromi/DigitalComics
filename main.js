@@ -290,6 +290,7 @@ function updateCursorCircle(valence) {
 function handleAudioForCurrentPanel() {
     const emotion = getPanelEmotion(currentPanelIndex);
     if (emotion) {
+        // Check for both WAV and MP3 files, preferring WAV if both exist
         const wavFile = `./music/${emotion}.wav`;
         const mp3File = `./music/${emotion}.mp3`;
 
@@ -325,7 +326,6 @@ function playAudio(audioFilePath, emotion) {
 
     // Set the volume based on the emotion, defaulting to 0.5 if not specified
     audioPlayer.volume = emotionVolumes[emotion] || 0.5;
-    console.log(`Playing ${emotion} at volume: ${volumeSetting}`);
 
     audioPlayer.src = audioFilePath;
     audioPlayer.load();  // Important to reload the new source
