@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('panelDisplayContainer').innerHTML = '';
         document.getElementById('prev').style.display = 'none';
         document.getElementById('next').style.display = 'none';
+        document.getElementById('surveyButton').style.display = 'none';
         this.style.display = 'none'; // Hide the back button
 
         // Stop the audio playback
