@@ -205,6 +205,13 @@ body #downloadButton {
     cursor: pointer;
 }
 
+.survey-question-title {
+    font-size: 16px;
+    margin-bottom: 20px; /* Space between question and options */
+    text-align: left;
+    font-weight: bold;
+}
+
 
 .likert {
     margin: 20px 0;
