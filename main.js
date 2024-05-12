@@ -55,19 +55,31 @@ let emotionAssociations = [];
 let currentPanelIndex = 0; // Initialize currentPanelIndex
 let currentValence = 'Neutral'; // Default valence
 
-document.getElementById('surveyButton').addEventListener('click', function() {
-    document.getElementById('surveyModal').style.display = 'block';
-});
 
-document.getElementsByClassName('close')[0].addEventListener('click', function() {
-    document.getElementById('surveyModal').style.display = 'none';
-});
+document.addEventListener('DOMContentLoaded', function() {
+    // Ensure elements are available in the DOM
+    var surveyButton = document.getElementById('surveyButton');
+    if (surveyButton) {
+        surveyButton.addEventListener('click', function() {
+            document.getElementById('surveyModal').style.display = 'block';
+        });
+    }
 
-function saveSurvey() {
-    // Perform validation or data collection here if necessary
-    console.log('Survey data saved.');
-    document.getElementById('surveyModal').style.display = 'none';
-}
+    var closeButton = document.getElementsByClassName('close')[0];
+    if (closeButton) {
+        closeButton.addEventListener('click', function() {
+            document.getElementById('surveyModal').style.display = 'none';
+        });
+    }
+
+    var saveButton = document.querySelector('.comic-button'); // Adjust if there are multiple buttons
+    if (saveButton) {
+        saveButton.addEventListener('click', function() {
+            console.log('Survey data saved.');
+            document.getElementById('surveyModal').style.display = 'none';
+        });
+    }
+});
 
 
 document.addEventListener('DOMContentLoaded', function() {
