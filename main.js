@@ -29,11 +29,11 @@ const valenceFilters = {
 
 const emotionVolumes = {
     'Surprise': 0.4,
-    'Excitement': 0.05,
+    'Excitement': 0.007,
     'Amusement': 0.2,
-    'Happiness': 0.05,
+    'Happiness': 0.005,
     'Neutral/None': 0.2,
-    'Wonder': 0.05,
+    'Wonder': 0.007,
     'Pride': 0.1,
     'Fear': 0.4,
     'Rejoicing': 0.1,
