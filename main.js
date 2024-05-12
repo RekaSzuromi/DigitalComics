@@ -290,14 +290,13 @@ function updateCursorCircle(valence) {
 function handleAudioForCurrentPanel() {
     const emotion = getPanelEmotion(currentPanelIndex);
     if (emotion) {
-        // Check for both WAV and MP3 files, preferring WAV if both exist
         const wavFile = `./music/${emotion}.wav`;
         const mp3File = `./music/${emotion}.mp3`;
 
         fetch(wavFile)
             .then(response => {
                 if (response.ok) {
-                    playAudio(wavFile);
+                    playAudio(wavFile, emotion);
                 } else {
                     // WAV not available, try MP3 file
                     return fetch(mp3File);
@@ -305,7 +304,7 @@ function handleAudioForCurrentPanel() {
             })
             .then(response => {
                 if (response && response.ok) {
-                    playAudio(mp3File);
+                    playAudio(mp3File, emotion);
                 }
             })
             .catch(error => {
@@ -326,6 +325,7 @@ function playAudio(audioFilePath, emotion) {
 
     // Set the volume based on the emotion, defaulting to 0.5 if not specified
     audioPlayer.volume = emotionVolumes[emotion] || 0.5;
+    console.log(`Playing ${emotion} at volume: ${volumeSetting}`);
 
     audioPlayer.src = audioFilePath;
     audioPlayer.load();  // Important to reload the new source
@@ -333,7 +333,6 @@ function playAudio(audioFilePath, emotion) {
         console.log(`Failed to play audio: ${error}. File: ${audioFilePath}`);
     });
 }
-
 
 function stopAudio() {
     const audioPlayer = document.getElementById('audioPlayer');
