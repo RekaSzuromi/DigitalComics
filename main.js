@@ -55,6 +55,20 @@ let emotionAssociations = [];
 let currentPanelIndex = 0; // Initialize currentPanelIndex
 let currentValence = 'Neutral'; // Default valence
 
+document.getElementById('surveyButton').addEventListener('click', function() {
+    document.getElementById('surveyModal').style.display = 'block';
+});
+
+document.getElementsByClassName('close')[0].addEventListener('click', function() {
+    document.getElementById('surveyModal').style.display = 'none';
+});
+
+function saveSurvey() {
+    // Perform validation or data collection here if necessary
+    console.log('Survey data saved.');
+    document.getElementById('surveyModal').style.display = 'none';
+}
+
 
 document.addEventListener('DOMContentLoaded', function() {
     setupNavigation();

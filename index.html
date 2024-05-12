@@ -43,6 +43,28 @@
     <button id="surveyButton" class="comic-button" style="display:none; position: fixed; top: 20px; right: 20px;">Take Survey</button>
     <audio id="audioPlayer" src="./music/Happiness.wav"></audio>
     <button id="downloadButton" style="display:none; margin: 20px;">Download Emotion Associations</button>
+        <!-- Survey Modal -->
+    <div id="surveyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Comic Feedback Survey</h2>
+            <p>Please rate your experience:</p>
+            <form id="surveyForm">
+                <!-- Example Question -->
+                <label for="question1">How much did you enjoy the comic?</label><br>
+                <div class="likert">
+                    <label><input type="radio" name="enjoyment" value="1"> 1</label>
+                    <label><input type="radio" name="enjoyment" value="2"> 2</label>
+                    <label><input type="radio" name="enjoyment" value="3"> 3</label>
+                    <label><input type="radio" name="enjoyment" value="4"> 4</label>
+                    <label><input type="radio" name="enjoyment" value="5"> 5</label>
+                </div>
+                <!-- Add more questions as needed -->
+                <button type="button" class="comic-button" onclick="saveSurvey()">Save</button>
+            </form>
+        </div>
+    </div>
+
 </body>
 </html>
 
