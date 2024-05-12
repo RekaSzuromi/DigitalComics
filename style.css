@@ -186,7 +186,7 @@ body #downloadButton {
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 70%; /* Could be more or less, depending on screen size */
 }
 
 .close {
@@ -216,11 +216,11 @@ body #downloadButton {
 }
 
 .options label {
-    margin: 0 10px; /* Space between labels and options */
+    margin-right: 20px; /* Space between labels and options */
 }
 
 .options input[type="radio"] {
-    margin: 0 10px;
+    margin-right: 10px;
 }
 
 .saveSurvey {
