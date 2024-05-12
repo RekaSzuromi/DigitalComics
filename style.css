@@ -205,7 +205,7 @@ body #downloadButton {
     cursor: pointer;
 }
 
-.survey-question-title {
+.label-group {
     font-size: 16px;
     margin-bottom: 20px; /* Space between question and options */
     text-align: left;
