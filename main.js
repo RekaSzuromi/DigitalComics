@@ -19,6 +19,13 @@ const emotionColors = {
     'Love': `rgba(255, 20, 147, ${alphaLevel})`
 };
 
+const valenceFilters = {
+    'Negative': 'brightness(50%) contrast(120%)',
+    'Slightly Negative': 'brightness(75%) contrast(110%)',
+    'Neutral': 'none',  // No filter for neutral
+    'Slightly Positive': 'brightness(125%) contrast(90%)',
+    'Positive': 'brightness(150%) contrast(80%)'
+};
 
 
 let currentPanelUrl = '';
@@ -114,14 +121,8 @@ function showNavigationButtons() {
     document.getElementById('next').style.display = 'inline-block';  // Show the next button
 }
 
-
 function displayPanel(index) {
     const panel = panelData[index];
-    if (!panel) {
-        console.error("No panel data available");
-        return;
-    }
-
     const container = document.getElementById('panelDisplayContainer');
     container.innerHTML = '';  // Clear previous content
 
@@ -133,13 +134,16 @@ function displayPanel(index) {
         let vertices = formatVertices(panel['Panel Region Vertices']);
         drawPanel(ctx, canvas, image, vertices, vertices.length === 2);
         container.appendChild(canvas);
-        updateBackgroundColor(panel.ID);
+
         const valence = getPanelValence(index) || 'Neutral';  // Default to 'Neutral' if undefined
+        canvas.style.filter = valenceFilters[valence];  // Apply the filter based on valence
+        updateBackgroundColor(panel.ID);
         updateCursorCircle(valence);  // Update the cursor based on the valence
     };
 
     image.src = `${currentImagePath}page-${panel['Page Number']}.jpg`;
 }
+
 
 
 
@@ -232,10 +236,10 @@ function getPanelValence(panelIndex) {
     for (let valence of associatedValences) {
         const match = valence.taxonomyPath.match(/Valence \/ (.+)/);
         if (match) {
-            return match[1].trim(); // Return the matched valence
+            return match[1].trim();  // Return the matched valence
         }
     }
-    return null; // Return null if no valid valence is found
+    return 'Neutral';  // Return 'Neutral' if no valid valence is found
 }
 
 function updateCursorCircle(valence) {
