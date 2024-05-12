@@ -20,11 +20,11 @@ const emotionColors = {
 };
 
 const valenceFilters = {
-    'Negative': 'brightness(50%) contrast(120%)',
-    'Slightly Negative': 'brightness(75%) contrast(110%)',
+    'Negative': 'brightness(60%) contrast(110%)',
+    'Slightly Negative': 'brightness(80%) contrast(105%)',
     'Neutral': 'none',  // No filter for neutral
-    'Slightly Positive': 'brightness(125%) contrast(90%)',
-    'Positive': 'brightness(150%) contrast(80%)'
+    'Slightly Positive': 'brightness(120%) contrast(95%)',
+    'Positive': 'brightness(140%) contrast(85%)'
 };
 
 
