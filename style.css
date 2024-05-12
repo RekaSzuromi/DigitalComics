@@ -188,6 +188,7 @@ body #downloadButton {
     border: 1px solid #888;
     width: 70%; /* Could be more or less, depending on screen size */
     box-sizing: border-box;
+    text-align: left;
 }
 
 .close {
@@ -222,8 +223,6 @@ body #downloadButton {
 }
 
 .options {
-    display: flex;
-    align-items: center;
     margin-bottom: 10px; /* Spacing between each question */
 }
 
