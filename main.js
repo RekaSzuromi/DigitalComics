@@ -290,7 +290,6 @@ function updateCursorCircle(valence) {
 function handleAudioForCurrentPanel() {
     const emotion = getPanelEmotion(currentPanelIndex);
     if (emotion) {
-        // Check for both WAV and MP3 files, preferring WAV if both exist
         const wavFile = `./music/${emotion}.wav`;
         const mp3File = `./music/${emotion}.mp3`;
 
@@ -300,19 +299,22 @@ function handleAudioForCurrentPanel() {
                     playAudio(wavFile, emotion);
                 } else {
                     // WAV not available, try MP3 file
-                    return fetch(mp3File);
-                }
-            })
-            .then(response => {
-                if (response && response.ok) {
-                    playAudio(mp3File, emotion);
+                    return fetch(mp3File).then(response => {
+                        if (response.ok) {
+                            playAudio(mp3File, emotion);
+                        } else {
+                            console.error(`No valid audio file found for ${emotion}`);
+                            stopAudio();  // No valid file found, stop any currently playing audio
+                        }
+                    });
                 }
             })
             .catch(error => {
-                console.log(`No audio file found for ${emotion}. Error: ${error}`);
+                console.error(`Error accessing audio file for ${emotion}: ${error}`);
                 stopAudio(); // Ensure to stop any currently playing audio if files are missing
             });
     } else {
+        console.log("No emotion available to determine audio, stopping playback.");
         stopAudio(); // Stop the audio if there's no emotion associated
     }
 }
@@ -324,14 +326,18 @@ function playAudio(audioFilePath, emotion) {
         return;
     }
 
-    // Set the volume based on the emotion, defaulting to 0.5 if not specified
-    audioPlayer.volume = emotionVolumes[emotion] || 0.5;
-    console.log(`Playing ${emotion} at volume: ${volumeSetting}`);
+    // Retrieve and log the volume setting for the current emotion
+    const volumeSetting = emotionVolumes[emotion] || 0.5;  // Ensure you have a default volume level
+    console.log(`Playing ${emotion} at volume: ${volumeSetting}, file: ${audioFilePath}`);
 
+    audioPlayer.volume = volumeSetting;
     audioPlayer.src = audioFilePath;
+
     audioPlayer.load();  // Important to reload the new source
-    audioPlayer.play().catch(error => {
-        console.log(`Failed to play audio: ${error}. File: ${audioFilePath}`);
+    audioPlayer.play().then(() => {
+        console.log("Audio playback started successfully");
+    }).catch(error => {
+        console.error(`Failed to play audio: ${error}. File: ${audioFilePath}`);
     });
 }
 
@@ -340,5 +346,6 @@ function stopAudio() {
     if (audioPlayer) {
         audioPlayer.pause();
         audioPlayer.currentTime = 0;  // Reset the time
+        console.log("Audio playback stopped and reset.");
     }
 }
