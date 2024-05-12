@@ -31,7 +31,7 @@ const emotionVolumes = {
     'Surprise': 0.6,
     'Excitement': 0.2,
     'Amusement': 0.4,
-    'Happiness': 0,
+    'Happiness': 0.2,
     'Neutral/None': 0.4,
     'Wonder': 0.2,
     'Pride': 0.3,
