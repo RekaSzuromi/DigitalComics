@@ -28,22 +28,22 @@ const valenceFilters = {
 };
 
 const emotionVolumes = {
-    'Surprise': 0.17,
-    'Excitement': 0.11,
-    'Amusement': 0.13,
-    'Happiness': 0.015,
-    'Neutral/None': 0.25,
-    'Wonder': 0.016,
-    'Pride': 0.2,
-    'Fear': 0.5,
-    'Rejoicing': 0.2,
-    'Sadness': 0.14,
-    'Shame': 0.13,
-    'Guilt': 0.2,
-    'Anger': 0.016,
-    'Relief': 0.12,
-    'Embarrassment': 0.2,
-    'Love': 0.017
+    'Surprise': 0.27,
+    'Excitement': 0.21,
+    'Amusement': 0.23,
+    'Happiness': 0.025,
+    'Neutral/None': 0.35,
+    'Wonder': 0.026,
+    'Pride': 0.3,
+    'Fear': 0.6,
+    'Rejoicing': 0.3,
+    'Sadness': 0.24,
+    'Shame': 0.23,
+    'Guilt': 0.3,
+    'Anger': 0.026,
+    'Relief': 0.22,
+    'Embarrassment': 0.3,
+    'Love': 0.027
 };
 
 let ambientEnabled = true;  // Global flag to control ambient features
