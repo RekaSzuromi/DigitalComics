@@ -207,11 +207,23 @@ body #downloadButton {
 
 .label-group {
     font-size: 16px;
-    margin-bottom: 20px; /* Space between question and options */
+    margin-bottom: 5px; /* Space between question and options */
     text-align: left;
     font-weight: bold;
 }
 
+.label-group-info2 {
+    font-size: 14px;
+    margin-bottom: 20px; /* Space between question and options */
+    text-align: left;
+}
+
+.label-group-info {
+    font-size: 11px;
+    margin-bottom: 15px; /* Space between question and options */
+    text-align: left;
+    font-style: italic;
+}
 
 .likert {
     margin: 20px 0;
