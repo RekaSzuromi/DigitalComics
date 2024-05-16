@@ -1,4 +1,4 @@
-const alphaLevel = 0.15  // Easily change this to adjust the transparency globally
+const alphaLevel = 0.13  // Easily change this to adjust the transparency globally
 const alphaLevel2 = 0.09
 
 const emotionColors = {
