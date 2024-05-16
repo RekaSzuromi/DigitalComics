@@ -210,6 +210,7 @@ body #downloadButton {
     margin-bottom: 5px; /* Space between question and options */
     text-align: left;
     font-weight: bold;
+    margin-top: 25px;
 }
 
 .label-group-info2 {
@@ -223,7 +224,6 @@ body #downloadButton {
     margin-bottom: 15px; /* Space between question and options */
     text-align: left;
     font-style: italic;
-    margin-top: 25px;
 }
 
 .likert {
