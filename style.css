@@ -223,7 +223,7 @@ body #downloadButton {
     margin-bottom: 15px; /* Space between question and options */
     text-align: left;
     font-style: italic;
-    margin-top: 10px;
+    margin-top: 25px;
 }
 
 .likert {
